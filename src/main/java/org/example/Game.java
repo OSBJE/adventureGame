@@ -8,7 +8,7 @@ public class Game {
 
     // Scanner input = new Scanner();
 
-    private Room current;
+    Room current;
 
     //*** Constructor *** //
     // Når et spil startes, kalder den sin metode buildGame.
@@ -23,7 +23,7 @@ public class Game {
     // Nedståden metode bygger vores "rooms map"
     //
 
-    public void buildGame(){
+    public void buildGame() {
         // vi starter med at lave 9 room objkter, et som repræsentere hver room i vores spil
         //
 
@@ -86,16 +86,11 @@ public class Game {
     public String getCurrentRoom() {
         return current.getRoomName();
     }
-    //MMH getter for at kunne kalde metoden med beskrivelser i Room
-    public Room getCurrent(){
-        return current;
-    }
-
 
     // Det her er vores navigator (Compass) så vi kan gå rundt i vores spil
 
 
-    public void moveRoom (int compass){
+    public void moveRoom(int compass) {
         switch (compass) {
             case 1: // North room
                 if (current.getRoomDoorNorth() != null) {
@@ -103,17 +98,17 @@ public class Game {
                 }
                 break;
             case 2: // South Room
-                if (current.getRoomDoorSouth() != null){
+                if (current.getRoomDoorSouth() != null) {
                     current = current.getRoomDoorSouth();
                 }
                 break;
             case 3: // East Room
-                if (current.getRoomDoorEast() != null){
+                if (current.getRoomDoorEast() != null) {
                     current = current.getRoomDoorEast();
                 }
                 break;
             case 4: // West Room
-                if (current.getRoomDoorWest() != null){
+                if (current.getRoomDoorWest() != null) {
                     current = current.getRoomDoorWest();
                 }
                 break;

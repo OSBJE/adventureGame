@@ -26,10 +26,10 @@ public class UserInterface {
         System.out.println("You are located in " + spil.getCurrentRoom());
 
         String previousRoom = spil.getCurrentRoom();//MMH String variabel til hjælp så vi kan bedømme i if else, om spilleren har flyttet sig
-        System.out.println(spil.getCurrent().roomDescription(previousRoom)); //MMH beskrivelse af start rum
-        System.out.println(" ");
-        while (userChoice != sentinel) {
+        System.out.println(spil.current.roomDescription(previousRoom)); //MMH beskrivelse af start rum
+        System.out.println(" ");//MMH bare for at få en ekstra linje
 
+        while (userChoice != sentinel) {
 
             System.out.println("In what direction do you want to go?");
             System.out.println("1. North \n2. South \n3. East \n4. West");
@@ -39,14 +39,14 @@ public class UserInterface {
             spil.moveRoom(userChoice);
 
             //MMH her vil jeg gerne have den til at udskrive noget om hvor spilleren befinder sig, og en melding, hvis vedkomende ikke kan gå den vej
-            //Til dette bruger jeg variable
+            //Til dette bruger jeg lokal variable previousRoom og currentRoom
             String currentRoom = spil.getCurrentRoom();//MMH variabel så kan tjekke om spiller har flyttet sig
             if (previousRoom.equals(currentRoom)) {
                 System.out.println("Unfortunately you cannot go in this direction");
                 System.out.println("You are still located in " + spil.getCurrentRoom());
             } else {
                 System.out.println("You are now located in " + spil.getCurrentRoom());
-                System.out.println(spil.getCurrent().roomDescription(currentRoom));
+                System.out.println(spil.current.roomDescription(currentRoom));
                 System.out.println(" ");
 
             }
