@@ -20,9 +20,14 @@ public class Room {
     //*** CONSTRUCTOR ***//
     // når et Room objekt skabes, så gives det et navn (som argument), og en beskrivelse - det er det eneste.
 
+
     public Room(String roomName, String roomDescription) {
         this.roomName = roomName;
         this.roomDescription = roomDescription;
+        this.roomDoorNorth = null;
+        this.roomDoorSouth = null;
+        this.roomDoorEast = null;
+        this.roomDoorWest = null;
     }
 
     // getter Methods
@@ -50,7 +55,7 @@ public class Room {
     }
 
     public Room getRoomDoorWest(){
-        return roomDoorEast;
+        return roomDoorWest;
     }
 
 

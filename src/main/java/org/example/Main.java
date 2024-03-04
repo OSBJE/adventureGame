@@ -1,16 +1,14 @@
 import org.example.Game;
+import org.example.UserInterface;
 
 import  java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Game spil = new Game();
+        UserInterface ui = new UserInterface();
+        ui.startGame();
 
-        System.out.println(spil.getCurrentRoom());
 
-        spil.moveRoom(2);
-
-        System.out.println(spil.getCurrentRoom());
 
     }
 }
