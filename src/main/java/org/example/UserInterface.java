@@ -17,7 +17,7 @@ public class UserInterface {
     }
 
     public void startGame() {
-        int sentinal = 5; // den her skal bruges senere, lige nu holder den bare loopet igang.
+        int sentinel = 5; // den her skal bruges senere, lige nu holder den bare loopet igang.
         int userChoice = 0; // starter bare så den kan loop hele tiden
 
 
@@ -26,8 +26,9 @@ public class UserInterface {
         System.out.println("You are located in " + spil.getCurrentRoom());
 
         String previousRoom = spil.getCurrentRoom();//MMH String variabel til hjælp så vi kan bedømme i if else, om spilleren har flyttet sig
-
-        while (userChoice != sentinal) {
+        System.out.println(spil.getCurrent().roomDescription(previousRoom)); //MMH beskrivelse af start rum
+        System.out.println(" ");
+        while (userChoice != sentinel) {
 
 
             System.out.println("In what direction do you want to go?");
@@ -45,7 +46,9 @@ public class UserInterface {
                 System.out.println("You are still located in " + spil.getCurrentRoom());
             } else {
                 System.out.println("You are now located in " + spil.getCurrentRoom());
-                //Her synes jeg, at vi skal kalde en metode, som viser beskrivelsen for netop det room
+                System.out.println(spil.getCurrent().roomDescription(currentRoom));
+                System.out.println(" ");
+
             }
             previousRoom = currentRoom;
 

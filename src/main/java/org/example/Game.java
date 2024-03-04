@@ -86,6 +86,10 @@ public class Game {
     public String getCurrentRoom() {
         return current.getRoomName();
     }
+    //MMH getter for at kunne kalde metoden med beskrivelser i Room
+    public Room getCurrent(){
+        return current;
+    }
 
 
     // Det her er vores navigator (Compass) så vi kan gå rundt i vores spil

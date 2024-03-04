@@ -16,7 +16,6 @@ public class Room {
     private Room roomDoorWest;
 
 
-
     //*** CONSTRUCTOR ***//
     // når et Room objekt skabes, så gives det et navn (som argument), og en beskrivelse - det er det eneste.
 
@@ -32,58 +31,73 @@ public class Room {
 
     // getter Methods
 
-    public String getRoomName(){
+    public String getRoomName() {
         return roomName;
     }
 
-    public String getRoomDescription(){
+    public String getRoomDescription() {
         return roomDescription;
     }
 
-    // this getter methods is used to check if it is okay go into the room
+    // this getter methods is used to check if it is okay go into the room. The value will either be a room or null
 
-    public Room getRoomDoorNorth(){
+    public Room getRoomDoorNorth() {
         return roomDoorNorth;
     }
 
-    public Room getRoomDoorSouth(){
+    public Room getRoomDoorSouth() {
         return roomDoorSouth;
     }
 
-    public Room getRoomDoorEast(){
+    public Room getRoomDoorEast() {
         return roomDoorEast;
     }
 
-    public Room getRoomDoorWest(){
+    public Room getRoomDoorWest() {
         return roomDoorWest;
     }
 
 
     // Setter Methods
 
-    public void setRoomDoorNorth(Room roomDoorNorth){
+    public void setRoomDoorNorth(Room roomDoorNorth) {
         this.roomDoorNorth = roomDoorNorth;
     }
 
-    public void setRoomDoorSouth(Room roomDoorSouth){
+    public void setRoomDoorSouth(Room roomDoorSouth) {
         this.roomDoorSouth = roomDoorSouth;
     }
 
-    public void setRoomDoorEast(Room roomDoorEast){
+    public void setRoomDoorEast(Room roomDoorEast) {
         this.roomDoorEast = roomDoorEast;
     }
 
-    public void setRoomDoorWest(Room roomDoorWest){
+    public void setRoomDoorWest(Room roomDoorWest) {
         this.roomDoorWest = roomDoorWest;
     }
 
+//MMH Methods to connect description to the rooms
 
+    public String roomDescription(String roomName) {
+        if (roomName.equals("Room 1")) {
+            return roomName + " is a beautiful green hill with a nice view.";
+        } else if (roomName.equals("Room 2")) {
+            return roomName + " is a dark cave with a thousand bats. Watch out!!!";
+        } else if (roomName.equals("Room 3")) {
+            return roomName + " is a cold icy mountain.";
+        } else if (roomName.equals("Room 4")) {
+            return roomName + " is a wooden cottage that is about to collapse. Watch out!!!.";
+        } else if (roomName.equals("Room 5")) {
+            return roomName + " is a warm and cozy fireplace.";
+        } else if (roomName.equals("Room 6")) {
+            return roomName + " is an erupting volcano...watch out for the burning lava!!!";
+        } else if (roomName.equals("Room 7")) {
+            return roomName + " is a noisy metropolis with polluting traffic.";
+        } else if (roomName.equals("Room 8")) {
+            return roomName + " is an olive grove with butterflies.";
+        } else {
+            return roomName + " is a battlefield from World War 1. \nKeep your head down, so you don't get hit!.";
+        }
 
-
-
-
-
-
-    // Beskrivelse constructor til at oprette rooms in vores spil
-
+    }
 }
