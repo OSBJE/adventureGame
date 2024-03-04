@@ -8,5 +8,9 @@ public class Main {
 
         System.out.println(spil.getCurrentRoom());
 
+        spil.moveRoom(2);
+
+        System.out.println(spil.getCurrentRoom());
+
     }
 }

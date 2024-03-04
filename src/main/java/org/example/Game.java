@@ -1,8 +1,12 @@
 package org.example;
 
+import java.util.Scanner;
+
 public class Game {
     //*** ATTRIBUTES ***//
     // Et kort af "Rooms" har et Room, som det laves på baggrund af.
+
+    // Scanner input = new Scanner();
 
     private Room current;
 
@@ -84,5 +88,52 @@ public class Game {
     }
 
 
-    //
+    // Det her er vores navigator (Compass) så vi kan gå rundt i vores spil
+
+
+
+
+    public void moveRoom (int compass){
+        switch (compass) {
+            case 1: // North room
+                if (current.getRoomDoorNorth() != null){
+                current = current.getRoomDoorNorth();
+                System.out.println("Congrats you are now in " + current);
+                break;}
+            case 2: // South Room
+                if (current.getRoomDoorSouth() != null){
+                    current = current.getRoomDoorSouth();
+                    System.out.println("Congrats you are now in " + current);
+                    break;
+                }
+            case 3: // East Room
+                if (current.getRoomDoorEast() != null){
+                    current = current.getRoomDoorEast();
+                    break;
+                }
+            case 4: // West Room
+                if (current.getRoomDoorWest() != null){
+                    current = current.getRoomDoorWest();
+                    break;
+                }
+
+        }
+
+
+    }
+
+    public void errorHandling (int userInput){
+
+        boolean flagdown = false;
+
+        while(!flagdown) {
+            try {
+
+
+
+            } catch (Exception E) {
+                System.out.println("Cannot go this way");
+            }
+        }
+    }
 }

@@ -31,6 +31,29 @@ public class Room {
         return roomName;
     }
 
+    public String getRoomDescription(){
+        return roomDescription;
+    }
+
+    // this getter methods is used to check if it is okay go into the room
+
+    public Room getRoomDoorNorth(){
+        return roomDoorNorth;
+    }
+
+    public Room getRoomDoorSouth(){
+        return roomDoorSouth;
+    }
+
+    public Room getRoomDoorEast(){
+        return roomDoorEast;
+    }
+
+    public Room getRoomDoorWest(){
+        return roomDoorEast;
+    }
+
+
     // Setter Methods
 
     public void setRoomDoorNorth(Room roomDoorNorth){
