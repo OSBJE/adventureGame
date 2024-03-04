@@ -11,33 +11,47 @@ public class UserInterface {
 
     Game spil = new Game();
 
-    public void startGame(){
+    //MMH Vi kunne definere constructor og køre startGame herinde. Så skal metodekald af startGame slettes fra Main
+    public UserInterface() {
+        startGame();
+    }
+
+    public void startGame() {
         int sentinal = 5; // den her skal bruges senere, lige nu holder den bare loopet igang.
         int userChoice = 0; // starter bare så den kan loop hele tiden
 
 
         // starten på spillet, her skal det køre en gang
-        System.out.println("Velkommen til AdventureGame!");
+        System.out.println("Welcome to AdventureGame!");
         System.out.println("You are located in " + spil.getCurrentRoom());
 
-        while (userChoice != sentinal){
+        String previousRoom = spil.getCurrentRoom();//MMH String variabel til hjælp så vi kan bedømme i if else, om spilleren har flyttet sig
+
+        while (userChoice != sentinal) {
 
 
-            System.out.println("vælg hvilke retning du vil gå på compasset");
-            System.out.println("1. North 2. South 3. East 4. West");
+            System.out.println("In what direction do you want to go?");
+            System.out.println("1. North \n2. South \n3. East \n4. West");
 
-        userChoice = input.nextInt();
+            userChoice = input.nextInt();
 
-        spil.moveRoom(userChoice);
+            spil.moveRoom(userChoice);
+
+            //MMH her vil jeg gerne have den til at udskrive noget om hvor spilleren befinder sig, og en melding, hvis vedkomende ikke kan gå den vej
+            //Til dette bruger jeg variable
+            String currentRoom = spil.getCurrentRoom();//MMH variabel så kan tjekke om spiller har flyttet sig
+            if (previousRoom.equals(currentRoom)) {
+                System.out.println("Unfortunately you cannot go in this direction");
+                System.out.println("You are still located in " + spil.getCurrentRoom());
+            } else {
+                System.out.println("You are now located in " + spil.getCurrentRoom());
+                //Her synes jeg, at vi skal kalde en metode, som viser beskrivelsen for netop det room
+            }
+            previousRoom = currentRoom;
+
+
         }
-
     }
-
-
-
-
-
-
 
 
     //**** Error handling methods ****//
