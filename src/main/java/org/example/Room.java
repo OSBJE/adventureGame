@@ -27,6 +27,9 @@ public class Room {
 
     // getter Methods
 
+    public String getRoomName(){
+        return roomName;
+    }
 
     // Setter Methods
 
@@ -39,7 +42,11 @@ public class Room {
     }
 
     public void setRoomDoorEast(Room roomDoorEast){
-this.roomDoorEast
+        this.roomDoorEast = roomDoorEast;
+    }
+
+    public void setRoomDoorWest(Room roomDoorWest){
+        this.roomDoorWest = roomDoorWest;
     }
 
 
