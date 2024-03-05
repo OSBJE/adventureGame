@@ -1,6 +1,7 @@
 package org.example;
+import java.util.*;
+import java.util.stream.*;
 
-import java.util.Scanner;
 
 public class Game {
     //*** ATTRIBUTES ***//
@@ -140,6 +141,26 @@ public class Game {
         }
         return direction;
     }
+
+    ///// Alternative method to hand play direction //////
+
+
+    /*public int playDirectionAdvance (String input){
+
+        final Map<String, Integer> WORDMAP = new HashMap<>();
+        WORDMAP.put("north", 1);
+        WORDMAP.put("south", 2);
+        WORDMAP.put("east",3);
+        WORDMAP.put("west",4);
+
+        List<Integer> result = WORDMAP.entrySet().stream().filter(e -> e.getKey().startsWith(input).map(Map.Entry::getValue).collect(Collector.toList()));
+        if(result.size() == 1){
+            return result.get(0);
+        }
+        return -1;
+    }*/
+
+
     //MMH Methods to connect description to the rooms
 
     public String roomDescription(String roomName) {
