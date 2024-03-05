@@ -32,9 +32,11 @@ public class UserInterface {
         while (userChoice != sentinel) {
 
             System.out.println("In what direction do you want to go?");
-            System.out.println("1. North \n2. South \n3. East \n4. West");
+            System.out.println("please type in your answer");
+            String userInput = input.next();
 
-            userChoice = input.nextInt();
+
+            userChoice = spil.playerDirection(userInput);
 
             spil.moveRoom(userChoice);
 
@@ -56,34 +58,8 @@ public class UserInterface {
         }
     }
 
-
-    //**** Error handling methods ****//
-    // nedstående error handling skal fange forkerte input i vores program
-    // Det skal gerne kunne genbruges som en general error hanndling
-
-    private int inputValidation(String prompt, int min, int max) {
-        int userInput = 0;
-        boolean flagdown = false;
-
-        while (!flagdown) {
-            try {
-                System.out.println(prompt);
-                userInput = input.nextInt();
-                input.nextLine();
-
-                if (userInput >= min && userInput <= max) {
-                    flagdown = true;
-                } else {
-                    System.out.println("Error! please input a number between " + min + " and " + max);
-                }
-            } catch (InputMismatchException inputMismatchException) {
-                System.out.println("Error! Please input a valid number");
-                input.nextLine();
-            }
-        }
-        return userInput;
-    }
 }
+
 
 
 

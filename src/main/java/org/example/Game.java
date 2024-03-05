@@ -114,6 +114,31 @@ public class Game {
                 break;
         }
     }
+
+
+    //////// Method to handle String direction inputs ////////////
+
+    public int playerDirection(String str) {
+        int direction = 0;
+        int lng = str.length()-1;
+        String str2 = str.toLowerCase();
+
+        for (int i = 0; i <= lng; i++) {
+            if (str2.charAt(i) == 'n'){
+                direction = 1;
+                break;
+            } else if (str2.charAt(i) == 's'){
+                direction = 2;
+                break;
+            } else if (str2.charAt(i) == 'e'){
+                direction = 3;
+                break;
+            } else if (str2.charAt(i) == 'w'){
+                direction = 4;
+            }
+        }
+        return direction;
+    }
     //MMH Methods to connect description to the rooms
 
     public String roomDescription(String roomName) {
