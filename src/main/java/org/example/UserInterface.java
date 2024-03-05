@@ -10,6 +10,7 @@ public class UserInterface {
     // laver en nyt game
 
     Game spil = new Game();
+    String previousRoom;
 
     //MMH Vi kunne definere constructor og køre startGame herinde. Så skal metodekald af startGame slettes fra Main
     public UserInterface() {
@@ -25,7 +26,7 @@ public class UserInterface {
         System.out.println("Welcome to AdventureGame!");
         System.out.println("You are located in " + spil.getCurrentRoom());
 
-        String previousRoom = spil.getCurrentRoom();//MMH String variabel til hjælp så vi kan bedømme i if else, om spilleren har flyttet sig
+        this.previousRoom = spil.getCurrentRoom();//MMH String variabel til hjælp så vi kan bedømme i if else, om spilleren har flyttet sig
         System.out.println(spil.roomDescription(previousRoom)); //MMH beskrivelse af start rum
         System.out.println(" ");//MMH bare for at få en ekstra linje
 
@@ -35,29 +36,13 @@ public class UserInterface {
             System.out.println("1. North \n2. South \n3. East \n4. West");
 
             userChoice = input.nextLine();
+            addInformation();
 
             helpExitLook(userChoice); //Metodekald. Indeholder tillige spil.MoveRoom metodekald i sidste else.
-
-
-            //MMH her vil jeg gerne have den til at udskrive noget om hvor spilleren befinder sig, og en melding, hvis vedkomende ikke kan gå den vej
-            //Til dette bruger jeg lokal variable previousRoom og currentRoom
-            String currentRoom = spil.getCurrentRoom();//MMH variabel så kan tjekke om spiller har flyttet sig
-            if (previousRoom.equals(currentRoom)) {
-                System.out.println("Unfortunately you cannot go in this direction");
-                System.out.println("You are still located in " + spil.getCurrentRoom());
-            } else {
-                System.out.println("You are now located in " + spil.getCurrentRoom());
-                System.out.println(spil.roomDescription(currentRoom));
-                System.out.println(" ");
-
-            }
-            previousRoom = currentRoom;
-
-
         }
     }
     public void helpCommands() { //bare for at samle sysout. Kan fjernes, hvis helt dumt.
-        System.out.println("Hjælpekommandoer:");
+        System.out.println("Help functions:");
         System.out.println("Type exit to terminate the program.");
         System.out.println("Type look to get a description of the current room.");
     }
@@ -65,14 +50,28 @@ public class UserInterface {
         if(userChoice.toLowerCase().equals("help")) { //Hjælp kommando i terminal
             helpCommands(); //udprintning af hjælpekommandoer
         } else if (userChoice.toLowerCase().equals("look")) { //henter værelsesbeskrivelse
-            System.out.println("Beskrivelse af omgivelser");
+            System.out.println("Description of surroundings");
             System.out.println(spil.roomDescription(spil.getCurrentRoom())); //Henter Mettes beskrivelser.
             System.out.println(spil.current.getRoomDescription()); //henter Room objektets description, der også er parameter.
         } else {
             //spil.moveRoom(userChoice); //Udkommenteret, da parameter skal kræve String og ikke int.
         }
     }
+    public void addInformation() {
+        //MMH her vil jeg gerne have den til at udskrive noget om hvor spilleren befinder sig, og en melding, hvis vedkomende ikke kan gå den vej
+        //Til dette bruger jeg lokal variable previousRoom og currentRoom
+        String currentRoom = spil.getCurrentRoom();//MMH variabel så kan tjekke om spiller har flyttet sig
+        if (previousRoom.equals(currentRoom)) {
+            System.out.println("Unfortunately you cannot go in this direction");
+            System.out.println("You are still located in " + spil.getCurrentRoom());
+        } else {
+            System.out.println("You are now located in " + spil.getCurrentRoom());
+            System.out.println(spil.roomDescription(currentRoom));
+            System.out.println(" ");
 
+        }
+        previousRoom = currentRoom;
+    }
 
     //**** Error handling methods ****//
     // nedstående error handling skal fange forkerte input i vores program
