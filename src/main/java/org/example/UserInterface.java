@@ -40,8 +40,10 @@ public class UserInterface {
                 helpCommands(); //udprintning af hjælpekommandoer
             } else if (userChoice.toLowerCase().equals("look")) { //henter værelsesbeskrivelse
                 System.out.println("Beskrivelse af omgivelser");
+                System.out.println(spil.roomDescription(spil.getCurrentRoom())); //Henter Mettes beskrivelser.
+                System.out.println(spil.current.getRoomDescription()); //henter Room objektets description, der også er parameter.
             } else {
-                //spil.moveRoom(userChoice);
+                //spil.moveRoom(userChoice); //Udkommenteret, da parameter skal kræve String og ikke int.
             }
 
 
