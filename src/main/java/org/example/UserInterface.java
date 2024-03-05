@@ -26,7 +26,7 @@ public class UserInterface {
         System.out.println("You are located in " + spil.getCurrentRoom());
 
         String previousRoom = spil.getCurrentRoom();//MMH String variabel til hjælp så vi kan bedømme i if else, om spilleren har flyttet sig
-        System.out.println(spil.current.roomDescription(previousRoom)); //MMH beskrivelse af start rum
+        System.out.println(spil.roomDescription(previousRoom)); //MMH beskrivelse af start rum
         System.out.println(" ");//MMH bare for at få en ekstra linje
 
         while (userChoice != sentinel) {
@@ -46,7 +46,7 @@ public class UserInterface {
                 System.out.println("You are still located in " + spil.getCurrentRoom());
             } else {
                 System.out.println("You are now located in " + spil.getCurrentRoom());
-                System.out.println(spil.current.roomDescription(currentRoom));
+                System.out.println(spil.roomDescription(currentRoom));
                 System.out.println(" ");
 
             }
