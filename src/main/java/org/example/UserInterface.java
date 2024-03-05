@@ -38,9 +38,9 @@ public class UserInterface {
             if(userChoiceString.toLowerCase().equals("help") || userChoiceString.toLowerCase().equals("look") || userChoiceString.toLowerCase().equals("exit")) {
                 helpExitLook(userChoiceString); //Metodekald.
             } else {
-                spil.playerDirection(userChoiceString);
+                spil.playDirectionAdvance(userChoiceString);
 
-                int userChoiceInt = spil.playerDirection(userChoiceString);
+                int userChoiceInt = spil.playDirectionAdvance(userChoiceString);
 
                 spil.moveRoom(userChoiceInt);
 

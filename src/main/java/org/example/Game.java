@@ -142,23 +142,39 @@ public class Game {
         return direction;
     }
 
-    ///// Alternative method to hand play direction //////
+    ///// Alternative method to handle play direction //////
 
 
-    /*public int playDirectionAdvance (String input){
+    public int playDirectionAdvance (String input){
 
         final Map<String, Integer> WORDMAP = new HashMap<>();
+
         WORDMAP.put("north", 1);
         WORDMAP.put("south", 2);
         WORDMAP.put("east",3);
         WORDMAP.put("west",4);
 
-        List<Integer> result = WORDMAP.entrySet().stream().filter(e -> e.getKey().startsWith(input).map(Map.Entry::getValue).collect(Collector.toList()));
+        List<Integer> result = WORDMAP.entrySet().stream().filter(e -> e.getKey().startsWith(cleanInput(input))).map(Map.Entry::getValue).collect(Collectors.toList());
         if(result.size() == 1){
-            return result.get(0);
+            return result.get(0); // Det her er index. når det ikke er et array som bruger man get. Fordi det er en collection kalder man metode.
         }
-        return -1;
-    }*/
+        return 0;
+
+        // Entry har en key og en value set er en list
+        // stream er et API som er et filter google java streams det er noget man bruger for lister
+            // når man laver et filter fravælger vi alle som ikke opfylder vores kriteri.
+            // Lambda expression e -> e.getKey det er bare et variable
+        // Map siger bare at vi få vores getvalue som er vores key in vores Hashmap
+        // collect(Collectors.toList()) det er hjælpe class som samler resultatet. Den samler det et list.
+    }
+
+    public static String cleanInput(String input) {
+        input = input.toLowerCase();
+        if (input.startsWith("go ")){
+            input = input.substring(input.indexOf(" ")+1);
+        }
+        return input;
+    }
 
 
     //MMH Methods to connect description to the rooms
