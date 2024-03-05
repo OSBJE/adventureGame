@@ -17,8 +17,8 @@ public class UserInterface {
     }
 
     public void startGame() {
-        int sentinel = 5; // den her skal bruges senere, lige nu holder den bare loopet igang.
-        int userChoice = 0; // starter bare så den kan loop hele tiden
+        final String SENTINEL = "exit"; // den her skal bruges senere, lige nu holder den bare loopet igang.
+        String userChoice=""; // starter bare så den kan loop hele tiden
 
 
         // starten på spillet, her skal det køre en gang
@@ -29,14 +29,21 @@ public class UserInterface {
         System.out.println(spil.roomDescription(previousRoom)); //MMH beskrivelse af start rum
         System.out.println(" ");//MMH bare for at få en ekstra linje
 
-        while (userChoice != sentinel) {
+        while (!userChoice.toLowerCase().equals(SENTINEL)) {
 
             System.out.println("In what direction do you want to go?");
             System.out.println("1. North \n2. South \n3. East \n4. West");
 
-            userChoice = input.nextInt();
+            userChoice = input.nextLine();
 
-            spil.moveRoom(userChoice);
+            if(userChoice.toLowerCase().equals("help")) { //Hjælp kommando i terminal
+                helpCommands(); //udprintning af hjælpekommandoer
+            } else if (userChoice.toLowerCase().equals("look")) { //henter værelsesbeskrivelse
+                System.out.println("Beskrivelse af omgivelser");
+            } else {
+                //spil.moveRoom(userChoice);
+            }
+
 
             //MMH her vil jeg gerne have den til at udskrive noget om hvor spilleren befinder sig, og en melding, hvis vedkomende ikke kan gå den vej
             //Til dette bruger jeg lokal variable previousRoom og currentRoom
@@ -54,6 +61,11 @@ public class UserInterface {
 
 
         }
+    }
+    public void helpCommands() { //bare for at samle sysout. Kan fjernes, hvis helt dumt.
+        System.out.println("Hjælpekommandoer:");
+        System.out.println("Type exit to terminate the program.");
+        System.out.println("Type look to get a description of the current room.");
     }
 
 
