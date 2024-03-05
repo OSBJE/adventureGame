@@ -8,7 +8,7 @@ public class Main {
         UserInterface ui = new UserInterface();
        // ui.startGame();
 
-
+// Virker det her
 
     }
 }
