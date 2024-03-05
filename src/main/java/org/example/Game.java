@@ -135,6 +135,7 @@ public class Game {
                 break;
             } else if (str2.charAt(i) == 'w'){
                 direction = 4;
+                break;
             }
         }
         return direction;

@@ -19,7 +19,7 @@ public class UserInterface {
 
     public void startGame() {
         final String SENTINEL = "exit"; // den her skal bruges senere, lige nu holder den bare loopet igang.
-        String userChoice=""; // starter bare så den kan loop hele tiden
+        String userChoiceString=""; // starter bare så den kan loop hele tiden
 
 
         // starten på spillet, her skal det køre en gang
@@ -30,15 +30,26 @@ public class UserInterface {
         System.out.println(spil.roomDescription(previousRoom)); //MMH beskrivelse af start rum
         System.out.println(" ");//MMH bare for at få en ekstra linje
 
-        while (!userChoice.toLowerCase().equals(SENTINEL)) {
+        while (!userChoiceString.toLowerCase().equals(SENTINEL)) {
 
             System.out.println("In what direction do you want to go?");
-            System.out.println("1. North \n2. South \n3. East \n4. West");
+            System.out.println("Type in what direction or type help, look, exit.");
+            userChoiceString = input.nextLine();
+            if(userChoiceString.toLowerCase().equals("help") || userChoiceString.toLowerCase().equals("look") || userChoiceString.toLowerCase().equals("exit")) {
+                helpExitLook(userChoiceString); //Metodekald.
+            } else {
+                spil.playerDirection(userChoiceString);
 
-            userChoice = input.nextLine();
-            addInformation();
+                int userChoiceInt = spil.playerDirection(userChoiceString);
 
-            helpExitLook(userChoice); //Metodekald. Indeholder tillige spil.MoveRoom metodekald i sidste else.
+                spil.moveRoom(userChoiceInt);
+
+                addInformation();
+            }
+
+
+
+
         }
     }
     public void helpCommands() { //bare for at samle sysout. Kan fjernes, hvis helt dumt.
@@ -46,15 +57,15 @@ public class UserInterface {
         System.out.println("Type exit to terminate the program.");
         System.out.println("Type look to get a description of the current room.");
     }
-    public void helpExitLook(String userChoice) {
-        if(userChoice.toLowerCase().equals("help")) { //Hjælp kommando i terminal
+    public void helpExitLook(String userChoiceString) {
+        if(userChoiceString.toLowerCase().equals("help")) { //Hjælp kommando i terminal
             helpCommands(); //udprintning af hjælpekommandoer
-        } else if (userChoice.toLowerCase().equals("look")) { //henter værelsesbeskrivelse
+        } else if (userChoiceString.toLowerCase().equals("look")) { //henter værelsesbeskrivelse
             System.out.println("Description of surroundings");
             System.out.println(spil.roomDescription(spil.getCurrentRoom())); //Henter Mettes beskrivelser.
             System.out.println(spil.current.getRoomDescription()); //henter Room objektets description, der også er parameter.
         } else {
-            //spil.moveRoom(userChoice); //Udkommenteret, da parameter skal kræve String og ikke int.
+            // spil.moveRoom(userchoice2); //Udkommenteret, da parameter skal kræve String og ikke int.
         }
     }
     public void addInformation() {
