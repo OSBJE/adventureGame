@@ -36,15 +36,7 @@ public class UserInterface {
 
             userChoice = input.nextLine();
 
-            if(userChoice.toLowerCase().equals("help")) { //Hjælp kommando i terminal
-                helpCommands(); //udprintning af hjælpekommandoer
-            } else if (userChoice.toLowerCase().equals("look")) { //henter værelsesbeskrivelse
-                System.out.println("Beskrivelse af omgivelser");
-                System.out.println(spil.roomDescription(spil.getCurrentRoom())); //Henter Mettes beskrivelser.
-                System.out.println(spil.current.getRoomDescription()); //henter Room objektets description, der også er parameter.
-            } else {
-                //spil.moveRoom(userChoice); //Udkommenteret, da parameter skal kræve String og ikke int.
-            }
+            helpExitLook(userChoice); //Metodekald. Indeholder tillige spil.MoveRoom metodekald i sidste else.
 
 
             //MMH her vil jeg gerne have den til at udskrive noget om hvor spilleren befinder sig, og en melding, hvis vedkomende ikke kan gå den vej
@@ -68,6 +60,17 @@ public class UserInterface {
         System.out.println("Hjælpekommandoer:");
         System.out.println("Type exit to terminate the program.");
         System.out.println("Type look to get a description of the current room.");
+    }
+    public void helpExitLook(String userChoice) {
+        if(userChoice.toLowerCase().equals("help")) { //Hjælp kommando i terminal
+            helpCommands(); //udprintning af hjælpekommandoer
+        } else if (userChoice.toLowerCase().equals("look")) { //henter værelsesbeskrivelse
+            System.out.println("Beskrivelse af omgivelser");
+            System.out.println(spil.roomDescription(spil.getCurrentRoom())); //Henter Mettes beskrivelser.
+            System.out.println(spil.current.getRoomDescription()); //henter Room objektets description, der også er parameter.
+        } else {
+            //spil.moveRoom(userChoice); //Udkommenteret, da parameter skal kræve String og ikke int.
+        }
     }
 
 
