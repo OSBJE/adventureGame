@@ -1,19 +1,15 @@
 package org.example;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class Players {
 
     //*** ATTRIBUTES ***//
     // Vi skal lave en current af vores map
 
-    RoomCreator currentRoom;
+    Room currentRoom;
 
 
     // Constructor ///
-    public Players(RoomCreator room) {
+    public Players(Room room) {
         currentRoom = room;
     }
 

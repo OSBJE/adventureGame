@@ -2,7 +2,7 @@ package org.example;
 
 // Den class er beregnet til at oprette "Rooms"
 
-public class RoomCreator {
+public class Room {
 
     //*** ATTRIBUTES ***//
     // Et Room har følgende egenskaber (attributes) et navn (String), En beskrivelse og fire forbindelser (Room).
@@ -10,17 +10,17 @@ public class RoomCreator {
 
     private String roomName;  // roomNavn
     private String roomDescription;   // Skal indhold hvilke "Rooms" den er konktet til
-    private RoomCreator roomDoorNorth;
-    private RoomCreator roomDoorSouth;
-    private RoomCreator roomDoorEast;
-    private RoomCreator roomDoorWest;
+    private Room roomDoorNorth;
+    private Room roomDoorSouth;
+    private Room roomDoorEast;
+    private Room roomDoorWest;
 
 
     //*** CONSTRUCTOR ***//
     // når et Room objekt skabes, så gives det et navn (som argument), og en beskrivelse - det er det eneste.
 
 
-    public RoomCreator(String roomName, String roomDescription) {
+    public Room(String roomName, String roomDescription) {
         this.roomName = roomName;
         this.roomDescription = roomDescription;
         this.roomDoorNorth = null;
@@ -41,38 +41,38 @@ public class RoomCreator {
 
     // this getter methods is used to check if it is okay go into the room. The value will either be a room or null
 
-    public RoomCreator getRoomDoorNorth() {
+    public Room getRoomDoorNorth() {
         return roomDoorNorth;
     }
 
-    public RoomCreator getRoomDoorSouth() {
+    public Room getRoomDoorSouth() {
         return roomDoorSouth;
     }
 
-    public RoomCreator getRoomDoorEast() {
+    public Room getRoomDoorEast() {
         return roomDoorEast;
     }
 
-    public RoomCreator getRoomDoorWest() {
+    public Room getRoomDoorWest() {
         return roomDoorWest;
     }
 
 
     // Setter Methods
 
-    public void setRoomDoorNorth(RoomCreator roomDoorNorth) {
+    public void setRoomDoorNorth(Room roomDoorNorth) {
         this.roomDoorNorth = roomDoorNorth;
     }
 
-    public void setRoomDoorSouth(RoomCreator roomDoorSouth) {
+    public void setRoomDoorSouth(Room roomDoorSouth) {
         this.roomDoorSouth = roomDoorSouth;
     }
 
-    public void setRoomDoorEast(RoomCreator roomDoorEast) {
+    public void setRoomDoorEast(Room roomDoorEast) {
         this.roomDoorEast = roomDoorEast;
     }
 
-    public void setRoomDoorWest(RoomCreator roomDoorWest) {
+    public void setRoomDoorWest(Room roomDoorWest) {
         this.roomDoorWest = roomDoorWest;
     }
 

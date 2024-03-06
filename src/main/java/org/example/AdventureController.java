@@ -24,8 +24,11 @@ public class AdventureController {
         map.buildMap();
     }
 
-    public String getCurrentRoom() {
+    public String getCurrentRoom() { //Room name
         return players.currentRoom.getRoomName();
+    }
+    public String getCurrentRoomDescription() {
+        return players.currentRoom.getRoomDescription();
     }
 
 
