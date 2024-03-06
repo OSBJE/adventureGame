@@ -5,7 +5,11 @@ public class Players {
     //*** ATTRIBUTES ***//
     // Vi skal lave en current af vores map
 
-    Room currentRoom;
+
+    private Room currentRoom;
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
 
 
     // Constructor ///

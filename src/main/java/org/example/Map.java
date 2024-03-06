@@ -4,7 +4,7 @@ public class Map {
     //*** ATTRIBUTES ***//
     // Et kort af "Rooms" har et Room, som det laves på baggrund af.
 
-    Room startRoom;
+    private Room startRoom;
 
 
     //*** Constructor *** //
