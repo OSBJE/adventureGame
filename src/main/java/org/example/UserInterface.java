@@ -9,7 +9,7 @@ public class UserInterface {
     // instance / laver et Game object
     // laver en nyt game
 
-    Game spil = new Game();
+    AdventureController spil = new AdventureController();
     String previousRoom;
 
     //MMH Vi kunne definere constructor og køre startGame herinde. Så skal metodekald af startGame slettes fra Main
@@ -27,7 +27,7 @@ public class UserInterface {
         System.out.println("You are located in " + spil.getCurrentRoom());
 
         this.previousRoom = spil.getCurrentRoom();//MMH String variabel til hjælp så vi kan bedømme i if else, om spilleren har flyttet sig
-        System.out.println(spil.roomDescription(previousRoom)); //MMH beskrivelse af start rum
+        //System.out.println(spil.getRoomDescription()); //MMH beskrivelse af start rum
         System.out.println(" ");//MMH bare for at få en ekstra linje
 
         while (!userChoiceString.toLowerCase().equals(SENTINEL)) {
@@ -38,15 +38,14 @@ public class UserInterface {
             if(userChoiceString.toLowerCase().equals("help") || userChoiceString.toLowerCase().equals("look") || userChoiceString.toLowerCase().equals("exit")) {
                 helpExitLook(userChoiceString); //Metodekald.
             } else {
-                spil.playDirectionAdvance(userChoiceString);
+                spil.playerDirection(userChoiceString);
 
-                int userChoiceInt = spil.playDirectionAdvance(userChoiceString);
+                int userChoiceInt = spil.playerDirection(userChoiceString);
 
                 spil.moveRoom(userChoiceInt);
 
                 addInformation();
             }
-
 
 
 
@@ -60,12 +59,10 @@ public class UserInterface {
     public void helpExitLook(String userChoiceString) {
         if(userChoiceString.toLowerCase().equals("help")) { //Hjælp kommando i terminal
             helpCommands(); //udprintning af hjælpekommandoer
-        } else if (userChoiceString.toLowerCase().equals("look")) { //henter værelsesbeskrivelse
+        } else  { //henter værelsesbeskrivelse
             System.out.println("Description of surroundings");
-            System.out.println(spil.roomDescription(spil.getCurrentRoom())); //Henter Mettes beskrivelser.
-            System.out.println(spil.current.getRoomDescription()); //henter Room objektets description, der også er parameter.
-        } else {
-            // spil.moveRoom(userchoice2); //Udkommenteret, da parameter skal kræve String og ikke int.
+           // System.out.println(spil.getRoomDescription()(spil.getCurrentRoom())); //Henter Mettes beskrivelser.
+            //System.out.println(spil.getRoomDescription()); //henter Room objektets description, der også er parameter.
         }
     }
     public void addInformation() {
@@ -77,7 +74,7 @@ public class UserInterface {
             System.out.println("You are still located in " + spil.getCurrentRoom());
         } else {
             System.out.println("You are now located in " + spil.getCurrentRoom());
-            System.out.println(spil.roomDescription(currentRoom));
+            //System.out.println(spil.getRoomDescription());
             System.out.println(" ");
 
         }
