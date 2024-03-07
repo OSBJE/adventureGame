@@ -79,6 +79,7 @@ public class UserInterface {
         } else {
             System.out.println("You are now located in " + spil.getCurrentRoom());
             System.out.println(spil.getCurrentRoomDescription()); //Udkommenteret, da vi printer desc i helpExitLook().
+            spil.displayItemsInRoom(); //Indsat af DOJ. Sættes her, da der vil ske udprint af tilgængelige items efter beskrivelsen af rummet.
             System.out.println(" ");
 
         }

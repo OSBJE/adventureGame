@@ -55,6 +55,9 @@ public class AdventureController {
     public void removeItemsArrayList(String itemToRemove) {
         map.getFirstRoom().removeItemsArrayList(itemToRemove);
     }
+    public void displayItemsInRoom() {
+        players.getCurrentRoom().displayItemsInRoom();
+    }
 
 
 
