@@ -9,6 +9,8 @@ public class AdventureController {
     private Players players;
 
 
+
+
     // Det her er vores konstroktor
 
     public AdventureController() {
@@ -40,6 +42,18 @@ public class AdventureController {
 
     public int playerDirection(String input){
         return players.playerDirection(input);
+    }
+    public void addToPlayerInventory(Items item) { //Player inventory
+        players.addToPlayerInventory(item);
+    }
+    public void dropItemFromInventory(String itemToRemove) {
+        players.dropItemFromInventory(itemToRemove);
+    }
+    public void addItemsArrayList(Items Item) {
+        map.getFirstRoom().addItemsArrayList(Item);
+    }
+    public void removeItemsArrayList(String itemToRemove) {
+        map.getFirstRoom().removeItemsArrayList(itemToRemove);
     }
 
 

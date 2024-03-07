@@ -4,6 +4,8 @@ public class Map {
     //*** ATTRIBUTES ***//
     // Et kort af "Rooms" har et Room, som det laves på baggrund af.
 
+
+
     private Room startRoom;
     private Items itemsList;
 
@@ -94,6 +96,7 @@ public class Map {
     public Room getFirstRoom() {
         return startRoom;
     }
+
 
 
     public void buildItems() {

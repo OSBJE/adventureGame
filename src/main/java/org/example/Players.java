@@ -1,6 +1,6 @@
 package org.example;
 
-import  java.util.ArrayList;
+import java.util.ArrayList;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +13,7 @@ public class Players {
 
 
     private Room currentRoom;
+
     public Room getCurrentRoom() {
         return currentRoom;
     }
@@ -62,20 +63,20 @@ public class Players {
 
     public int playerDirection(String str) {
         int direction = 0;
-        int lng = str.length()-1;
+        int lng = str.length() - 1;
         String str2 = str.toLowerCase();
 
         for (int i = 0; i <= lng; i++) {
-            if (str2.charAt(i) == 'n'){
+            if (str2.charAt(i) == 'n') {
                 direction = 1;
                 break;
-            } else if (str2.charAt(i) == 's'){
+            } else if (str2.charAt(i) == 's') {
                 direction = 2;
                 break;
-            } else if (str2.charAt(i) == 'e'){
+            } else if (str2.charAt(i) == 'e') {
                 direction = 3;
                 break;
-            } else if (str2.charAt(i) == 'w'){
+            } else if (str2.charAt(i) == 'w') {
                 direction = 4;
                 break;
             }
@@ -85,11 +86,19 @@ public class Players {
 
     //// Player item liste ////
 
-    public void addToPlayerInventory(String item) {
-
+    public void addToPlayerInventory(Items item) { // Metode til at tilføje items til player inventory.
+        playerInventory.add(item);
     }
 
 
+public void dropItemFromInventory(String itemToRemove) { //Metode til at fjerne items fra player inventory.
+    for (Items searchItems : playerInventory) {
+        if (searchItems.getItem().contains(itemToRemove)) {   //// Vi skal have en bedre metode en getItem til at fjerne fra liste.
+            playerInventory.remove(searchItems);
+            currentRoom.addItemsArrayList(searchItems); //Tilføjer den "dropped" item til det room, man er i.
+        }
+    }
+}
 
 
     ///// Alternative method to handle play direction //////
