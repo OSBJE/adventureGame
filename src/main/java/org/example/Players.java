@@ -1,8 +1,11 @@
 package org.example;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
+import java.util.stream.*;
+
+//import java.util.HashMap;
+//import java.util.List;
+//import java.util.stream.Collectors;
 
 public class Players {
 
@@ -76,6 +79,7 @@ public class Players {
 
 
     /*public int playDirectionAdvance (String input){
+
 
         final Map<String, Integer> WORDMAP = new HashMap<>();
 
