@@ -1,22 +1,23 @@
 package org.example;
 
-import java.util.*;
-import java.util.stream.*;
-
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Players {
 
     //*** ATTRIBUTES ***//
     // Vi skal lave en current af vores map
 
-    RoomCreator currentRoom;
+
+    private Room currentRoom;
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
 
 
     // Constructor ///
-    public Players(RoomCreator room) {
+    public Players(Room room) {
         currentRoom = room;
     }
 
@@ -79,7 +80,6 @@ public class Players {
 
 
     /*public int playDirectionAdvance (String input){
-
 
         final Map<String, Integer> WORDMAP = new HashMap<>();
 

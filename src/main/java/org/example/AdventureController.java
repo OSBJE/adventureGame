@@ -5,8 +5,8 @@ public class AdventureController {
 
     // Her kalder vi de forskellige instancer af vores class
 
-    public Map map;
-    public Players players;
+    private Map map;
+    private Players players;
 
 
     // Det her er vores konstroktor
@@ -24,8 +24,11 @@ public class AdventureController {
         map.buildMap();
     }
 
-    public String getCurrentRoom() {
-        return players.currentRoom.getRoomName();
+    public String getCurrentRoom() { //Room name
+        return players.getCurrentRoom().getRoomName();
+    }
+    public String getCurrentRoomDescription() {
+        return players.getCurrentRoom().getRoomDescription();
     }
 
 

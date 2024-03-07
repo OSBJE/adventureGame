@@ -4,7 +4,7 @@ public class Map {
     //*** ATTRIBUTES ***//
     // Et kort af "Rooms" har et Room, som det laves på baggrund af.
 
-    RoomCreator startRoom;
+    private Room startRoom;
 
 
     //*** Constructor *** //
@@ -24,15 +24,15 @@ public class Map {
         // vi starter med at lave 9 room objkter, et som repræsentere hver room i vores spil
         //
 
-        RoomCreator room1 = new RoomCreator("Room 1", " is a beautiful green hill with a nice view.");
-        RoomCreator room2 = new RoomCreator("Room 2", " is a dark cave with a thousand bats. Watch out!!!");
-        RoomCreator room3 = new RoomCreator("Room 3", " is a cold icy mountain.");
-        RoomCreator room4 = new RoomCreator("Room 4", " is a wooden cottage that is about to collapse. Watch out!!!.");
-        RoomCreator room5 = new RoomCreator("Room 5", " is a warm and cozy fireplace.");
-        RoomCreator room6 = new RoomCreator("Room 6", " is an erupting volcano...watch out for the burning lava!!!");
-        RoomCreator room7 = new RoomCreator("Room 7", " is a noisy metropolis with polluting traffic.");
-        RoomCreator room8 = new RoomCreator("Room 8", " is an olive grove with butterflies.");
-        RoomCreator room9 = new RoomCreator("Room 9", " is a battlefield from World War 1. \nKeep your head down, so you don't get hit!.");
+        Room room1 = new Room("Room 1", "This is a beautiful green hill with a nice view.");
+        Room room2 = new Room("Room 2", "This is a dark cave with a thousand bats. Watch out!!!");
+        Room room3 = new Room("Room 3", "This is a cold icy mountain.");
+        Room room4 = new Room("Room 4", "This is a wooden cottage that is about to collapse. Watch out!!!.");
+        Room room5 = new Room("Room 5", "This is a warm and cozy fireplace.");
+        Room room6 = new Room("Room 6", "This is an erupting volcano...watch out for the burning lava!!!");
+        Room room7 = new Room("Room 7", "This is a noisy metropolis with polluting traffic.");
+        Room room8 = new Room("Room 8", "This is an olive grove with butterflies.");
+        Room room9 = new Room("Room 9", "This is a battlefield from World War 1. \nKeep your head down, so you don't get hit!.");
 
         // Her skal vi have forbindelserne mellem de forskellige "Rooms"
 
@@ -78,7 +78,7 @@ public class Map {
 
     }
 
-    public RoomCreator getFirstRoom() {
+    public Room getFirstRoom() {
         return startRoom;
     }
 

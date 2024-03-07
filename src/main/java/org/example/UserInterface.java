@@ -10,7 +10,7 @@ public class UserInterface {
     // laver en nyt game
 
     AdventureController spil = new AdventureController();
-    String previousRoom;
+    private String previousRoom;
 
     //MMH Vi kunne definere constructor og køre startGame herinde. Så skal metodekald af startGame slettes fra Main
     public UserInterface() {
@@ -25,10 +25,12 @@ public class UserInterface {
         // starten på spillet, her skal det køre en gang
         System.out.println("Welcome to AdventureGame!");
         System.out.println("You are located in " + spil.getCurrentRoom());
+        //System.out.println(spil.getCurrentRoomDescription());
 
         this.previousRoom = spil.getCurrentRoom();//MMH String variabel til hjælp så vi kan bedømme i if else, om spilleren har flyttet sig
         //System.out.println(spil.getRoomDescription()); //MMH beskrivelse af start rum
         System.out.println(" ");//MMH bare for at få en ekstra linje
+        System.out.println(spil.getCurrentRoomDescription());
 
         while (!userChoiceString.toLowerCase().equals(SENTINEL)) {
 
@@ -45,6 +47,8 @@ public class UserInterface {
                 spil.moveRoom(userChoiceInt);
 
                 addInformation();
+
+
             }
 
 
@@ -59,8 +63,8 @@ public class UserInterface {
     public void helpExitLook(String userChoiceString) {
         if(userChoiceString.toLowerCase().equals("help")) { //Hjælp kommando i terminal
             helpCommands(); //udprintning af hjælpekommandoer
-        } else  { //henter værelsesbeskrivelse
-            System.out.println("Description of surroundings");
+        } else if(!userChoiceString.toLowerCase().equals("exit"))  { //henter værelsesbeskrivelse
+            System.out.println(spil.getCurrentRoomDescription());
            // System.out.println(spil.getRoomDescription()(spil.getCurrentRoom())); //Henter Mettes beskrivelser.
             //System.out.println(spil.getRoomDescription()); //henter Room objektets description, der også er parameter.
         }
@@ -74,7 +78,7 @@ public class UserInterface {
             System.out.println("You are still located in " + spil.getCurrentRoom());
         } else {
             System.out.println("You are now located in " + spil.getCurrentRoom());
-            //System.out.println(spil.getRoomDescription());
+            System.out.println(spil.getCurrentRoomDescription()); //Udkommenteret, da vi printer desc i helpExitLook().
             System.out.println(" ");
 
         }
