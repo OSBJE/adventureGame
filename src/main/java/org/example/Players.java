@@ -1,5 +1,7 @@
 package org.example;
 
+import  java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +24,12 @@ public class Players {
     }
 
 
-    // Det her er vores navigator (Compass) så vi kan gå rundt i vores spil
+    // Player variable til brug i methode //
+
+    ArrayList<Items> playerInventory = new ArrayList<>();
+
+
+    // Det her er vores navigator (Compass) så vi kan gå rundt i vores spil //
 
 
     public void moveRoom(int compass) {
@@ -51,7 +58,7 @@ public class Players {
     }
 
 
-    //////// Method to handle String direction inputs ////////////
+    //"Method to handle String direction inputs"//
 
     public int playerDirection(String str) {
         int direction = 0;
@@ -75,6 +82,15 @@ public class Players {
         }
         return direction;
     }
+
+    //// Player item liste ////
+
+    public void addToPlayerInventory(String item) {
+
+    }
+
+
+
 
     ///// Alternative method to handle play direction //////
 

@@ -5,6 +5,7 @@ public class Map {
     // Et kort af "Rooms" har et Room, som det laves på baggrund af.
 
     private Room startRoom;
+    private Items itemsList;
 
 
     //*** Constructor *** //
@@ -76,12 +77,34 @@ public class Map {
 
         startRoom = room1;
 
+
+        Items itemKniv = new  Items("Kniv", "Magisk Grim");
+        Items itemSværd = new Items("Sværd", "Det er stort");
+        Items itemØkse = new Items("Økse", "Den hedder gimli");
+        Items itemVaskebrædt = new Items("Vaskebrædt", "Husk at vasketøj");
+
+
+        room3.addItemsArrayList(itemKniv);
+        room3.addItemsArrayList(itemSværd);
+        room3.addItemsArrayList(itemØkse);
+        room7.addItemsArrayList(itemVaskebrædt);
+
     }
 
     public Room getFirstRoom() {
         return startRoom;
     }
 
+
+    public void buildItems() {
+
+        Items itemKniv = new  Items("Kniv", "Magisk Grim");
+        Items itemsSværd = new Items("Sværd", "Det er stort");
+        Items itemsØkse = new Items("Økse", "Den hedder gimli");
+        Items itemsVaskebrædt = new Items("Vaskebrædt", "Husk at vasketøj");
+
+
+    }
 
     //MMH Methods to connect description to the rooms
 /*
