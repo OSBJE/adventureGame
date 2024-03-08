@@ -101,6 +101,7 @@ public void dropItemFromInventory(String itemToRemove) { //Metode til at fjerne 
 }
 
 
+
     ///// Alternative method to handle play direction //////
 
 

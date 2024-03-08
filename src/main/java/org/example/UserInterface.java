@@ -86,6 +86,7 @@ public class UserInterface {
         previousRoom = currentRoom;
     }
 
+
     //**** Error handling methods ****//
     // nedstående error handling skal fange forkerte input i vores program
     // Det skal gerne kunne genbruges som en general error hanndling

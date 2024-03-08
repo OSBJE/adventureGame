@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.ArrayList;
+
 public class AdventureController {
 
 
@@ -54,6 +56,9 @@ public class AdventureController {
     }
     public void removeItemsArrayList(String itemToRemove) {
         map.getFirstRoom().removeItemsArrayList(itemToRemove);
+    }
+    public ArrayList<Items> getitemsArrayList (){  // really nice Mette og Daniel //Returner
+        return map.getFirstRoom().getitemsArrayList();
     }
     public void displayItemsInRoom() {
         players.getCurrentRoom().displayItemsInRoom();
