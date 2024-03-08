@@ -8,7 +8,7 @@ public class AdventureController {
     // Her kalder vi de forskellige instancer af vores class
 
     private Map map;
-    private Players players;
+    private Player player;
 
 
 
@@ -17,7 +17,7 @@ public class AdventureController {
 
     public AdventureController() {
         map = new Map();
-        players = new Players(map.getFirstRoom());
+        player = new Player(map.getFirstRoom());
     }
 
 
@@ -29,39 +29,39 @@ public class AdventureController {
     }
 
     public String getCurrentRoom() { //Room name
-        return players.getCurrentRoom().getRoomName();
+        return player.getCurrentRoom().getRoomName();
     }
     public String getCurrentRoomDescription() {
-        return players.getCurrentRoom().getRoomDescription();
+        return player.getCurrentRoom().getRoomDescription();
     }
 
 
     ///////************** Players *********** ////////
 
     public void moveRoom(int input){
-        players.moveRoom(input);
+        player.moveRoom(input);
     }
 
     public int playerDirection(String input){
-        return players.playerDirection(input);
+        return player.playerDirection(input);
     }
-    public void addToPlayerInventory(Items item) { //Player inventory
-        players.addToPlayerInventory(item);
+    public void addToPlayerInventory(Item item) { //Player inventory
+        player.addToPlayerInventory(item);
     }
     public void dropItemFromInventory(String itemToRemove) {
-        players.dropItemFromInventory(itemToRemove);
+        player.dropItemFromInventory(itemToRemove);
     }
-    public void addItemsArrayList(Items Item) {
-        map.getFirstRoom().addItemsArrayList(Item);
+    public void addItemsArrayList(Item item) {
+        map.getFirstRoom().addItemsArrayList(item);
     }
     public void removeItemsArrayList(String itemToRemove) {
         map.getFirstRoom().removeItemsArrayList(itemToRemove);
     }
-    public ArrayList<Items> getitemsArrayList (){  // really nice Mette og Daniel //Returner
+    public ArrayList<Item> getitemsArrayList (){  // really nice Mette og Daniel //Returner
         return map.getFirstRoom().getitemsArrayList();
     }
     public void displayItemsInRoom() {
-        players.getCurrentRoom().displayItemsInRoom();
+        player.getCurrentRoom().displayItemsInRoom();
     }
 
 

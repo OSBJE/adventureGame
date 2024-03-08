@@ -19,7 +19,7 @@ public class UserInterface {
 
     public void startGame() {
         final String SENTINEL = "exit"; // den her skal bruges senere, lige nu holder den bare loopet igang.
-        String userChoiceString=""; // starter bare så den kan loop hele tiden
+        String userChoiceString = ""; // starter bare så den kan loop hele tiden
 
 
         // starten på spillet, her skal det køre en gang
@@ -37,7 +37,7 @@ public class UserInterface {
             System.out.println("In what direction do you want to go?");
             System.out.println("Type in what direction or type help, look, exit.");
             userChoiceString = input.nextLine();
-            if(userChoiceString.toLowerCase().equals("help") || userChoiceString.toLowerCase().equals("look") || userChoiceString.toLowerCase().equals("exit")) {
+            if (userChoiceString.toLowerCase().equals("help") || userChoiceString.toLowerCase().equals("look") || userChoiceString.toLowerCase().equals("exit")) {
                 helpExitLook(userChoiceString); //Metodekald.
             } else {
                 spil.playerDirection(userChoiceString);
@@ -52,23 +52,25 @@ public class UserInterface {
             }
 
 
-
         }
     }
+
     public void helpCommands() { //bare for at samle sysout. Kan fjernes, hvis helt dumt.
         System.out.println("Help functions:");
         System.out.println("Type exit to terminate the program.");
         System.out.println("Type look to get a description of the current room.");
     }
+
     public void helpExitLook(String userChoiceString) {
-        if(userChoiceString.toLowerCase().equals("help")) { //Hjælp kommando i terminal
+        if (userChoiceString.toLowerCase().equals("help")) { //Hjælp kommando i terminal
             helpCommands(); //udprintning af hjælpekommandoer
-        } else if(!userChoiceString.toLowerCase().equals("exit"))  { //henter værelsesbeskrivelse
+        } else if (!userChoiceString.toLowerCase().equals("exit")) { //henter værelsesbeskrivelse
             System.out.println(spil.getCurrentRoomDescription());
-           // System.out.println(spil.getRoomDescription()(spil.getCurrentRoom())); //Henter Mettes beskrivelser.
+            // System.out.println(spil.getRoomDescription()(spil.getCurrentRoom())); //Henter Mettes beskrivelser.
             //System.out.println(spil.getRoomDescription()); //henter Room objektets description, der også er parameter.
         }
     }
+
     public void addInformation() {
         //MMH her vil jeg gerne have den til at udskrive noget om hvor spilleren befinder sig, og en melding, hvis vedkomende ikke kan gå den vej
         //Til dette bruger jeg lokal variable previousRoom og currentRoom
@@ -80,6 +82,7 @@ public class UserInterface {
             System.out.println("You are now located in " + spil.getCurrentRoom());
             System.out.println(spil.getCurrentRoomDescription()); //Udkommenteret, da vi printer desc i helpExitLook().
             spil.displayItemsInRoom(); //Indsat af DOJ. Sættes her, da der vil ske udprint af tilgængelige items efter beskrivelsen af rummet.
+
             System.out.println(" ");
 
         }

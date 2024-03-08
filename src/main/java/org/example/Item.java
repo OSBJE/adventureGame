@@ -1,6 +1,6 @@
 package org.example;
 
-public class Items {
+public class Item {
 
 
 
@@ -19,7 +19,7 @@ public class Items {
     /// Konstructor /////
 
 
-    public Items (String item, String itemDescription){
+    public Item (String item, String itemDescription){
         this.item = item;
         this.itemDescription = itemDescription;
     }
