@@ -92,7 +92,7 @@ public class UserInterface {
     public void displayItemsInRoom() { //Metode til at displaye items i room. Items bliver foreløbigt sat i buildMap().
         if(!spil.getitemsArrayList().isEmpty()) { //Hvis arraylisten IKKE er tom
             System.out.println("You spot items that may be of use to you in this room: ");
-            for(Items item : spil.getitemsArrayList()) { //For each loop itererer gennem vores itemsArrayList for at finde Items, der er forbundet med det enkelte rum.
+            for(Item item : spil.getitemsArrayList()) { //For each loop itererer gennem vores itemsArrayList for at finde Items, der er forbundet med det enkelte rum.
                 System.out.println(item.getItem());
             }
         }

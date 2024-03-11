@@ -60,9 +60,6 @@ public class AdventureController {
     public ArrayList<Item> getitemsArrayList (){  //Returnerer assignede items, der er forbundet med rummene.
         return player.getCurrentRoom().getitemsArrayList();
     }
-    public void displayItemsInRoom() {
-        player.getCurrentRoom().displayItemsInRoom();
-    }
 
 
 
