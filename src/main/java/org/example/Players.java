@@ -94,8 +94,8 @@ public class Players {
 public void dropItemFromInventory(String itemToRemove) { //Metode til at fjerne items fra player inventory.
     for (Items searchItems : playerInventory) {
         if (searchItems.getItem().contains(itemToRemove)) {   //// Vi skal have en bedre metode en getItem til at fjerne fra liste.
-            playerInventory.remove(searchItems);
             currentRoom.addItemsArrayList(searchItems); //Tilføjer den "dropped" item til det room, man er i.
+            playerInventory.remove(searchItems);
         }
     }
 }

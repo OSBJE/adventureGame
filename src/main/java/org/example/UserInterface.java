@@ -57,8 +57,10 @@ public class UserInterface {
     }
     public void helpCommands() { //bare for at samle sysout. Kan fjernes, hvis helt dumt.
         System.out.println("Help functions:");
+        System.out.println(" ");
         System.out.println("Type exit to terminate the program.");
         System.out.println("Type look to get a description of the current room.");
+        System.out.println(" ");
     }
     public void helpExitLook(String userChoiceString) {
         if(userChoiceString.toLowerCase().equals("help")) { //Hjælp kommando i terminal
@@ -78,12 +80,24 @@ public class UserInterface {
             System.out.println("You are still located in " + spil.getCurrentRoom());
         } else {
             System.out.println("You are now located in " + spil.getCurrentRoom());
-            System.out.println(spil.getCurrentRoomDescription()); //Udkommenteret, da vi printer desc i helpExitLook().
-            spil.displayItemsInRoom(); //Indsat af DOJ. Sættes her, da der vil ske udprint af tilgængelige items efter beskrivelsen af rummet.
+            System.out.println(spil.getCurrentRoomDescription());
+            displayItemsInRoom();
+            //spil.displayItemsInRoom(); //Indsat af DOJ. Sættes her, da der vil ske udprint af tilgængelige items efter beskrivelsen af rummet.
             System.out.println(" ");
 
         }
         previousRoom = currentRoom;
+    }
+    public void displayItemsInRoom() { //Metode til at displaye items i room. Items bliver foreløbigt sat i buildMap().
+        if(!spil.getitemsArrayList().isEmpty()) { //Hvis arraylisten IKKE er tom
+            System.out.println("You spot items that may be of use to you in this room: ");
+            for(Items item : spil.getitemsArrayList()) { //For each loop itererer gennem vores itemsArrayList for at finde Items, der er forbundet med det enkelte rum.
+                System.out.println(item.getItem());
+            }
+        }
+        else {
+            System.out.println("You see nothing of use to you in this room.");
+        }
     }
 
 

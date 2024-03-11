@@ -57,14 +57,7 @@ public class AdventureController {
     public void removeItemsArrayList(String itemToRemove) {
         map.getFirstRoom().removeItemsArrayList(itemToRemove);
     }
-    public ArrayList<Items> getitemsArrayList (){  // really nice Mette og Daniel //Returner
-        return map.getFirstRoom().getitemsArrayList();
+    public ArrayList<Items> getitemsArrayList (){  //Returnerer assignede items, der er forbundet med rummene.
+        return players.getCurrentRoom().getitemsArrayList();
     }
-    public void displayItemsInRoom() {
-        players.getCurrentRoom().displayItemsInRoom();
-    }
-
-
-
-
 }

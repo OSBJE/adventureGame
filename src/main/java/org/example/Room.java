@@ -47,16 +47,6 @@ public class Room {
     public ArrayList<Items> getitemsArrayList (){  // really nice Mette og Daniel
         return itemsArrayList;
     }
-    public void displayItemsInRoom() { //Metode til at displaye items i room. Items bliver foreløbigt sat i buildMap().
-        if(!itemsArrayList.isEmpty()) {
-            System.out.println("You spot items that may be of use to you in this room: ");
-            for(Items item : itemsArrayList) { //For each loop leder efter items
-                System.out.println(item.getItem());
-            }
-        } else {
-            System.out.println("You see nothing of use to you in this room.");
-        }
-    }
 
     // this getter methods is used to check if it is okay go into the room. The value will either be a room or null
 
