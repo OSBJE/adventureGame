@@ -14,7 +14,7 @@ public class Room {
 
     private String roomName;  // roomNavn
     private String roomDescription;   // Skal indhold hvilke "Rooms" den er konktet til
-    private ArrayList<Items> itemsArrayList = new ArrayList<>();
+    private ArrayList<Item> itemsArrayList = new ArrayList<>();
     private Room roomDoorNorth;
     private Room roomDoorSouth;
     private Room roomDoorEast;
@@ -44,7 +44,7 @@ public class Room {
         return roomDescription;
     }
 
-    public ArrayList<Items> getitemsArrayList (){  // really nice Mette og Daniel
+    public ArrayList<Item> getitemsArrayList (){  // really nice Mette og Daniel
         return itemsArrayList;
     }
 
@@ -79,12 +79,12 @@ public class Room {
 
 
     //////******* en adder metode til vores Arraylist *******/////////
-    public void addItemsArrayList(Items Item){
+    public void addItemsArrayList(Item Item){
         itemsArrayList.add(Item);
     }
 
     public void removeItemsArrayList(String itemToRemove){
-       for(Items searchItems : itemsArrayList) {
+       for(Item searchItems : itemsArrayList) {
            if(searchItems.getItem().contains(itemToRemove)) {   //// Vi skal have en bedre metode en getItem til at fjerne fra liste.
                itemsArrayList.remove(searchItems);
            }

@@ -2,11 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
-
-public class Players {
+public class Player {
 
     //*** ATTRIBUTES ***//
     // Vi skal lave en current af vores map
@@ -20,14 +16,14 @@ public class Players {
 
 
     // Constructor ///
-    public Players(Room room) {
+    public Player(Room room) {
         currentRoom = room;
     }
 
 
     // Player variable til brug i methode //
 
-    ArrayList<Items> playerInventory = new ArrayList<>();
+    ArrayList<Item> playerInventory = new ArrayList<>();
 
 
     // Det her er vores navigator (Compass) så vi kan gå rundt i vores spil //
@@ -86,13 +82,13 @@ public class Players {
 
     //// Player item liste ////
 
-    public void addToPlayerInventory(Items item) { // Metode til at tilføje items til player inventory.
+    public void addToPlayerInventory(Item item) { // Metode til at tilføje items til player inventory.
         playerInventory.add(item);
     }
 
 
 public void dropItemFromInventory(String itemToRemove) { //Metode til at fjerne items fra player inventory.
-    for (Items searchItems : playerInventory) {
+    for (Item searchItems : playerInventory) {
         if (searchItems.getItem().contains(itemToRemove)) {   //// Vi skal have en bedre metode en getItem til at fjerne fra liste.
             currentRoom.addItemsArrayList(searchItems); //Tilføjer den "dropped" item til det room, man er i.
             playerInventory.remove(searchItems);

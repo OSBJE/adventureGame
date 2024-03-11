@@ -7,7 +7,7 @@ public class Map {
 
 
     private Room startRoom;
-    private Items itemsList;
+    private Item itemsList;
 
 
     //*** Constructor *** //
@@ -80,10 +80,10 @@ public class Map {
         startRoom = room1;
 
 
-        Items itemKniv = new  Items("Kniv", "Magisk Grim");
-        Items itemSværd = new Items("Sværd", "Det er stort");
-        Items itemØkse = new Items("Økse", "Den hedder gimli");
-        Items itemVaskebrædt = new Items("Vaskebrædt", "Husk at vasketøj");
+        Item itemKniv = new  Item("Kniv", "Magisk Grim");
+        Item itemSværd = new Item("Sværd", "Det er stort");
+        Item itemØkse = new Item("Økse", "Den hedder gimli");
+        Item itemVaskebrædt = new Item("Vaskebrædt", "Husk at vasketøj");
 
 
         room3.addItemsArrayList(itemKniv);
@@ -101,10 +101,10 @@ public class Map {
 
     public void buildItems() {
 
-        Items itemKniv = new  Items("Kniv", "Magisk Grim");
-        Items itemsSværd = new Items("Sværd", "Det er stort");
-        Items itemsØkse = new Items("Økse", "Den hedder gimli");
-        Items itemsVaskebrædt = new Items("Vaskebrædt", "Husk at vasketøj");
+        Item itemKniv = new  Item("Kniv", "Magisk Grim");
+        Item itemsSværd = new Item("Sværd", "Det er stort");
+        Item itemsØkse = new Item("Økse", "Den hedder gimli");
+        Item itemsVaskebrædt = new Item("Vaskebrædt", "Husk at vasketøj");
 
 
     }
