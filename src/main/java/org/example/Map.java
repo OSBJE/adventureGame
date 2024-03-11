@@ -98,7 +98,6 @@ public class Map {
     }
 
 
-
     public void buildItems() {
 
         Item itemKniv = new  Item("Kniv", "Magisk Grim");
@@ -108,31 +107,5 @@ public class Map {
 
 
     }
-
-    //MMH Methods to connect description to the rooms
-/*
-    public String roomDescription(String roomName) {
-        if (roomName.equals("Room 1")) {
-            return roomName + " is a beautiful green hill with a nice view.";
-        } else if (roomName.equals("Room 2")) {
-            return roomName + " is a dark cave with a thousand bats. Watch out!!!";
-        } else if (roomName.equals("Room 3")) {
-            return roomName + " is a cold icy mountain.";
-        } else if (roomName.equals("Room 4")) {
-            return roomName + " is a wooden cottage that is about to collapse. Watch out!!!.";
-        } else if (roomName.equals("Room 5")) {
-            return roomName + " is a warm and cozy fireplace.";
-        } else if (roomName.equals("Room 6")) {
-            return roomName + " is an erupting volcano...watch out for the burning lava!!!";
-        } else if (roomName.equals("Room 7")) {
-            return roomName + " is a noisy metropolis with polluting traffic.";
-        } else if (roomName.equals("Room 8")) {
-            return roomName + " is an olive grove with butterflies.";
-        } else {
-            return roomName + " is a battlefield from World War 1. \nKeep your head down, so you don't get hit!.";
-        }
-
-    }
-*/
 
 }

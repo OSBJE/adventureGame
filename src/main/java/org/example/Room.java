@@ -77,30 +77,6 @@ public class Room {
         this.roomDoorSouth = roomDoorSouth;
     }
 
-
-    //////******* en adder metode til vores Arraylist *******/////////
-    public void addItemsArrayList(Item Item){
-        itemsArrayList.add(Item);
-    }
-
-    public void removeItemsArrayList(String itemToRemove){
-       for(Item searchItems : itemsArrayList) {
-           if(searchItems.getItem().contains(itemToRemove)) {   //// Vi skal have en bedre metode en getItem til at fjerne fra liste.
-               itemsArrayList.remove(searchItems);
-           }
-       }
-
-        // Jeg vil gerne have lavet en for løkke i stedet for en for each lykke.
-
-        /* for (int i = 0; i < itemsArrayList.size(); i++ ) {
-            if (Items )
-        }*/
-
-
-    }
-
-    //////////////////////////////////////////////////////////////////
-
     public void setRoomDoorEast(Room roomDoorEast) {
         this.roomDoorEast = roomDoorEast;
     }
@@ -109,5 +85,16 @@ public class Room {
         this.roomDoorWest = roomDoorWest;
     }
 
+
+    //////******* en adder og remove metode til vores Arraylist *******/////////
+
+    // vi kan gøre det her trick fordi Room. er connected to Item.
+    public void addItemsArrayList(Item Item){
+        itemsArrayList.add(Item);
+    }
+
+    public void removeItemsArrayList(Item Item) {
+        itemsArrayList.remove(Item);
+    }
 
 }

@@ -17,6 +17,9 @@ public class UserInterface {
         startGame();
     }
 
+
+    /////****** Start and control game ********//////////////////
+
     public void startGame() {
         final String SENTINEL = "exit"; // den her skal bruges senere, lige nu holder den bare loopet igang.
         String userChoiceString = ""; // starter bare så den kan loop hele tiden
@@ -39,73 +42,88 @@ public class UserInterface {
             userChoiceString = input.nextLine();
             if (userChoiceString.toLowerCase().equals("help") || userChoiceString.toLowerCase().equals("look") || userChoiceString.toLowerCase().equals("exit")) {
                 helpExitLook(userChoiceString); //Metodekald.
-            } else {
-                spil.playerDirection(userChoiceString);
+            } else if (userChoiceString.toLowerCase().contains("take")) {
+                String cleanInput = spil.cleanItemInput(userChoiceString);
+                spil.takeItemMethod(cleanInput);
 
-                int userChoiceInt = spil.playerDirection(userChoiceString);
+            } else if (userChoiceString.toLowerCase().contains("drop")) {
+                String cleanInput = spil.cleanItemInput(userChoiceString);
+                spil.dropItemMethod(cleanInput);
+            }else{
+                    spil.playerDirection(userChoiceString);
 
-                spil.moveRoom(userChoiceInt);
+                    int userChoiceInt = spil.playerDirection(userChoiceString);
 
-                addInformation();
+                    spil.moveRoom(userChoiceInt);
 
+                    addInformation();
+
+                }
 
             }
-
-
-
         }
-    }
-    public void helpCommands() { //bare for at samle sysout. Kan fjernes, hvis helt dumt.
-        System.out.println("Help functions:");
-        System.out.println(" ");
-        System.out.println("Type exit to terminate the program.");
-        System.out.println("Type look to get a description of the current room.");
-        System.out.println(" ");
-    }
-    public void helpExitLook(String userChoiceString) {
-        if (userChoiceString.toLowerCase().equals("help")) { //Hjælp kommando i terminal
-            helpCommands(); //udprintning af hjælpekommandoer
-        } else if (!userChoiceString.toLowerCase().equals("exit")) { //henter værelsesbeskrivelse
-            System.out.println(spil.getCurrentRoomDescription());
-            // System.out.println(spil.getRoomDescription()(spil.getCurrentRoom())); //Henter Mettes beskrivelser.
-            //System.out.println(spil.getRoomDescription()); //henter Room objektets description, der også er parameter.
-        }
-    }
 
-    public void addInformation() {
-        //MMH her vil jeg gerne have den til at udskrive noget om hvor spilleren befinder sig, og en melding, hvis vedkomende ikke kan gå den vej
-        //Til dette bruger jeg lokal variable previousRoom og currentRoom
-        String currentRoom = spil.getCurrentRoom();//MMH variabel så kan tjekke om spiller har flyttet sig
-        if (previousRoom.equals(currentRoom)) {
-            System.out.println("Unfortunately you cannot go in this direction");
-            System.out.println("You are still located in " + spil.getCurrentRoom());
-        } else {
-            System.out.println("You are now located in " + spil.getCurrentRoom());
-            System.out.println(spil.getCurrentRoomDescription());
-            displayItemsInRoom();
-            //spil.displayItemsInRoom(); //Indsat af DOJ. Sættes her, da der vil ske udprint af tilgængelige items efter beskrivelsen af rummet.
+
+        public void helpCommands () { //bare for at samle sysout. Kan fjernes, hvis helt dumt.
+            System.out.println("Help functions:");
             System.out.println(" ");
-
+            System.out.println("Type exit to terminate the program.");
+            System.out.println("Type look to get a description of the current room.");
+            System.out.println(" ");
         }
-        previousRoom = currentRoom;
-    }
-    public void displayItemsInRoom() { //Metode til at displaye items i room. Items bliver foreløbigt sat i buildMap().
-        if(!spil.getitemsArrayList().isEmpty()) { //Hvis arraylisten IKKE er tom
-            System.out.println("You spot items that may be of use to you in this room: ");
-            for(Item item : spil.getitemsArrayList()) { //For each loop itererer gennem vores itemsArrayList for at finde Items, der er forbundet med det enkelte rum.
-                System.out.println(item.getItem());
+        public void helpExitLook (String userChoiceString){
+            if (userChoiceString.toLowerCase().equals("help")) { //Hjælp kommando i terminal
+                helpCommands(); //udprintning af hjælpekommandoer
+            } else if (!userChoiceString.toLowerCase().equals("exit")) { //henter værelsesbeskrivelse
+                System.out.println(spil.getCurrentRoomDescription());
+                // System.out.println(spil.getRoomDescription()(spil.getCurrentRoom())); //Henter Mettes beskrivelser.
+                //System.out.println(spil.getRoomDescription()); //henter Room objektets description, der også er parameter.
             }
         }
-        else {
-            System.out.println("You see nothing of use to you in this room.");
+
+        public void addInformation () {
+            //MMH her vil jeg gerne have den til at udskrive noget om hvor spilleren befinder sig, og en melding, hvis vedkomende ikke kan gå den vej
+            //Til dette bruger jeg lokal variable previousRoom og currentRoom
+            String currentRoom = spil.getCurrentRoom();//MMH variabel så kan tjekke om spiller har flyttet sig
+            if (previousRoom.equals(currentRoom)) {
+                System.out.println("Unfortunately you cannot go in this direction");
+                System.out.println("You are still located in " + spil.getCurrentRoom());
+            } else {
+                System.out.println("You are now located in " + spil.getCurrentRoom());
+                System.out.println(spil.getCurrentRoomDescription());
+                displayItemsInRoom();
+                //spil.displayItemsInRoom(); //Indsat af DOJ. Sættes her, da der vil ske udprint af tilgængelige items efter beskrivelsen af rummet.
+                System.out.println(" ");
+
+            }
+            previousRoom = currentRoom;
+        }
+        public void displayItemsInRoom ()
+        { //Metode til at displaye items i room. Items bliver foreløbigt sat i buildMap().
+            if (!spil.getitemsArrayList().isEmpty()) { //Hvis arraylisten IKKE er tom
+                System.out.println("You spot items that may be of use to you in this room: ");
+                for (Item item : spil.getitemsArrayList()) { //For each loop itererer gennem vores itemsArrayList for at finde Items, der er forbundet med det enkelte rum.
+                    System.out.println(item.getItem());
+                }
+            } else {
+                System.out.println("You see nothing of use to you in this room.");
+            }
         }
     }
+
+
+
+
+
+
+
+
 
 
     //**** Error handling methods ****//
     // nedstående error handling skal fange forkerte input i vores program
     // Det skal gerne kunne genbruges som en general error hanndling
-
+/*
     private int inputValidation(String prompt, int min, int max) {
         int userInput = 0;
         boolean flagdown = false;
@@ -127,8 +145,8 @@ public class UserInterface {
             }
         }
         return userInput;
-    }
-}
+    } */
+
 
 
 

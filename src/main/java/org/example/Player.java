@@ -82,18 +82,41 @@ public class Player {
 
     //// Player item liste ////
 
-    public void addToPlayerInventory(Item item) { // Metode til at tilføje items til player inventory.
-        playerInventory.add(item);
-    }
 
+    /// de to nedstående metoder har vi fået af lucas, vi skal teste om de virker ///
+    public ArrayList<Item> takeItemMethod(String name){
+        ArrayList<Item> itemsCopy = new ArrayList<>(currentRoom.getitemsArrayList());
+        for (Item item : itemsCopy){
+            if(item.getItem().equalsIgnoreCase(name)){
+                playerInventory.add(item);
+                currentRoom.removeItemsArrayList(item);
 
-public void dropItemFromInventory(String itemToRemove) { //Metode til at fjerne items fra player inventory.
-    for (Item searchItems : playerInventory) {
-        if (searchItems.getItem().contains(itemToRemove)) {   //// Vi skal have en bedre metode en getItem til at fjerne fra liste.
-            currentRoom.addItemsArrayList(searchItems); //Tilføjer den "dropped" item til det room, man er i.
-            playerInventory.remove(searchItems);
+                return playerInventory;
+            }
         }
+        return playerInventory;
     }
+
+
+    public ArrayList<Item> dropItemMethod(String name) {
+        ArrayList<Item> itemsCopy = new ArrayList<>(playerInventory);
+        for (Item item : itemsCopy) {
+            if(item.getItem().equalsIgnoreCase(name)) {
+                currentRoom.addItemsArrayList(item);
+                playerInventory.remove(item);
+                return playerInventory;
+
+            }
+        } return playerInventory;
+    }
+
+    /// overstående metoder har vi fået fra Lucas nedstående virker ////
+
+
+public String cleanItemInput (String input) {
+        String[] navnearray = input.split(" ");
+        String output = navnearray[1];
+        return output;
 }
 
 

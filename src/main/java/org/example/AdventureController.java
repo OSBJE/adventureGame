@@ -36,7 +36,7 @@ public class AdventureController {
     }
 
 
-    ///////************** Players *********** ////////
+    ///////************** Players movement  *********** ////////
 
     public void moveRoom(int input){
         player.moveRoom(input);
@@ -45,23 +45,30 @@ public class AdventureController {
     public int playerDirection(String input){
         return player.playerDirection(input);
     }
-    public void addToPlayerInventory(Item item) { //Player inventory
-        player.addToPlayerInventory(item);
+
+    ///////************** Item handling between room and player inventory  *********** ////////
+
+    public void takeItemMethod (String input) {
+        player.takeItemMethod(input);
     }
-    public void dropItemFromInventory(String itemToRemove) {
-        player.dropItemFromInventory(itemToRemove);
+
+    public void dropItemMethod (String input) {
+        player.dropItemMethod(input);
     }
-    public void addItemsArrayList(Item item) {
-        map.getFirstRoom().addItemsArrayList(item);
-    }
-    public void removeItemsArrayList(String itemToRemove) {
-        map.getFirstRoom().removeItemsArrayList(itemToRemove);
-    }
+
     public ArrayList<Item> getitemsArrayList (){  //Returnerer assignede items, der er forbundet med rummene.
         return player.getCurrentRoom().getitemsArrayList();
     }
 
 
 
+
+
+    ///////************** Hjælpe funktion til at håndtere inputs  *********** ////////
+
+    public String cleanItemInput (String userInput) {
+        String cleanInput = player.cleanItemInput(userInput);
+        return cleanInput;
+    }
 
 }
