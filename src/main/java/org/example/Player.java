@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
 
@@ -109,6 +110,15 @@ public class Player {
             }
         } return playerInventory;
     }
+
+    public String getPlayerInventory () {
+        String playerInventoryList = "";
+        for (int i = 0; i <= playerInventory.size() -1; i++) {
+            playerInventoryList += playerInventory.get(i).toString();
+        }
+        return playerInventoryList;
+    }
+
 
     /// overstående metoder har vi fået fra Lucas nedstående virker ////
 

@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -24,6 +25,7 @@ public class UserInterface {
         final String SENTINEL = "exit"; // den her skal bruges senere, lige nu holder den bare loopet igang.
         String userChoiceString = ""; // starter bare så den kan loop hele tiden
 
+        ArrayList<String> wordCheck = wordDirection2(); //Great a list to direct the game based on word
 
         // starten på spillet, her skal det køre en gang
         System.out.println("Welcome to AdventureGame!");
@@ -36,32 +38,57 @@ public class UserInterface {
         System.out.println(spil.getCurrentRoomDescription());
 
         while (!userChoiceString.toLowerCase().equals(SENTINEL)) {
-
             System.out.println("In what direction do you want to go?");
             System.out.println("Type in what direction or type help, look, exit.");
             userChoiceString = input.nextLine();
-            if (userChoiceString.toLowerCase().equals("help") || userChoiceString.toLowerCase().equals("look") || userChoiceString.toLowerCase().equals("exit")) {
-                helpExitLook(userChoiceString); //Metodekald.
-            } else if (userChoiceString.toLowerCase().contains("take")) {
-                String cleanInput = spil.cleanItemInput(userChoiceString);
-                spil.takeItemMethod(cleanInput);
+            String userChoice = userChoiceCleaner(userChoiceString);
 
-            } else if (userChoiceString.toLowerCase().contains("drop")) {
-                String cleanInput = spil.cleanItemInput(userChoiceString);
-                spil.dropItemMethod(cleanInput);
-            }else{
-                    spil.playerDirection(userChoiceString);
-
-                    int userChoiceInt = spil.playerDirection(userChoiceString);
-
-                    spil.moveRoom(userChoiceInt);
-
-                    addInformation();
-
-                }
-
+            if (wordCheck.contains(userChoice)) {
+                playerChoiceHelper(userChoiceString);
+            } else if (userChoice.equals("inventory")) {
+                playerInventory();
+            } else {
+                playerMovement(userChoiceString);
+            }
             }
         }
+
+
+        ////***** Game interface and help functions and exit program functions *****////////////
+
+    // userChoiceString cleaner
+
+    public ArrayList<String> wordDirection2 () {
+        ArrayList<String> wordDirection = new ArrayList<>();
+
+        wordDirection.add("help");
+        wordDirection.add("look");
+        wordDirection.add("exit");
+        wordDirection.add("take");
+        wordDirection.add("drop");
+
+        return wordDirection;
+    }
+
+    public String userChoiceCleaner (String userChoice1) {
+        String userChoice2 = userChoice1.toLowerCase();
+        String[] output = userChoice2.split(" ");
+
+        return output[0];
+    }
+
+    /// To make code in the interface more simple
+    public void playerChoiceHelper (String userChoiceString) {
+        if (userChoiceString.equals("help") || userChoiceString.equals("look") || userChoiceString.equals("exit")) {
+            helpExitLook(userChoiceString); //Metodekald.
+        } else if (userChoiceString.toLowerCase().contains("take")) {
+            takeItemInRoom(userChoiceString);
+        } else if (userChoiceString.toLowerCase().contains("drop")){
+            dropItemInRoom(userChoiceString);
+        } else {
+            playerMovement(userChoiceString);
+        }
+    }
 
 
         public void helpCommands () { //bare for at samle sysout. Kan fjernes, hvis helt dumt.
@@ -81,10 +108,20 @@ public class UserInterface {
             }
         }
 
-        public void addInformation () {
-            //MMH her vil jeg gerne have den til at udskrive noget om hvor spilleren befinder sig, og en melding, hvis vedkomende ikke kan gå den vej
-            //Til dette bruger jeg lokal variable previousRoom og currentRoom
-            String currentRoom = spil.getCurrentRoom();//MMH variabel så kan tjekke om spiller har flyttet sig
+
+    ////***** Player movement function and associated help functions *****////////////
+
+    public void playerMovement (String userChoiceString) {
+        spil.playerDirection(userChoiceString);
+        int userChoiceInt = spil.playerDirection(userChoiceString);
+        spil.moveRoom(userChoiceInt);
+        addInformation();
+    }
+
+    public void addInformation () {
+        //MMH her vil jeg gerne have den til at udskrive noget om hvor spilleren befinder sig, og en melding, hvis vedkomende ikke kan gå den vej
+        //Til dette bruger jeg lokal variable previousRoom og currentRoom
+        String currentRoom = spil.getCurrentRoom();//MMH variabel så kan tjekke om spiller har flyttet sig
             if (previousRoom.equals(currentRoom)) {
                 System.out.println("Unfortunately you cannot go in this direction");
                 System.out.println("You are still located in " + spil.getCurrentRoom());
@@ -97,17 +134,37 @@ public class UserInterface {
 
             }
             previousRoom = currentRoom;
-        }
-        public void displayItemsInRoom ()
-        { //Metode til at displaye items i room. Items bliver foreløbigt sat i buildMap().
-            if (!spil.getitemsArrayList().isEmpty()) { //Hvis arraylisten IKKE er tom
-                System.out.println("You spot items that may be of use to you in this room: ");
-                for (Item item : spil.getitemsArrayList()) { //For each loop itererer gennem vores itemsArrayList for at finde Items, der er forbundet med det enkelte rum.
-                    System.out.println(item.getItem());
-                }
-            } else {
-                System.out.println("You see nothing of use to you in this room.");
+    }
+
+
+        /////******** Player and Room Item handling *************/////////
+
+    public void displayItemsInRoom ()
+    { //Metode til at displaye items i room. Items bliver foreløbigt sat i buildMap().
+        if (!spil.getitemsArrayList().isEmpty()) { //Hvis arraylisten IKKE er tom
+            System.out.println("You spot items that may be of use to you in this room: ");
+            for (Item item : spil.getitemsArrayList()) { //For each loop itererer gennem vores itemsArrayList for at finde Items, der er forbundet med det enkelte rum.
+                System.out.println(item.getItem());
             }
+        } else {
+            System.out.println("You see nothing of use to you in this room.");
+        }
+    }
+
+        public void takeItemInRoom (String userChoiceString) {
+            String cleanInput = spil.cleanItemInput(userChoiceString);
+            spil.takeItemMethod(cleanInput);
+        }
+
+        public void dropItemInRoom (String userChoiceString) {
+            String cleanInput = spil.cleanItemInput(userChoiceString);
+            spil.dropItemMethod(cleanInput);
+        }
+
+        // method to print our playerInventory
+        public void playerInventory () {
+            String playerInventory = spil.getPlayerInventory();
+            System.out.println(playerInventory);
         }
     }
 

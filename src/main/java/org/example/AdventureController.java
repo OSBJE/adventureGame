@@ -60,7 +60,9 @@ public class AdventureController {
         return player.getCurrentRoom().getitemsArrayList();
     }
 
-
+    public String getPlayerInventory () { // returnere ting i player inventory
+        return player.getPlayerInventory();
+    }
 
 
 
