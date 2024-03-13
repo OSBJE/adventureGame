@@ -49,11 +49,11 @@ public class AdventureController {
     ///////************** Item handling between room and player inventory  *********** ////////
 
     public void takeItemMethod (String input) {
-        player.takeItemMethod(input);
+        player.takeItem(input);
     }
 
     public void dropItemMethod (String input) {
-        player.dropItemMethod(input);
+        player.dropItem(input);
     }
 
     public ArrayList<Item> getitemsArrayList (){  //Returnerer assignede items, der er forbundet med rummene.

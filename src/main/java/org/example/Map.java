@@ -119,10 +119,10 @@ public class Map {
     }
 
     public void buildFood() {
-        Item itemApple = new Food("Apple", "from snowwhite", -25, true);
-        Item itemMeat = new Food("Meat", "from cow", 25, false);
-        Item itemBanana = new Food("Banana", "from minions", 15, false);
-        Item itemProtienBar = new Food("Protien Bar", "from arnolds gym", 35, false);
+        Food itemApple = new Food("Apple", "from snowwhite", -25, true);
+        Food itemMeat = new Food("Meat", "from cow", 25, false);
+        Food itemBanana = new Food("Banana", "from minions", 15, false);
+        Food itemProtienBar = new Food("Protien Bar", "from arnolds gym", 35, false);
     }
 
 }

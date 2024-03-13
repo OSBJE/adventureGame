@@ -89,31 +89,24 @@ public class Player {
     //// Player item liste ////
 
 
-    /// de to nedstående metoder har vi fået af lucas, vi skal teste om de virker ///
-    public ArrayList<Item> takeItemMethod(String name){
-        ArrayList<Item> itemsCopy = new ArrayList<>(currentRoom.getitemsArrayList());
-        for (Item item : itemsCopy){
-            if(item.getItem().equalsIgnoreCase(name)){
-                playerInventory.add(item);
+    public void takeItem(String chosenItem) {
+        for(Item item : currentRoom.getitemsArrayList()) {
+            if(item.getItem().equalsIgnoreCase(chosenItem)){
                 currentRoom.removeItemsArrayList(item);
-
-                return playerInventory;
+                playerInventory.add(item);
+                break;
             }
         }
-        return playerInventory;
     }
 
-
-    public ArrayList<Item> dropItemMethod(String name) {
-        ArrayList<Item> itemsCopy = new ArrayList<>(playerInventory);
-        for (Item item : itemsCopy) {
-            if(item.getItem().equalsIgnoreCase(name)) {
+    public void dropItem (String chosenItem){
+        for(Item item : playerInventory) {
+            if(item.getItem().equalsIgnoreCase(chosenItem)){
                 currentRoom.addItemsArrayList(item);
                 playerInventory.remove(item);
-                return playerInventory;
-
+                break;
             }
-        } return playerInventory;
+        }
     }
 
     public String getPlayerInventory () {
