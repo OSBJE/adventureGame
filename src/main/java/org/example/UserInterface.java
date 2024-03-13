@@ -30,16 +30,17 @@ public class UserInterface {
         // starten på spillet, her skal det køre en gang
         System.out.println("Welcome to AdventureGame!");
         System.out.println("You are located in " + spil.getCurrentRoom());
-        //System.out.println(spil.getCurrentRoomDescription());
-
-        this.previousRoom = spil.getCurrentRoom();//MMH String variabel til hjælp så vi kan bedømme i if else, om spilleren har flyttet sig
-        //System.out.println(spil.getRoomDescription()); //MMH beskrivelse af start rum
         System.out.println(" ");//MMH bare for at få en ekstra linje
         System.out.println(spil.getCurrentRoomDescription());
 
+        this.previousRoom = spil.getCurrentRoom();//MMH String variabel til hjælp så vi kan bedømme i if else, om spilleren har flyttet sig
+        //System.out.println(spil.getRoomDescription()); //MMH beskrivelse af start rum
+
+
         while (!userChoiceString.toLowerCase().equals(SENTINEL)) {
-            System.out.println("In what direction do you want to go?");
-            System.out.println("Type in what direction or type help, look, exit.");
+            System.out.println("What do you wanna do now?");
+            System.out.println("Either type in what direction you want to go or type help, look, inventory or exit");
+            System.out.println(" ");
             userChoiceString = input.nextLine();
             String userChoice = userChoiceCleaner(userChoiceString);
 
@@ -50,15 +51,15 @@ public class UserInterface {
             } else {
                 playerMovement(userChoiceString);
             }
-            }
         }
+    }
 
 
-        ////***** Game interface and help functions and exit program functions *****////////////
+    ////***** Game interface and help functions and exit program functions *****////////////
 
     // userChoiceString cleaner
 
-    public ArrayList<String> wordDirection2 () {
+    public ArrayList<String> wordDirection2() {
         ArrayList<String> wordDirection = new ArrayList<>();
 
         wordDirection.add("help");
@@ -70,7 +71,7 @@ public class UserInterface {
         return wordDirection;
     }
 
-    public String userChoiceCleaner (String userChoice1) {
+    public String userChoiceCleaner(String userChoice1) {
         String userChoice2 = userChoice1.toLowerCase();
         String[] output = userChoice2.split(" ");
 
@@ -78,12 +79,12 @@ public class UserInterface {
     }
 
     /// To make code in the interface more simple
-    public void playerChoiceHelper (String userChoiceString) {
+    public void playerChoiceHelper(String userChoiceString) {
         if (userChoiceString.equals("help") || userChoiceString.equals("look") || userChoiceString.equals("exit")) {
             helpExitLook(userChoiceString); //Metodekald.
         } else if (userChoiceString.toLowerCase().contains("take")) {
             takeItemInRoom(userChoiceString);
-        } else if (userChoiceString.toLowerCase().contains("drop")){
+        } else if (userChoiceString.toLowerCase().contains("drop")) {
             dropItemInRoom(userChoiceString);
         } else {
             playerMovement(userChoiceString);
@@ -91,96 +92,152 @@ public class UserInterface {
     }
 
 
+    public void helpCommands() { //bare for at samle sysout. Kan fjernes, hvis helt dumt.
+        System.out.println("Help functions:");
+        System.out.println(" ");
+        System.out.println("Type exit to terminate the program.");
+        System.out.println("Type look to get a description of the current room.");
+        System.out.println(" ");
+    }
 
-        public void helpCommands () { //bare for at samle sysout. Kan fjernes, hvis helt dumt.
-            System.out.println("Help functions:");
-            System.out.println(" ");
-            System.out.println("Type exit to terminate the program.");
-            System.out.println("Type look to get a description of the current room.");
-            System.out.println(" ");
+    public void helpExitLook(String userChoiceString) {
+        if (userChoiceString.toLowerCase().equals("help")) { //Hjælp kommando i terminal
+            helpCommands(); //udprintning af hjælpekommandoer
+        } else if (!userChoiceString.toLowerCase().equals("exit")) { //henter værelsesbeskrivelse
+            System.out.println(spil.getCurrentRoomDescription());
+            // System.out.println(spil.getRoomDescription()(spil.getCurrentRoom())); //Henter Mettes beskrivelser.
+            //System.out.println(spil.getRoomDescription()); //henter Room objektets description, der også er parameter.
         }
-        public void helpExitLook (String userChoiceString){
-            if (userChoiceString.toLowerCase().equals("help")) { //Hjælp kommando i terminal
-                helpCommands(); //udprintning af hjælpekommandoer
-            } else if (!userChoiceString.toLowerCase().equals("exit")) { //henter værelsesbeskrivelse
-                System.out.println(spil.getCurrentRoomDescription());
-                // System.out.println(spil.getRoomDescription()(spil.getCurrentRoom())); //Henter Mettes beskrivelser.
-                //System.out.println(spil.getRoomDescription()); //henter Room objektets description, der også er parameter.
-            }
-        }
+    }
 
 
     ////***** Player movement function and associated help functions *****////////////
 
-    public void playerMovement (String userChoiceString) {
+    public void playerMovement(String userChoiceString) {
         spil.playerDirection(userChoiceString);
         int userChoiceInt = spil.playerDirection(userChoiceString);
         spil.moveRoom(userChoiceInt);
         addInformation();
     }
 
-    public void addInformation () {
+    public void addInformation() {
         //MMH her vil jeg gerne have den til at udskrive noget om hvor spilleren befinder sig, og en melding, hvis vedkomende ikke kan gå den vej
         //Til dette bruger jeg lokal variable previousRoom og currentRoom
         String currentRoom = spil.getCurrentRoom();//MMH variabel så kan tjekke om spiller har flyttet sig
-            if (previousRoom.equals(currentRoom)) {
-                System.out.println("Unfortunately you cannot go in this direction");
-                System.out.println("You are still located in " + spil.getCurrentRoom());
-            } else {
-                System.out.println("You are now located in " + spil.getCurrentRoom());
-                System.out.println(spil.getCurrentRoomDescription());
-                displayItemsInRoom();
-                //spil.displayItemsInRoom(); //Indsat af DOJ. Sættes her, da der vil ske udprint af tilgængelige items efter beskrivelsen af rummet.
-                System.out.println(" ");
+        if (previousRoom.equals(currentRoom)) {
+            System.out.println("Unfortunately you cannot go in this direction");
+            System.out.println("You are still located in " + spil.getCurrentRoom());
+        } else {
+            System.out.println("You are now located in " + spil.getCurrentRoom());
+            System.out.println(spil.getCurrentRoomDescription());
+            System.out.println(" ");
+            displayItemsInRoom();
+            System.out.println(" ");
 
-            }
-            previousRoom = currentRoom;
+        }
+        previousRoom = currentRoom;
     }
 
 
-        /////******** Player and Room Item handling *************/////////
+    /////******** Player and Room Item handling *************/////////
 
-    public void displayItemsInRoom ()
-    { //Metode til at displaye items i room. Items bliver foreløbigt sat i buildMap().
+    public void displayItemsInRoom() { //Metode til at displaye items i room. Items bliver foreløbigt sat i buildMap().
         if (!spil.getitemsArrayList().isEmpty()) { //Hvis arraylisten IKKE er tom
             System.out.println("You spot items that may be of use to you in this room: ");
             for (Item item : spil.getitemsArrayList()) { //For each loop itererer gennem vores itemsArrayList for at finde Items, der er forbundet med det enkelte rum.
                 System.out.println(item.getItem());
             }
+            //checkOfEatability("Økse");
+            takeItemChoice();
         } else {
             System.out.println("You see nothing of use to you in this room.");
+            if (!spil.getPlayerInventory().isEmpty()) {
+                dropItemChoice();
+            }
         }
     }
 
-        public void takeItemInRoom (String userChoiceString) {
-            String cleanInput = spil.cleanItemInput(userChoiceString);
-            spil.takeItemMethod(cleanInput);
-        }
+    public void takeItemChoice() { //lidt mere brugervenlig info
+        System.out.println("Do you want to take an item, yes or no?");
+        String playerChoice = input.nextLine();
+        switch (playerChoice.toLowerCase()) {
+            case "no" -> {
+                System.out.println("Then let us move on");
+            }
+            case "yes", "take", "yes take" -> {
+                System.out.println("What item do you want to take?");
+                String chosenItem = input.nextLine();
+                spil.takeItemMethod(chosenItem);
+                System.out.println("You have now added " + chosenItem + " to your bag");
+            }
+            default -> {
+                System.out.println("Sorry you entered a wrong command");
+                takeItemChoice();
 
-        public void dropItemInRoom (String userChoiceString) {
-            String cleanInput = spil.cleanItemInput(userChoiceString);
-            spil.dropItemMethod(cleanInput);
-        }
-
-        // method to print our playerInventory
-        public void playerInventory () {
-            String playerInventory = spil.getPlayerInventory();
-            System.out.println(playerInventory);
+            }
         }
     }
 
+    public void dropItemChoice() {
+        System.out.println("Do you want to drop an item in this room, yes or no?");
+        String playerChoice = input.nextLine();
+        switch (playerChoice.toLowerCase()) {
+            case "no" -> {
+                System.out.println("Then let us move on");
+            }
+            case "yes" -> {
+                System.out.println("What item do you want to drop?");
+                String chosenItem = input.nextLine();
+                spil.dropItemMethod(chosenItem);
+                System.out.println("You now have in your bag: " + spil.getPlayerInventory());
+            }
+            default -> {
+                System.out.println("Sorry you entered a wrong command.");
+                dropItemChoice();
+
+            }
+        }
+
+    }
+
+    /*public void checkOfEatability(String chosenItem) {
+        System.out.println("Do you want something to eat?");
+        chosenItem = input.nextLine();
+        if (spil.eatableItemMethod(chosenItem)) {
+            System.out.println("denne kan godt spises");
+
+        }
+        System.out.println("desværre dette kan ikke spises");
+    }*/
 
 
+    public void takeItemInRoom(String userChoiceString) {
+        String cleanInput = spil.cleanItemInput(userChoiceString);
+        spil.takeItemMethod(cleanInput);
+    }
+
+    public void dropItemInRoom(String userChoiceString) {
+        String cleanInput = spil.cleanItemInput(userChoiceString);
+        spil.dropItemMethod(cleanInput);
+    }
+
+    // method to print our playerInventory
+    public void playerInventory() {
+        String playerInventory = spil.getPlayerInventory();
+        System.out.println(playerInventory);
+    }
+
+    public void eatItem(String chosenItem) {
+
+    }
 
 
+}
 
 
-
-
-
-    //**** Error handling methods ****//
-    // nedstående error handling skal fange forkerte input i vores program
-    // Det skal gerne kunne genbruges som en general error hanndling
+//**** Error handling methods ****//
+// nedstående error handling skal fange forkerte input i vores program
+// Det skal gerne kunne genbruges som en general error hanndling
 /*
     private int inputValidation(String prompt, int min, int max) {
         int userInput = 0;

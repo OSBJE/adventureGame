@@ -10,26 +10,16 @@ public class Player {
 
 
     private Room currentRoom;
-
-    public Room getCurrentRoom() {
-        return currentRoom;
-    }
+    private ArrayList<Item> playerInventory = new ArrayList<>();
+    private double healthPlayer = 50;  // Player Health Bar//
+    //private ArrayList<Item> itemTotalList = new ArrayList<>();
 
 
     // Constructor ///
     public Player(Room room) {
         currentRoom = room;
+        //itemTotalList = playerInventory.addAll(currentRoom.getitemsArrayList());
     }
-
-
-    // Player variable til brug i methode //
-
-    ArrayList<Item> playerInventory = new ArrayList<>();
-
-
-    // Player Health Bar//
-
-    double healthPlayer = 50;
 
 
     // Det her er vores navigator (Compass) så vi kan gå rundt i vores spil //
@@ -90,8 +80,8 @@ public class Player {
 
 
     public void takeItem(String chosenItem) {
-        for(Item item : currentRoom.getitemsArrayList()) {
-            if(item.getItem().equalsIgnoreCase(chosenItem)){
+        for (Item item : currentRoom.getitemsArrayList()) {
+            if (item.getItem().equalsIgnoreCase(chosenItem)) {
                 currentRoom.removeItemsArrayList(item);
                 playerInventory.add(item);
                 break;
@@ -99,9 +89,9 @@ public class Player {
         }
     }
 
-    public void dropItem (String chosenItem){
-        for(Item item : playerInventory) {
-            if(item.getItem().equalsIgnoreCase(chosenItem)){
+    public void dropItem(String chosenItem) {
+        for (Item item : playerInventory) {
+            if (item.getItem().equalsIgnoreCase(chosenItem)) {
                 currentRoom.addItemsArrayList(item);
                 playerInventory.remove(item);
                 break;
@@ -109,9 +99,9 @@ public class Player {
         }
     }
 
-    public String getPlayerInventory () {
+    public String getPlayerInventory() {
         String playerInventoryList = "";
-        for (int i = 0; i <= playerInventory.size() -1; i++) {
+        for (int i = 0; i <= playerInventory.size() - 1; i++) {
             playerInventoryList += playerInventory.get(i).toString();
         }
         return playerInventoryList;
@@ -119,21 +109,29 @@ public class Player {
 
 
     ////************** Player eat Items ************************/////////
-
-
     // metode der checker om det kan spises //
+    public boolean eatableItem(String itemToCheck) {
+        for (Item item : currentRoom.getitemsArrayList()) {
+            if (item.getItem().equalsIgnoreCase(itemToCheck)) {
+                if (item instanceof Food) {
+                    return true;
+                }
+
+            }
+        }
+        return false;
+    }
+
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
 
 
-
-    /// overstående metoder har vi fået fra Lucas nedstående virker ////
-
-
-public String cleanItemInput (String input) {
+    public String cleanItemInput(String input) {
         String[] navnearray = input.split(" ");
         String output = navnearray[1];
         return output;
-}
-
+    }
 
 
     ///// Alternative method to handle play direction //////

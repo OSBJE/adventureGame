@@ -64,6 +64,10 @@ public class AdventureController {
         return player.getPlayerInventory();
     }
 
+    public boolean eatableItemMethod(String itemToCheck){
+        return player.eatableItem(itemToCheck);
+    }
+
 
 
     ///////************** Hjælpe funktion til at håndtere inputs  *********** ////////
