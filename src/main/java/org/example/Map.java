@@ -79,6 +79,7 @@ public class Map {
 
         startRoom = room1;
 
+        //// Her bygger vi items og tilføje dem til room ///
 
         Item itemKniv = new  Item("Kniv", "Magisk Grim");
         Item itemSværd = new Item("Sværd", "Det er stort");
@@ -90,6 +91,17 @@ public class Map {
         room3.addItemsArrayList(itemSværd);
         room3.addItemsArrayList(itemØkse);
         room7.addItemsArrayList(itemVaskebrædt);
+
+        ///// Her laver vi mad og tilføjde dem til room ///
+        Food itemApple = new Food("Apple", "from snowwhite", -25, true);
+        Food itemMeat = new Food("Meat", "from cow", 25, false);
+        Food itemBanana = new Food("Banana", "from minions", 15, false);
+        Food itemProtienBar = new Food("Protien Bar", "from arnolds gym", 35, false);
+
+        room2.addItemsArrayList(itemApple);
+        room2.addItemsArrayList(itemMeat);
+        room4.addItemsArrayList(itemBanana);
+        room7.addItemsArrayList(itemProtienBar);
 
     }
 
@@ -104,8 +116,13 @@ public class Map {
         Item itemsSværd = new Item("Sværd", "Det er stort");
         Item itemsØkse = new Item("Økse", "Den hedder gimli");
         Item itemsVaskebrædt = new Item("Vaskebrædt", "Husk at vasketøj");
+    }
 
-
+    public void buildFood() {
+        Food itemApple = new Food("Apple", "from snowwhite", -25, true);
+        Food itemMeat = new Food("Meat", "from cow", 25, false);
+        Food itemBanana = new Food("Banana", "from minions", 15, false);
+        Food itemProtienBar = new Food("Protien Bar", "from arnolds gym", 35, false);
     }
 
 }

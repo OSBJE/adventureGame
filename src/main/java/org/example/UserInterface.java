@@ -91,6 +91,7 @@ public class UserInterface {
     }
 
 
+
         public void helpCommands () { //bare for at samle sysout. Kan fjernes, hvis helt dumt.
             System.out.println("Help functions:");
             System.out.println(" ");

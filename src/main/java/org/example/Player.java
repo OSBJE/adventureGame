@@ -27,6 +27,11 @@ public class Player {
     ArrayList<Item> playerInventory = new ArrayList<>();
 
 
+    // Player Health Bare//
+
+    double healthPlayer = 50;
+
+
     // Det her er vores navigator (Compass) så vi kan gå rundt i vores spil //
 
 
