@@ -7,6 +7,8 @@ public class Food extends Item{
     private double healthGain;
     private boolean poison;
 
+    /// "Instance of" check om det er object Food ///
+
 
 
     /// Constructor ////

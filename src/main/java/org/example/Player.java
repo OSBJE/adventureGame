@@ -27,7 +27,7 @@ public class Player {
     ArrayList<Item> playerInventory = new ArrayList<>();
 
 
-    // Player Health Bare//
+    // Player Health Bar//
 
     double healthPlayer = 50;
 
@@ -123,6 +123,13 @@ public class Player {
         }
         return playerInventoryList;
     }
+
+
+    ////************** Player eat Items ************************/////////
+
+
+    // metode der checker om det kan spises //
+
 
 
     /// overstående metoder har vi fået fra Lucas nedstående virker ////
