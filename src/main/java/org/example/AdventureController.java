@@ -76,6 +76,7 @@ public class AdventureController {
     }
 
 
+
     ///////************** Hjælpe funktion til at håndtere inputs  *********** ////////
 
     public String cleanItemInput (String userInput) {

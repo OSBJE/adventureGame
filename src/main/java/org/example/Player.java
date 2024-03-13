@@ -11,13 +11,12 @@ public class Player {
 
     private Room currentRoom;
     Item item = new Item("", ""); // dummy objekt, så vi kan bruge nogle af vores item funktioner.
+
     private double healthPlayer;
 
     public Room getCurrentRoom() {
         return currentRoom;
     }
-
-
 
 
     // Constructor ///
@@ -29,6 +28,7 @@ public class Player {
     public double getHealthPlayer() { //hente playerHealth
         return healthPlayer;
     }
+
     public void setHealthPlayer(double healthPlayer) { //setter til damage eller healthregain  fra indtagelse af food.
         this.healthPlayer = healthPlayer; //Health angives ved skabelsen af playerobjekt. Dette kan ses i Controller.
     }
@@ -40,8 +40,6 @@ public class Player {
 
 
     // Player Health Bar//
-
-
 
 
     // Det her er vores navigator (Compass) så vi kan gå rundt i vores spil //
@@ -102,10 +100,10 @@ public class Player {
 
 
     /// de to nedstående metoder har vi fået af lucas, vi skal teste om de virker ///
-    public ArrayList<Item> takeItemMethod(String name){
+    public ArrayList<Item> takeItemMethod(String name) {
         ArrayList<Item> itemsCopy = new ArrayList<>(currentRoom.getitemsArrayList());
-        for (Item item : itemsCopy){
-            if(item.getItem().equalsIgnoreCase(name)){
+        for (Item item : itemsCopy) {
+            if (item.getItem().equalsIgnoreCase(name)) {
                 playerInventory.add(item);
                 currentRoom.removeItemsArrayList(item);
 
@@ -119,18 +117,19 @@ public class Player {
     public ArrayList<Item> dropItemMethod(String name) {
         ArrayList<Item> itemsCopy = new ArrayList<>(playerInventory);
         for (Item item : itemsCopy) {
-            if(item.getItem().equalsIgnoreCase(name)) {
+            if (item.getItem().equalsIgnoreCase(name)) {
                 currentRoom.addItemsArrayList(item);
                 playerInventory.remove(item);
                 return playerInventory;
 
             }
-        } return playerInventory;
+        }
+        return playerInventory;
     }
 
-    public String getPlayerInventory () {
+    public String getPlayerInventory() {
         String playerInventoryList = "";
-        for (int i = 0; i <= playerInventory.size() -1; i++) {
+        for (int i = 0; i <= playerInventory.size() - 1; i++) {
             playerInventoryList += playerInventory.get(i).toString();
         }
         return playerInventoryList;
@@ -141,41 +140,30 @@ public class Player {
 
 
     // metode der checker om det kan spises //
-/*
     public void playerEatsFood(String input) {
-        ArrayList<Item> itemsCopy = new ArrayList<>(currentRoom.getitemsArrayList());
-        for (Item item : itemsCopy) {
-            if (item.getItem().equalsIgnoreCase(input)) {
-                playerInventory.add(item);
-                break;
-            }
-        }
-        ArrayList<Food> foodItemsToRemove = new ArrayList<>();
-
-        for (Item item : playerInventory) {
-            if(item instanceof Food) {
-                Food fooditem = (Food) item;
-                double healthGain = fooditem.getHealthGain();
-                setHealthPlayer(getHealthPlayer()+healthGain);
-                foodItemsToRemove.add(fooditem);
-            }
-        }
-        playerInventory.removeAll(foodItemsToRemove);
-
-    }
- */
-    public void playerEatsFood(String input) { //PROBLEM Kan ikke spise fra inventory. Der bliver ikke restored health eller fjernes fra inventory.
-        ArrayList<Item> itemsCopy = new ArrayList<>(currentRoom.getitemsArrayList());
-
-        for (Item item : itemsCopy) {
+        // tjekker om givne item er i rummet.
+        for (Item item : currentRoom.getitemsArrayList()) {
             if (item.getItem().equalsIgnoreCase(input)) {
                 if (item instanceof Food) {
-                    Food foodItem = (Food) item; //Vi "caster" item til food objekt. Item er superklasse til food. Hvis der returnes "true" og item er et food objekt kan vi tilgå food attributter og metoder.
+                    Food foodItem = (Food) item;
                     double healthGain = foodItem.getHealthGain();
 
                     setHealthPlayer(getHealthPlayer() + healthGain);
 
                     currentRoom.removeItemsArrayList(item);
+
+                    break;
+                }
+            }
+        }
+        // tjekker om givne item er i playerinventory.
+        for (Item item : playerInventory) {
+            if (item.getItem().equalsIgnoreCase(input)) {
+                if (item instanceof Food) {
+                    Food foodItem = (Food) item;
+                    double healthGain = foodItem.getHealthGain();
+
+                    setHealthPlayer(getHealthPlayer() + healthGain);
 
                     playerInventory.remove(item);
 
@@ -189,11 +177,13 @@ public class Player {
     /// overstående metoder har vi fået fra Lucas nedstående virker ////
 
 
-public String cleanItemInput (String input) {
+    public String cleanItemInput(String input) {
         String[] navnearray = input.split(" ");
         String output = navnearray[1];
         return output;
+    }
 }
+
 
 
 
@@ -231,4 +221,4 @@ public String cleanItemInput (String input) {
         return input;
     }*/
 
-}
+

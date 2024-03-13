@@ -11,8 +11,9 @@ public class Food extends Item{
 
 
 
+
     /// Constructor ////
-    public Food(String item, String itemDescription, double healthGain, boolean poison) {
+    public Food(String item, String itemDescription, double healthGain, boolean poison, boolean edible) {
         super(item, itemDescription);
         this.healthGain = healthGain;
         this.poison = poison;
