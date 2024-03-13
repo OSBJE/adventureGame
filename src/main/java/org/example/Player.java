@@ -10,15 +10,27 @@ public class Player {
 
 
     private Room currentRoom;
+    Item item = new Item("", ""); // dummy objekt, så vi kan bruge nogle af vores item funktioner.
+    private double healthPlayer;
 
     public Room getCurrentRoom() {
         return currentRoom;
     }
 
 
+
+
     // Constructor ///
-    public Player(Room room) {
+    public Player(Room room, double healthPlayer) {
         currentRoom = room;
+        this.healthPlayer = healthPlayer; //Health angives ved skabelsen af playerobjekt. Dette kan ses i Controller.
+    }
+
+    public double getHealthPlayer() { //hente playerHealth
+        return healthPlayer;
+    }
+    public void setHealthPlayer(double healthPlayer) { //setter til damage eller healthregain  fra indtagelse af food.
+        this.healthPlayer = healthPlayer; //Health angives ved skabelsen af playerobjekt. Dette kan ses i Controller.
     }
 
 
@@ -29,7 +41,7 @@ public class Player {
 
     // Player Health Bar//
 
-    double healthPlayer = 50;
+
 
 
     // Det her er vores navigator (Compass) så vi kan gå rundt i vores spil //
@@ -129,7 +141,49 @@ public class Player {
 
 
     // metode der checker om det kan spises //
+/*
+    public void playerEatsFood(String input) {
+        ArrayList<Item> itemsCopy = new ArrayList<>(currentRoom.getitemsArrayList());
+        for (Item item : itemsCopy) {
+            if (item.getItem().equalsIgnoreCase(input)) {
+                playerInventory.add(item);
+                break;
+            }
+        }
+        ArrayList<Food> foodItemsToRemove = new ArrayList<>();
 
+        for (Item item : playerInventory) {
+            if(item instanceof Food) {
+                Food fooditem = (Food) item;
+                double healthGain = fooditem.getHealthGain();
+                setHealthPlayer(getHealthPlayer()+healthGain);
+                foodItemsToRemove.add(fooditem);
+            }
+        }
+        playerInventory.removeAll(foodItemsToRemove);
+
+    }
+ */
+    public void playerEatsFood(String input) { //PROBLEM Kan ikke spise fra inventory. Der bliver ikke restored health eller fjernes fra inventory.
+        ArrayList<Item> itemsCopy = new ArrayList<>(currentRoom.getitemsArrayList());
+
+        for (Item item : itemsCopy) {
+            if (item.getItem().equalsIgnoreCase(input)) {
+                if (item instanceof Food) {
+                    Food foodItem = (Food) item; //Vi "caster" item til food objekt. Item er superklasse til food. Hvis der returnes "true" og item er et food objekt kan vi tilgå food attributter og metoder.
+                    double healthGain = foodItem.getHealthGain();
+
+                    setHealthPlayer(getHealthPlayer() + healthGain);
+
+                    currentRoom.removeItemsArrayList(item);
+
+                    playerInventory.remove(item);
+
+                    break;
+                }
+            }
+        }
+    }
 
 
     /// overstående metoder har vi fået fra Lucas nedstående virker ////

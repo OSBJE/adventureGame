@@ -66,6 +66,8 @@ public class UserInterface {
         wordDirection.add("exit");
         wordDirection.add("take");
         wordDirection.add("drop");
+        wordDirection.add("health"); //Indsat for menu DOJ. -DEBUG
+        wordDirection.add("eat");
 
         return wordDirection;
     }
@@ -85,13 +87,29 @@ public class UserInterface {
             takeItemInRoom(userChoiceString);
         } else if (userChoiceString.toLowerCase().contains("drop")){
             dropItemInRoom(userChoiceString);
-        } else {
+        } else if (userChoiceString.toLowerCase().equals("health")) {
+            showPlayerHealthUI();
+        } else if (userChoiceString.toLowerCase().contains("eat")) {
+            String cleanInput = spil.cleanItemInput(userChoiceString);
+            spil.playerEatsFood(cleanInput);
+        }
+        else {
             playerMovement(userChoiceString);
         }
     }
 
 
-
+        public void showPlayerHealthUI() { ///Sysouts af nuværende player health. Thresholds ligger på højere eller lige med 50 & 30 med sidste else.
+            if(spil.getHealthPlayer() >= 50) {
+                System.out.println("Your health is currently at "+spil.getHealthPlayer()+"."+" You are in good health, but avoid fighting right now.");
+            }
+            else if(spil.getHealthPlayer() >= 30) {
+                System.out.println("Your health is currently at "+spil.getHealthPlayer()+"."+" Your health is worryingly low right now.");
+            }
+            else {
+                System.out.println("Your health is currently at "+spil.getHealthPlayer()+"."+" You feel dizzy and might cross into the afterlife anytime soon.");
+            }
+        }
         public void helpCommands () { //bare for at samle sysout. Kan fjernes, hvis helt dumt.
             System.out.println("Help functions:");
             System.out.println(" ");
@@ -164,8 +182,14 @@ public class UserInterface {
 
         // method to print our playerInventory
         public void playerInventory () {
+        if(spil.getPlayerInventory().length() > 0) {
             String playerInventory = spil.getPlayerInventory();
             System.out.println(playerInventory);
+        }
+        else {
+            System.out.println("Your inventory is empty.");
+        }
+
         }
     }
 
