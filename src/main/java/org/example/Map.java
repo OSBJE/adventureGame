@@ -24,18 +24,18 @@ public class Map {
 
 
     public void buildMap() {
-        // vi starter med at lave 9 room objkter, et som repræsentere hver room i vores spil
+        // vi starter med at lave 9 room objekter, et som repræsenterer hvert room i vores spil
         //
 
         Room room1 = new Room("Room 1", "This is a beautiful green hill with a nice view.");
         Room room2 = new Room("Room 2", "This is a dark cave with a thousand bats. Watch out!!!");
         Room room3 = new Room("Room 3", "This is a cold icy mountain.");
-        Room room4 = new Room("Room 4", "This is a wooden cottage that is about to collapse. Watch out!!!.");
+        Room room4 = new Room("Room 4", "This is a wooden cottage that is about to collapse. Watch out!!!");
         Room room5 = new Room("Room 5", "This is a warm and cozy fireplace.");
-        Room room6 = new Room("Room 6", "This is an erupting volcano...watch out for the burning lava!!!");
+        Room room6 = new Room("Room 6", "This is an erupting volcano... watch out for the burning lava!!!");
         Room room7 = new Room("Room 7", "This is a noisy metropolis with polluting traffic.");
         Room room8 = new Room("Room 8", "This is an olive grove with butterflies.");
-        Room room9 = new Room("Room 9", "This is a battlefield from World War 1. \nKeep your head down, so you don't get hit!.");
+        Room room9 = new Room("Room 9", "This is a battlefield from World War 1. \nKeep your head down, so you don't get hit!");
 
         // Her skal vi have forbindelserne mellem de forskellige "Rooms"
 
@@ -80,16 +80,16 @@ public class Map {
         startRoom = room1;
 
 
-        Item itemKniv = new  Item("Kniv", "Magisk Grim");
-        Item itemSværd = new Item("Sværd", "Det er stort");
-        Item itemØkse = new Item("Økse", "Den hedder gimli");
-        Item itemVaskebrædt = new Item("Vaskebrædt", "Husk at vasketøj");
+        Item itemKnife = new  Item("Knife", "Magic Grim");
+        Item itemSword = new Item("Sword", "It's a big sword");
+        Item itemAxe = new Item("Axe", "Its name is gimli");
+        Item itemWashboard = new Item("Washboard", "Remember to do your laundy");
 
 
-        room3.addItemsArrayList(itemKniv);
-        room3.addItemsArrayList(itemSværd);
-        room3.addItemsArrayList(itemØkse);
-        room7.addItemsArrayList(itemVaskebrædt);
+        room3.addItemsArrayList(itemKnife);
+        room3.addItemsArrayList(itemSword);
+        room3.addItemsArrayList(itemAxe);
+        room7.addItemsArrayList(itemWashboard);
 
     }
 
@@ -100,10 +100,10 @@ public class Map {
 
     public void buildItems() {
 
-        Item itemKniv = new  Item("Kniv", "Magisk Grim");
-        Item itemsSværd = new Item("Sværd", "Det er stort");
-        Item itemsØkse = new Item("Økse", "Den hedder gimli");
-        Item itemsVaskebrædt = new Item("Vaskebrædt", "Husk at vasketøj");
+        Item itemKnife = new  Item("Knife", "Magic Grim");
+        Item itemSword = new Item("Sword", "It's a big sword");
+        Item itemAxe = new Item("Axe", "Its name is gimli");
+        Item itemWashboard = new Item("Washboard", "Remember to do your laundy");
 
 
     }

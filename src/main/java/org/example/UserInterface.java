@@ -25,7 +25,7 @@ public class UserInterface {
         final String SENTINEL = "exit"; // den her skal bruges senere, lige nu holder den bare loopet igang.
         String userChoiceString = ""; // starter bare så den kan loop hele tiden
 
-        ArrayList<String> wordCheck = wordDirection2(); //Great a list to direct the game based on word
+        ArrayList<String> wordCheck = wordDirection2(); //Creat a list to direct the game based on word
 
         // starten på spillet, her skal det køre en gang
         System.out.println("Welcome to AdventureGame!");
