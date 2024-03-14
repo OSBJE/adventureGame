@@ -17,7 +17,7 @@ public class AdventureController {
 
     public AdventureController() {
         map = new Map();
-        player = new Player(map.getFirstRoom());
+        player = new Player(map.getFirstRoom(), 50);
     }
 
 
@@ -49,11 +49,11 @@ public class AdventureController {
     ///////************** Item handling between room and player inventory  *********** ////////
 
     public void takeItemMethod (String input) {
-        player.takeItemMethod(input);
+        player.takeItem(input);
     }
 
     public void dropItemMethod (String input) {
-        player.dropItemMethod(input);
+        player.dropItem(input);
     }
 
     public ArrayList<Item> getitemsArrayList (){  //Returnerer assignede items, der er forbundet med rummene.
@@ -62,6 +62,25 @@ public class AdventureController {
 
     public String getPlayerInventory () { // returnere ting i player inventory
         return player.getPlayerInventory();
+    }
+
+    ///////************** Player health management  *********** ////////
+    public double getHealthPlayer() { //hente playerHealth
+        return player.getHealthPlayer();
+    }
+    public void setHealthPlayer(double healthPlayer) { //setter til damage eller healthregain  fra indtagelse af food.
+        player.setHealthPlayer(healthPlayer);
+    }
+    public void playerEatsFood(String input) {
+        player.playerEatsFood(input);
+    }
+
+    public String getRoomsArrayList () {
+        return player.getCurrentRoom().getRoomsArrayListWithDescription();
+    }
+
+    public boolean eatableItemMethod(String itemToCheck){
+        return player.eatableItem(itemToCheck);
     }
 
 

@@ -91,6 +91,17 @@ public class Map {
         room3.addItemsArrayList(itemAxe);
         room7.addItemsArrayList(itemWashboard);
 
+        ///// Her laver vi mad og tilføjde dem til room ///
+        Food itemApple = new Food("Apple", "from snowwhite", -25, true);
+        Food itemMeat = new Food("Meat", "from cow", 25, false);
+        Food itemBanana = new Food("Banana", "from minions", 15, false);
+        Food itemProtienBar = new Food("Protien Bar", "from arnolds gym", 35, false);
+
+        room2.addItemsArrayList(itemApple);
+        room2.addItemsArrayList(itemMeat);
+        room4.addItemsArrayList(itemBanana);
+        room7.addItemsArrayList(itemProtienBar);
+
     }
 
     public Room getFirstRoom() {
@@ -104,8 +115,12 @@ public class Map {
         Item itemSword = new Item("Sword", "It's a big sword");
         Item itemAxe = new Item("Axe", "Its name is gimli");
         Item itemWashboard = new Item("Washboard", "Remember to do your laundy");
-
-
+}
+    public void buildFood() {
+        Food itemApple = new Food("Apple", "from snowwhite", -25, true);
+        Food itemMeat = new Food("Meat", "from cow", 25, false);
+        Food itemBanana = new Food("Banana", "from minions", 15, false);
+        Food itemProtienBar = new Food("Protien Bar", "from arnolds gym", 35, false);
     }
 
 }

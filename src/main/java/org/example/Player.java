@@ -11,20 +11,34 @@ public class Player {
 
     private Room currentRoom;
 
+    private double healthPlayer;
+
     public Room getCurrentRoom() {
         return currentRoom;
     }
 
 
     // Constructor ///
-    public Player(Room room) {
+    public Player(Room room, double healthPlayer) {
         currentRoom = room;
+        this.healthPlayer = healthPlayer; //Health angives ved skabelsen af playerobjekt. Dette kan ses i Controller.
+    }
+
+    public double getHealthPlayer() { //hente playerHealth
+        return healthPlayer;
+    }
+
+    public void setHealthPlayer(double healthPlayer) { //setter til damage eller healthregain  fra indtagelse af food.
+        this.healthPlayer = healthPlayer; //Health angives ved skabelsen af playerobjekt. Dette kan ses i Controller.
     }
 
 
     // Player variable til brug i methode //
 
     ArrayList<Item> playerInventory = new ArrayList<>();
+
+
+    // Player Health Bar//
 
 
     // Det her er vores navigator (Compass) så vi kan gå rundt i vores spil //
@@ -84,31 +98,24 @@ public class Player {
     //// Player item liste ////
 
 
-    /// de to nedstående metoder har vi fået af lucas, vi skal teste om de virker ///
-    public ArrayList<Item> takeItemMethod(String name){
-        ArrayList<Item> itemsCopy = new ArrayList<>(currentRoom.getitemsArrayList());
-        for (Item item : itemsCopy){
-            if(item.getItem().equalsIgnoreCase(name)){
-                playerInventory.add(item);
+    public void takeItem(String chosenItem) {
+        for (Item item : currentRoom.getitemsArrayList()) {
+            if (item.getItem().equalsIgnoreCase(chosenItem)) {
                 currentRoom.removeItemsArrayList(item);
-
-                return playerInventory;
+                playerInventory.add(item);
+                break;
             }
         }
-        return playerInventory;
     }
 
-
-    public ArrayList<Item> dropItemMethod(String name) {
-        ArrayList<Item> itemsCopy = new ArrayList<>(playerInventory);
-        for (Item item : itemsCopy) {
-            if(item.getItem().equalsIgnoreCase(name)) {
+    public void dropItem(String chosenItem) {
+        for (Item item : playerInventory) {
+            if (item.getItem().equalsIgnoreCase(chosenItem)) {
                 currentRoom.addItemsArrayList(item);
                 playerInventory.remove(item);
-                return playerInventory;
-
+                break;
             }
-        } return playerInventory;
+        }
     }
 
     public String getPlayerInventory () {
@@ -120,14 +127,64 @@ public class Player {
     }
 
 
+    ////************** Player eat Items ************************/////////
+
+
+    // metode der checker om det kan spises //
+    public void playerEatsFood(String input) {
+        // tjekker om givne item er i rummet.
+        for (Item item : currentRoom.getitemsArrayList()) {
+            if (item.getItem().equalsIgnoreCase(input)) {
+                if (item instanceof Food) {
+                    Food foodItem = (Food) item;
+                    double healthGain = foodItem.getHealthGain();
+
+                    setHealthPlayer(getHealthPlayer() + healthGain);
+
+                    currentRoom.removeItemsArrayList(item);
+
+                    break;
+                }
+            }
+        }
+        // tjekker om givne item er i playerinventory.
+        for (Item item : playerInventory) {
+            if (item.getItem().equalsIgnoreCase(input)) {
+                if (item instanceof Food) {
+                    Food foodItem = (Food) item;
+                    double healthGain = foodItem.getHealthGain();
+
+                    setHealthPlayer(getHealthPlayer() + healthGain);
+
+                    playerInventory.remove(item);
+
+                    break;
+                }
+            }
+        }
+    }
+    public boolean eatableItem(String itemToCheck) {
+        for (Item item : currentRoom.getitemsArrayList()) {
+            if (item.getItem().equalsIgnoreCase(itemToCheck)) {
+                if (item instanceof Food) {
+                    return true;
+                }
+
+            }
+        }
+        return false;
+    }
+
     /// overstående metoder har vi fået fra Lucas nedstående virker ////
 
 
-public String cleanItemInput (String input) {
+    public String cleanItemInput(String input) {
         String[] navnearray = input.split(" ");
         String output = navnearray[1];
         return output;
+    }
 }
+
 
 
 
@@ -165,4 +222,4 @@ public String cleanItemInput (String input) {
         return input;
     }*/
 
-}
+
