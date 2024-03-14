@@ -147,8 +147,8 @@ public class UserInterface {
             for (Item item : spil.getitemsArrayList()) { //For each loop itererer gennem vores itemsArrayList for at finde Items, der er forbundet med det enkelte rum.
                 System.out.println(item.getItem());
             }
-            //checkOfEatability("Økse");
             takeItemChoice();
+            eatWithCheckofEatability();
         } else {
             System.out.println("You see nothing of use to you in this room.");
             if (!spil.getPlayerInventory().isEmpty()) {
@@ -200,15 +200,37 @@ public class UserInterface {
 
     }
 
-    /*public void checkOfEatability(String chosenItem) {
-        System.out.println("Do you want something to eat?");
-        chosenItem = input.nextLine();
-        if (spil.eatableItemMethod(chosenItem)) {
-            System.out.println("denne kan godt spises");
+    public void eatWithCheckofEatability () {
+        System.out.println("Are you hungry, yes or no?");
+        String playerChoice = input.nextLine();
+        switch (playerChoice.toLowerCase()) {
+            case "no" -> {
+                System.out.println("Then let us move on");
+            }
+            case "yes" -> {
+                System.out.println("Here you can see a list of items in this room and in your bag");
+                for (Item item : spil.getitemsArrayList()) {
+                    System.out.println(item.getItem());
+                }
+                System.out.println(spil.getPlayerInventory());
+                System.out.println(" ");
 
+                System.out.println("Type item you would like eat og not hungry if you want to move on");
+                String chosenItem = input.nextLine();
+                if (spil.eatableItemMethod(chosenItem)) {
+                    System.out.println("Bon appetite");
+                    //eatoghealth metode
+                    break;
+                }
+                System.out.println("Unfortunately you cannot eat this item");
+            }
+            default -> {
+                System.out.println("Sorry you entered a wrong command.");
+                eatWithCheckofEatability();
+
+            }
         }
-        System.out.println("desværre dette kan ikke spises");
-    }*/
+    }
 
 
     public void takeItemInRoom(String userChoiceString) {
