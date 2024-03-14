@@ -91,8 +91,8 @@ public class UserInterface {
         } else if (userChoiceString.toLowerCase().equals("health")) {
             showPlayerHealthUI();
         } else if (userChoiceString.toLowerCase().contains("eat")) {
-            String cleanInput = spil.cleanItemInput(userChoiceString);
-            spil.playerEatsFood(cleanInput);
+            //String cleanInput = spil.cleanItemInput(userChoiceString);
+            spil.playerEatsFood(userChoiceString);
         }
         else {
             playerMovement(userChoiceString);
@@ -236,8 +236,8 @@ public class UserInterface {
                 System.out.println("Type item you would like eat og not hungry if you want to move on");
                 String chosenItem = input.nextLine();
                 if (spil.eatableItemMethod(chosenItem)) {
+                    spil.playerEatsFood(chosenItem);
                     System.out.println("Bon appetite");
-                    //eatoghealth metode
                     break;
                 }
                 System.out.println("Unfortunately you cannot eat this item");
