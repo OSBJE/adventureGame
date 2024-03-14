@@ -224,6 +224,7 @@ public class UserInterface {
                 }
                 System.out.println("Unfortunately you cannot eat this item");
             }
+
             default -> {
                 System.out.println("Sorry you entered a wrong command.");
                 eatWithCheckofEatability();

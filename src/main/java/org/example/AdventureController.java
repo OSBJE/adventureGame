@@ -64,6 +64,10 @@ public class AdventureController {
         return player.getPlayerInventory();
     }
 
+    public String getRoomsArrayList () {
+        return player.getCurrentRoom().getRoomsArrayListWithDescription();
+    }
+
     public boolean eatableItemMethod(String itemToCheck){
         return player.eatableItem(itemToCheck);
     }

@@ -48,6 +48,13 @@ public class Room {
         return itemsArrayList;
     }
 
+    public String getRoomsArrayListWithDescription (){
+        String roomsArrayList = " ";
+        for (int i = 0; i < itemsArrayList.size();i++){
+            roomsArrayList = itemsArrayList.get(i).toString();
+        } return roomsArrayList;
+    }
+
     // this getter methods is used to check if it is okay go into the room. The value will either be a room or null
 
     public Room getRoomDoorNorth() {
