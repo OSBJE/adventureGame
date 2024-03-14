@@ -10,7 +10,6 @@ public class Player {
 
 
     private Room currentRoom;
-    Item item = new Item("", ""); // dummy objekt, så vi kan bruge nogle af vores item funktioner.
 
     private double healthPlayer;
 
