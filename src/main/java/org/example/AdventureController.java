@@ -17,7 +17,7 @@ public class AdventureController {
 
     public AdventureController() {
         map = new Map();
-        player = new Player(map.getFirstRoom());
+        player = new Player(map.getFirstRoom(), 50);
     }
 
 
@@ -62,6 +62,17 @@ public class AdventureController {
 
     public String getPlayerInventory () { // returnere ting i player inventory
         return player.getPlayerInventory();
+    }
+
+    ///////************** Player health management  *********** ////////
+    public double getHealthPlayer() { //hente playerHealth
+        return player.getHealthPlayer();
+    }
+    public void setHealthPlayer(double healthPlayer) { //setter til damage eller healthregain  fra indtagelse af food.
+        player.setHealthPlayer(healthPlayer);
+    }
+    public void playerEatsFood(String input) {
+        player.playerEatsFood(input);
     }
 
     public String getRoomsArrayList () {

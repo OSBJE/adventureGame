@@ -10,16 +10,35 @@ public class Player {
 
 
     private Room currentRoom;
-    private ArrayList<Item> playerInventory = new ArrayList<>();
-    private double healthPlayer = 50;  // Player Health Bar//
-    //private ArrayList<Item> itemTotalList = new ArrayList<>();
+
+    private double healthPlayer;
+
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
 
 
     // Constructor ///
-    public Player(Room room) {
+    public Player(Room room, double healthPlayer) {
         currentRoom = room;
-        //itemTotalList = playerInventory.addAll(currentRoom.getitemsArrayList());
+        this.healthPlayer = healthPlayer; //Health angives ved skabelsen af playerobjekt. Dette kan ses i Controller.
     }
+
+    public double getHealthPlayer() { //hente playerHealth
+        return healthPlayer;
+    }
+
+    public void setHealthPlayer(double healthPlayer) { //setter til damage eller healthregain  fra indtagelse af food.
+        this.healthPlayer = healthPlayer; //Health angives ved skabelsen af playerobjekt. Dette kan ses i Controller.
+    }
+
+
+    // Player variable til brug i methode //
+
+    ArrayList<Item> playerInventory = new ArrayList<>();
+
+
+    // Player Health Bar//
 
 
     // Det her er vores navigator (Compass) så vi kan gå rundt i vores spil //
@@ -99,9 +118,9 @@ public class Player {
         }
     }
 
-    public String getPlayerInventory() {
+    public String getPlayerInventory () {
         String playerInventoryList = "";
-        for (int i = 0; i <= playerInventory.size() - 1; i++) {
+        for (int i = 0; i <= playerInventory.size() -1; i++) {
             playerInventoryList += playerInventory.get(i).toString();
         }
         return playerInventoryList;
@@ -109,7 +128,41 @@ public class Player {
 
 
     ////************** Player eat Items ************************/////////
+
+
     // metode der checker om det kan spises //
+    public void playerEatsFood(String input) {
+        // tjekker om givne item er i rummet.
+        for (Item item : currentRoom.getitemsArrayList()) {
+            if (item.getItem().equalsIgnoreCase(input)) {
+                if (item instanceof Food) {
+                    Food foodItem = (Food) item;
+                    double healthGain = foodItem.getHealthGain();
+
+                    setHealthPlayer(getHealthPlayer() + healthGain);
+
+                    currentRoom.removeItemsArrayList(item);
+
+                    break;
+                }
+            }
+        }
+        // tjekker om givne item er i playerinventory.
+        for (Item item : playerInventory) {
+            if (item.getItem().equalsIgnoreCase(input)) {
+                if (item instanceof Food) {
+                    Food foodItem = (Food) item;
+                    double healthGain = foodItem.getHealthGain();
+
+                    setHealthPlayer(getHealthPlayer() + healthGain);
+
+                    playerInventory.remove(item);
+
+                    break;
+                }
+            }
+        }
+    }
     public boolean eatableItem(String itemToCheck) {
         for (Item item : currentRoom.getitemsArrayList()) {
             if (item.getItem().equalsIgnoreCase(itemToCheck)) {
@@ -122,9 +175,7 @@ public class Player {
         return false;
     }
 
-    public Room getCurrentRoom() {
-        return currentRoom;
-    }
+    /// overstående metoder har vi fået fra Lucas nedstående virker ////
 
 
     public String cleanItemInput(String input) {
@@ -132,6 +183,9 @@ public class Player {
         String output = navnearray[1];
         return output;
     }
+}
+
+
 
 
     ///// Alternative method to handle play direction //////
@@ -168,4 +222,4 @@ public class Player {
         return input;
     }*/
 
-}
+
