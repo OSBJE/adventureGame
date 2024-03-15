@@ -130,6 +130,7 @@ public class Player {
     ////************** Player eat Items ************************/////////
 
 
+
     // metode der checker om det kan spises //
     public void playerEatsFood(String input) {
         // tjekker om givne item er i rummet.

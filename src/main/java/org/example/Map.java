@@ -80,7 +80,7 @@ public class Map {
         startRoom = room1;
 
 
-        Item itemKnife = new  Item("Knife", "Magic Grim");
+        Item itemKnife = new MeleeWeapon("Knife", "Magic Grim", 10, 1000);
         Item itemSword = new Item("Sword", "It's a big sword");
         Item itemAxe = new Item("Axe", "Its name is gimli");
         Item itemWashboard = new Item("Washboard", "Remember to do your laundy");
