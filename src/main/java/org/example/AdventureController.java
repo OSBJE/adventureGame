@@ -12,7 +12,6 @@ public class AdventureController {
 
 
 
-
     // Det her er vores konstroktor
 
     public AdventureController() {
@@ -24,10 +23,6 @@ public class AdventureController {
     //////*********** Map ******************** ///////
     // At kalde den her funktion bygger vores kort.
 
-    public void buildMap(){
-        map.buildMap();
-    }
-
     public String getCurrentRoom() { //Room name
         return player.getCurrentRoom().getRoomName();
     }
@@ -38,13 +33,10 @@ public class AdventureController {
 
     ///////************** Players movement  *********** ////////
 
-    public void moveRoom(int input){
-        player.moveRoom(input);
+    public void movePlayer(String playerDirection){
+        player.movePlayer(playerDirection);
     }
 
-    public int playerDirection(String input){
-        return player.playerDirection(input);
-    }
 
     ///////************** Item handling between room and player inventory  *********** ////////
 
@@ -71,25 +63,9 @@ public class AdventureController {
     public void setHealthPlayer(double healthPlayer) { //setter til damage eller healthregain  fra indtagelse af food.
         player.setHealthPlayer(healthPlayer);
     }
-    public void playerEatsFood(String input) {
-        player.playerEatsFood(input);
-    }
-
-    public String getRoomsArrayList () {
-        return player.getCurrentRoom().getRoomsArrayListWithDescription();
-    }
-
-    public boolean eatableItemMethod(String itemToCheck){
-        return player.eatableItem(itemToCheck);
-    }
-
-
-
-    ///////************** Hjælpe funktion til at håndtere inputs  *********** ////////
-
-    public String cleanItemInput (String userInput) {
-        String cleanInput = player.cleanItemInput(userInput);
-        return cleanInput;
+    public String playerEatsFood(String input) {
+        String foodOrNoFood = player.playerEatsFood(input);
+        return foodOrNoFood;
     }
 
 }

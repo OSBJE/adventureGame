@@ -15,126 +15,127 @@ public class UserInterface {
 
     //MMH Vi kunne definere constructor og køre startGame herinde. Så skal metodekald af startGame slettes fra Main
     public UserInterface() {
-        startGame();
+        welcome();
+        startAndPlayGame();
     }
 
+    public void startAndPlayGame() {
 
-    /////****** Start and control game ********//////////////////
-
-    public void startGame() {
-        final String SENTINEL = "exit"; // den her skal bruges senere, lige nu holder den bare loopet igang.
-        String userChoiceString = ""; // starter bare så den kan loop hele tiden
-
-        ArrayList<String> wordCheck = wordDirection2(); //Creat a list to direct the game based on word
-
-        // starten på spillet, her skal det køre en gang
-        System.out.println("Welcome to AdventureGame!");
-        System.out.println("You are located in " + spil.getCurrentRoom());
-        System.out.println(" ");//MMH bare for at få en ekstra linje
-        System.out.println(spil.getCurrentRoomDescription());
-
-        this.previousRoom = spil.getCurrentRoom();//MMH String variabel til hjælp så vi kan bedømme i if else, om spilleren har flyttet sig
-        //System.out.println(spil.getRoomDescription()); //MMH beskrivelse af start rum
+        final String SENTINEL = "exit";
+        String playerInput = " ";
+        this.previousRoom = spil.getCurrentRoom();
 
 
-        while (!userChoiceString.toLowerCase().equals(SENTINEL)) {
-            System.out.println("What do you wanna do now?");
-            System.out.println("Either type in what direction you want to go or type help, look, inventory or exit");
-            System.out.println(" ");
-            userChoiceString = input.nextLine();
-            String userChoice = userChoiceCleaner(userChoiceString);
+        while (!playerInput.toLowerCase().equals(SENTINEL)) {
+            System.out.println("In what direction do you want to go: North, South, East og West?");
+            System.out.println("Or type inventory, take, drop, eat, equip, attack, help, look or exit.");
+            playerInput = input.nextLine();
+            String[] inputArray = playerInputManipulation(playerInput);
+            String firstWord = inputArray[0];
+            String secondWord = inputArray[1];
+            String playerInput3 = inputArray[2];
+            //System.out.println("dette er ord 1: " + firstWord);    test af input
+            //System.out.println("dette er ord 2: " + secondWord);    test af input
 
-            if (wordCheck.contains(userChoice)) {
-                playerChoiceHelper(userChoiceString);
-            } else if (userChoice.equals("inventory")) {
-                playerInventory();
-            } else {
-                playerMovement(userChoiceString);
+            switch (firstWord) {
+                case "take" -> {
+                    takeItemChoice(secondWord);
+                    break;
+                }
+                case "drop" -> {
+                    dropItemChoice(secondWord);
+                    break;
+                }
+                case "eat" -> {
+                    eatWithCheckofEatability(secondWord);
+                    break;
+                }
+                case "equip" -> {
+                    //equipMethod(secondWord);
+                    break;
+                }
             }
+
+            switch (playerInput3) {
+                case "north", "go north", "n" -> {
+                    playerMovement("north");
+                    break;
+                }
+                case "go south", "south", "s" -> {
+                    playerMovement("south");
+                    break;
+                }
+                case "go east", "east", "e" -> {
+                    playerMovement("east");
+                    break;
+                }
+                case "go west", "west", "w" -> {
+                    playerMovement("west");
+                    break;
+                }
+                case "help" -> {
+                    helpCommands();
+                    break;
+                }
+                case "look" -> {
+                    spil.getCurrentRoomDescription();
+                    break;
+                }
+                case "inventory", "invent", "inv" -> {
+                    playerInventory();
+                    break;
+                }
+                case "health" -> {
+                    showPlayerHealthUI();
+                    break;
+                }
+                case "exit", "Exit" -> {
+                    System.out.println("Thank you for playing and see you soon");
+                    playerInput3 = SENTINEL;
+                    firstWord = SENTINEL;
+
+                }
+
+            }
+
         }
+
+    }
+    public void welcome() {
+        System.out.println(" ");
+        System.out.println("Welcome to the AdventureGame");
+        System.out.println("We hope you are ready for som action.");
+        System.out.println(" ");
+        System.out.println("You start in room1 where you find yourself standing on a \nbeautiful green hill with a marvelous view...");
     }
 
+    //denne metode tager input fra player, laver til små bogstaver, deler op på ord i nyt Array, så disse kan bruges videre
+    public String[] playerInputManipulation(String playerInput) {
+        String playerInput2 = playerInput.toLowerCase();
+        String[] output = playerInput2.split(" ");
+        String firstWord = output[0];
+        String secondWord;
+        if (output.length > 1) {
+            secondWord = output[1];
+        } else {
+            secondWord = " ";
+        }
+        String playerInput3 = playerInput2;
+        return new String[]{firstWord, secondWord, playerInput3};
 
-    ////***** Game interface and help functions and exit program functions *****////////////
-
-    // userChoiceString cleaner
-
-    public ArrayList<String> wordDirection2 () {
-        ArrayList<String> wordDirection = new ArrayList<>();
-
-        wordDirection.add("help");
-        wordDirection.add("look");
-        wordDirection.add("exit");
-        wordDirection.add("take");
-        wordDirection.add("drop");
-        wordDirection.add("health"); //Indsat for menu DOJ. -DEBUG
-        wordDirection.add("eat");
-
-        return wordDirection;
+    }
+    public void takeItemChoice(String chosenItem) {
+        spil.takeItemMethod(chosenItem); //metoden skal tilrettes lidt, så vi kan tilføje tekst, hvis item ikke er i rum
+        System.out.println("You have now added " + chosenItem + " to your bag");
     }
 
-    public String userChoiceCleaner (String userChoice1) {
-        String userChoice2 = userChoice1.toLowerCase();
-        String[] output = userChoice2.split(" ");
-
-        return output[0];
+    public void dropItemChoice(String chosenItem) {
+        spil.dropItemMethod(chosenItem);
+        System.out.println("You now have in your bag: " + spil.getPlayerInventory());
     }
 
-    /// To make code in the interface more simple
-    public void playerChoiceHelper (String userChoiceString) {
-        if (userChoiceString.equals("help") || userChoiceString.equals("look") || userChoiceString.equals("exit")) {
-            helpExitLook(userChoiceString); //Metodekald.
-        } else if (userChoiceString.toLowerCase().contains("take")) {
-            takeItemInRoom(userChoiceString);
-        } else if (userChoiceString.toLowerCase().contains("drop")){
-            dropItemInRoom(userChoiceString);
-        } else if (userChoiceString.toLowerCase().equals("health")) {
-            showPlayerHealthUI();
-        } else if (userChoiceString.toLowerCase().contains("eat")) {
-            //String cleanInput = spil.cleanItemInput(userChoiceString);
-            spil.playerEatsFood(userChoiceString);
-        }
-        else {
-            playerMovement(userChoiceString);
-        }
-    }
-
-
-        public void showPlayerHealthUI() { ///Sysouts af nuværende player health. Thresholds ligger på højere eller lige med 50 & 30 med sidste else.
-            if(spil.getHealthPlayer() >= 50) {
-                System.out.println("Your health is currently at "+spil.getHealthPlayer()+"."+" You are in good health, but avoid fighting right now.");
-            }
-            else if(spil.getHealthPlayer() >= 30) {
-                System.out.println("Your health is currently at "+spil.getHealthPlayer()+"."+" Your health is worryingly low right now.");
-            }
-            else {
-                System.out.println("Your health is currently at "+spil.getHealthPlayer()+"."+" You feel dizzy and might cross into the afterlife anytime soon.");
-            }
-        }
-        public void helpCommands () { //bare for at samle sysout. Kan fjernes, hvis helt dumt.
-            System.out.println("Help functions:");
-            System.out.println(" ");
-            System.out.println("Type exit to terminate the program.");
-            System.out.println("Type look to get a description of the current room.");
-            System.out.println(" ");
-        }
-        public void helpExitLook (String userChoiceString){
-            if (userChoiceString.toLowerCase().equals("help")) { //Hjælp kommando i terminal
-                helpCommands(); //udprintning af hjælpekommandoer
-            } else if (!userChoiceString.toLowerCase().equals("exit")) { //henter værelsesbeskrivelse
-                System.out.println(spil.getCurrentRoomDescription());
-                // System.out.println(spil.getRoomDescription()(spil.getCurrentRoom())); //Henter Mettes beskrivelser.
-                //System.out.println(spil.getRoomDescription()); //henter Room objektets description, der også er parameter.
-            }
-        }
-
-
-    ////***** Player movement function and associated help functions *****////////////
-
-    public void playerMovement (String userChoiceString) {
-        spil.playerDirection(userChoiceString);
-        int userChoiceInt = spil.playerDirection(userChoiceString);
-        spil.moveRoom(userChoiceInt);
+    public void playerMovement(String userChoice) {
+        spil.movePlayer(userChoice);
         addInformation();
     }
 
@@ -151,13 +152,9 @@ public class UserInterface {
             System.out.println(" ");
             displayItemsInRoom();
             System.out.println(" ");
-
         }
         previousRoom = currentRoom;
     }
-
-
-    /////******** Player and Room Item handling *************/////////
 
     public void displayItemsInRoom() { //Metode til at displaye items i room. Items bliver foreløbigt sat i buildMap().
         if (!spil.getitemsArrayList().isEmpty()) { //Hvis arraylisten IKKE er tom
@@ -165,161 +162,55 @@ public class UserInterface {
             for (Item item : spil.getitemsArrayList()) { //For each loop itererer gennem vores itemsArrayList for at finde Items, der er forbundet med det enkelte rum.
                 System.out.println(item.getItem());
             }
-            takeItemChoice();
-            eatWithCheckofEatability();
         } else {
             System.out.println("You see nothing of use to you in this room.");
-            if (!spil.getPlayerInventory().isEmpty()) {
-                dropItemChoice();
-            }
         }
     }
 
-    public void takeItemChoice() { //lidt mere brugervenlig info
-        System.out.println("Do you want to take an item, yes or no?");
-        String playerChoice = input.nextLine();
-        switch (playerChoice.toLowerCase()) {
-            case "no" -> {
-                System.out.println("Then let us move on");
-            }
-            case "yes", "take", "yes take" -> {
-                System.out.println("What item do you want to take?");
-                String chosenItem = input.nextLine();
-                spil.takeItemMethod(chosenItem);
-                System.out.println("You have now added " + chosenItem + " to your bag");
-            }
-            default -> {
-                System.out.println("Sorry you entered a wrong command");
-                takeItemChoice();
-
-            }
-        }
-    }
-
-    public void dropItemChoice() {
-        System.out.println("Do you want to drop an item in this room, yes or no?");
-        String playerChoice = input.nextLine();
-        switch (playerChoice.toLowerCase()) {
-            case "no" -> {
-                System.out.println("Then let us move on");
-            }
-            case "yes" -> {
-                System.out.println("What item do you want to drop?");
-                String chosenItem = input.nextLine();
-                spil.dropItemMethod(chosenItem);
-                System.out.println("You now have in your bag: " + spil.getPlayerInventory());
-            }
-            default -> {
-                System.out.println("Sorry you entered a wrong command.");
-                dropItemChoice();
-
-            }
-        }
-
-    }
-
-    public void eatWithCheckofEatability () {
-        System.out.println("Are you hungry, yes or no?");
-        String playerChoice = input.nextLine();
-        switch (playerChoice.toLowerCase()) {
-            case "no" -> {
-                System.out.println("Then let us move on");
-            }
-            case "yes" -> {
-                System.out.println("Here you can see a list of items in this room and in your bag");
-                for (Item item : spil.getitemsArrayList()) {
-                    System.out.println(item.getItem());
-                }
-                System.out.println(spil.getPlayerInventory());
-                System.out.println(" ");
-
-                System.out.println("Type item you would like eat og not hungry if you want to move on");
-                String chosenItem = input.nextLine();
-                if (spil.eatableItemMethod(chosenItem)) {
-                    spil.playerEatsFood(chosenItem);
-                    System.out.println("Bon appetite");
-                    break;
-                }
-                System.out.println("Unfortunately you cannot eat this item");
-            }
-
-            default -> {
-                System.out.println("Sorry you entered a wrong command.");
-                eatWithCheckofEatability();
-
-            }
-        }
-    }
-
-
-        public void takeItemInRoom (String userChoiceString) {
-            String cleanInput = spil.cleanItemInput(userChoiceString);
-            spil.takeItemMethod(cleanInput);
-        }
-
-        public void dropItemInRoom (String userChoiceString) {
-            String cleanInput = spil.cleanItemInput(userChoiceString);
-            spil.dropItemMethod(cleanInput);
-        }
-
-        // method to print our playerInventory
-        public void playerInventory () {
-        if(spil.getPlayerInventory().length() > 0) {
+    public void playerInventory() {
+        if (spil.getPlayerInventory().length() > 0) {
             String playerInventory = spil.getPlayerInventory();
             System.out.println(playerInventory);
-        }
-        else {
+        } else {
             System.out.println("Your inventory is empty.");
-        }
-
         }
     }
 
+    public void helpCommands() { //bare for at samle sysout. Kan fjernes, hvis helt dumt.
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("Help functions:");
+        System.out.println(" ");
+        System.out.println("Type direction you want to move.");
+        System.out.println("Type take and name of item, if you want to take an item from a room. ");
+        System.out.println("Type drop and name of item, if you want to drop an item in a room. ");
+        System.out.println("Type look to get a description of the current room. ");
+        System.out.println("Type eat and name of food you want to eat. ");
+        System.out.println("Type equip and name of weapon you want to use. ");
+        System.out.println("Type attack and .... ");
+        System.out.println("Type exit to terminate the program.");
+        System.out.println("Type exit to terminate the program.");
+        System.out.println("---------------------------------------------------------------- ");
+    }
 
-
-
-
-
-
-
-
-
-    //**** Error handling methods ****//
-    // nedstående error handling skal fange forkerte input i vores program
-    // Det skal gerne kunne genbruges som en general error hanndling
-/*
-    private int inputValidation(String prompt, int min, int max) {
-        int userInput = 0;
-        boolean flagdown = false;
-
-        while (!flagdown) {
-            try {
-                System.out.println(prompt);
-                userInput = input.nextInt();
-                input.nextLine();
-
-                if (userInput >= min && userInput <= max) {
-                    flagdown = true;
-                } else {
-                    System.out.println("Error! please input a number between " + min + " and " + max);
-                }
-            } catch (InputMismatchException inputMismatchException) {
-                System.out.println("Error! Please input a valid number");
-                input.nextLine();
-            }
+    public void eatWithCheckofEatability(String chosenitem) {
+        if(spil.playerEatsFood(chosenitem).equals("foodOkay")){
+            System.out.println("Bon appetite");
+        } else if (spil.playerEatsFood(chosenitem).equals("notFood")) {
+            System.out.println("Unfortunately you cannot eat this item.");
+        } else if (spil.playerEatsFood(chosenitem).equals("foodNotAvailable")) {
+            System.out.println("You do not have this available.");
         }
-        return userInput;
-    } */
+    }
 
-
-
-
-
-
-
-
-
-
-
+    public void showPlayerHealthUI() { ///Sysouts af nuværende player health. Thresholds ligger på højere eller lige med 50 & 30 med sidste else.
+        if (spil.getHealthPlayer() >= 50) {
+            System.out.println("Your health is currently at " + spil.getHealthPlayer() + "." + " You are in good health, but avoid fighting right now.");
+        } else if (spil.getHealthPlayer() < 30) {
+            System.out.println("Your health is currently at " + spil.getHealthPlayer() + "." + " You feel dizzy and might cross into the afterlife anytime soon.");
+        } else {
+            System.out.println("Your health is currently at " + spil.getHealthPlayer() + "." + " Your health is worryingly low right now.");
+        }
+    }
+}
 
 
