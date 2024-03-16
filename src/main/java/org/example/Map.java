@@ -81,9 +81,9 @@ public class Map {
 
 
         Item itemKnife = new MeleeWeapon("Knife", "Magic Grim", 10, 1000);
-        Item itemSword = new Item("Sword", "It's a big sword");
-        Item itemAxe = new Item("Axe", "Its name is gimli");
-        Item itemWashboard = new Item("Washboard", "Remember to do your laundy");
+        Item itemSword = new MeleeWeapon("Sword", "It's a big sword", 10, 1000);
+        Item itemAxe = new MeleeWeapon("Axe", "Its name is gimli", 20, 1000);
+        Item itemWashboard = new RangedWeapon("Washboard", "Remember to do your laundy", 50, 2);
 
 
         room3.addItemsArrayList(itemKnife);
@@ -111,10 +111,10 @@ public class Map {
 
     public void buildItems() {
 
-        Item itemKnife = new  Item("Knife", "Magic Grim");
-        Item itemSword = new Item("Sword", "It's a big sword");
-        Item itemAxe = new Item("Axe", "Its name is gimli");
-        Item itemWashboard = new Item("Washboard", "Remember to do your laundy");
+        Item itemKnife = new MeleeWeapon("Knife", "Magic Grim", 10, 1000);
+        Item itemSword = new MeleeWeapon("Sword", "It's a big sword", 10, 1000);
+        Item itemAxe = new MeleeWeapon("Axe", "Its name is gimli", 20, 1000);
+        Item itemWashboard = new RangedWeapon("Washboard", "Remember to do your laundy", 50, 2);
 }
     public void buildFood() {
         Food itemApple = new Food("Apple", "from snowwhite", -25, true);

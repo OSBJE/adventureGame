@@ -92,4 +92,17 @@ public class AdventureController {
         return cleanInput;
     }
 
+    //------Testing----------------------------------------------------------------------
+
+    public String getPlayerEquiped (){
+        return player.getPlayerEquiped();
+    }
+
+    public void setEquipedWeapon (String input) {
+        player.equipWeapon(input);
+    }
+
+    //------------------------------------------------------------------------------------
+
+
 }

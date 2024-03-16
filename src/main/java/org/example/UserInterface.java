@@ -48,6 +48,10 @@ public class UserInterface {
                 playerChoiceHelper(userChoiceString);
             } else if (userChoice.equals("inventory")) {
                 playerInventory();
+                playerEquiped();
+            } else if (userChoice.equals("equip")) {
+                String weaponToequip = input.nextLine();
+                equipWeapon(weaponToequip);
             } else {
                 playerMovement(userChoiceString);
             }
@@ -272,6 +276,17 @@ public class UserInterface {
             System.out.println("Your inventory is empty.");
         }
 
+        }
+
+        //-----Testing--------------------------------------------------------------------------
+        public void playerEquiped () {
+        System.out.println("\n you have the following weapon equiped: ");
+        String equiped = spil.getPlayerEquiped();
+            System.out.println(equiped);
+        }
+
+        public void equipWeapon (String input) {
+        spil.setEquipedWeapon(input);
         }
     }
 
