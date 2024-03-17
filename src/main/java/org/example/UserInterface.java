@@ -42,6 +42,7 @@ public class UserInterface {
                     takeItemChoice(secondWord);
                     break;
                 }
+
                 case "drop" -> {
                     dropItemChoice(secondWord);
                     break;
@@ -89,7 +90,7 @@ public class UserInterface {
                     showPlayerHealthUI();
                     break;
                 }
-                case "exit", "Exit" -> {
+                case "exit" -> {
                     System.out.println("Thank you for playing and see you soon");
                     playerInput3 = SENTINEL;
                     firstWord = SENTINEL;
@@ -101,6 +102,7 @@ public class UserInterface {
         }
 
     }
+
     public void welcome() {
         System.out.println(" ");
         System.out.println("Welcome to the AdventureGame");
@@ -124,14 +126,24 @@ public class UserInterface {
         return new String[]{firstWord, secondWord, playerInput3};
 
     }
+
     public void takeItemChoice(String chosenItem) {
-        spil.takeItemMethod(chosenItem); //metoden skal tilrettes lidt, så vi kan tilføje tekst, hvis item ikke er i rum
-        System.out.println("You have now added " + chosenItem + " to your bag");
+        String result = spil.takeItemMethod(chosenItem);
+        if (result.equals("takeOkay")) {
+            System.out.println("You have now added " + chosenItem + " to your bag");
+        } else if (result.equals("takeNotPossible")) {
+            System.out.println("This item is not available to take.");
+        }
     }
 
     public void dropItemChoice(String chosenItem) {
-        spil.dropItemMethod(chosenItem);
-        System.out.println("You now have in your bag: " + spil.getPlayerInventory());
+        String result = spil.dropItemMethod(chosenItem);
+        if (result.equals("dropOkay")) {
+            System.out.println("You now have left in your bag: " + spil.getPlayerInventory());
+        } else if (result.equals("dropNotPossible")) {
+            System.out.println("This item is not available to drop.");
+        }
+
     }
 
     public void playerMovement(String userChoice) {
@@ -188,12 +200,11 @@ public class UserInterface {
         System.out.println("Type equip and name of weapon you want to use. ");
         System.out.println("Type attack and .... ");
         System.out.println("Type exit to terminate the program.");
-        System.out.println("Type exit to terminate the program.");
         System.out.println("---------------------------------------------------------------- ");
     }
 
     public void eatWithCheckofEatability(String chosenitem) {
-        if(spil.playerEatsFood(chosenitem).equals("foodOkay")){
+        if (spil.playerEatsFood(chosenitem).equals("foodOkay")) {
             System.out.println("Bon appetite");
         } else if (spil.playerEatsFood(chosenitem).equals("notFood")) {
             System.out.println("Unfortunately you cannot eat this item.");

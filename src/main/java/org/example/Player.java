@@ -68,7 +68,7 @@ public class Player {
         }
     }
 
-    public void takeItem(String chosenItem) {
+    /*public void takeItem(String chosenItem) {
         for (Item item : currentRoom.getitemsArrayList()) {
             if (item.getItem().equalsIgnoreCase(chosenItem)) {
                 currentRoom.removeItemsArrayList(item);
@@ -76,22 +76,41 @@ public class Player {
                 break;//denne laves om, så vi kan få UI tekst, hvis item ikke er i rum
             }
         }
+    }*/
+
+    public String takeItem(String chosenItem){
+        String result = "takeNotPossible";
+        for (Item item : currentRoom.getitemsArrayList()){
+            if (item.getItem().equalsIgnoreCase(chosenItem)){
+                currentRoom.removeItemsArrayList(item);
+                playerInventory.add(item);
+                result = "takeOkay";
+                break;
+            }
+        }
+        return result;
     }
 
-    public void dropItem(String chosenItem) {
+
+
+    public String dropItem(String chosenItem) {
+        String result = "dropNotPossible";
         for (Item item : playerInventory) {
             if (item.getItem().equalsIgnoreCase(chosenItem)) {
                 currentRoom.addItemsArrayList(item);
                 playerInventory.remove(item);
+                result = "dropOkay";
                 break;
             }
         }
+        return result;
     }
 
     public String getPlayerInventory() {
         String playerInventoryList = "";
         for (int i = 0; i <= playerInventory.size() - 1; i++) {
             playerInventoryList += playerInventory.get(i).toString();
+            //playerInventoryList += playerInventory.get(i).getItem();
         }
         return playerInventoryList;
     }

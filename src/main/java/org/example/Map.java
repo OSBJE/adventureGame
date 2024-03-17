@@ -5,9 +5,17 @@ public class Map {
     // Et kort af "Rooms" har et Room, som det laves på baggrund af.
 
 
-
     private Room startRoom;
     private Item itemsList;
+    private Room room1;
+    private Room room2;
+    private Room room3;
+    private Room room4;
+    private Room room5;
+    private Room room6;
+    private Room room7;
+    private Room room8;
+    private Room room9;
 
 
     //*** Constructor *** //
@@ -27,15 +35,15 @@ public class Map {
         // vi starter med at lave 9 room objekter, et som repræsenterer hvert room i vores spil
         //
 
-        Room room1 = new Room("Room 1", "This is a beautiful green hill with a nice view.");
-        Room room2 = new Room("Room 2", "This is a dark cave with a thousand bats. Watch out!!!");
-        Room room3 = new Room("Room 3", "This is a cold icy mountain.");
-        Room room4 = new Room("Room 4", "This is a wooden cottage that is about to collapse. Watch out!!!");
-        Room room5 = new Room("Room 5", "This is a warm and cozy fireplace.");
-        Room room6 = new Room("Room 6", "This is an erupting volcano... watch out for the burning lava!!!");
-        Room room7 = new Room("Room 7", "This is a noisy metropolis with polluting traffic.");
-        Room room8 = new Room("Room 8", "This is an olive grove with butterflies.");
-        Room room9 = new Room("Room 9", "This is a battlefield from World War 1. \nKeep your head down, so you don't get hit!");
+        this.room1 = new Room("Room 1", "This is a beautiful green hill with a nice view.");
+        this.room2 = new Room("Room 2", "This is a dark cave with a thousand bats. Watch out!!!");
+        this.room3 = new Room("Room 3", "This is a cold icy mountain.");
+        this.room4 = new Room("Room 4", "This is a wooden cottage that is about to collapse. Watch out!!!");
+        this.room5 = new Room("Room 5", "This is a warm and cozy fireplace.");
+        this.room6 = new Room("Room 6", "This is an erupting volcano... watch out for the burning lava!!!");
+        this.room7 = new Room("Room 7", "This is a noisy metropolis with polluting traffic.");
+        this.room8 = new Room("Room 8", "This is an olive grove with butterflies.");
+        this.room9 = new Room("Room 9", "This is a battlefield from World War 1. \nKeep your head down, so you don't get hit!");
 
         // Her skal vi have forbindelserne mellem de forskellige "Rooms"
 
@@ -78,29 +86,7 @@ public class Map {
         // Her har vi det endelig kort.
 
         startRoom = room1;
-
-
-        Item itemKnife = new MeleeWeapon("Knife", "Magic Grim", 10, 1000);
-        Item itemSword = new Item("Sword", "It's a big sword");
-        Item itemAxe = new Item("Axe", "Its name is gimli");
-        Item itemWashboard = new Item("Washboard", "Remember to do your laundy");
-
-
-        room3.addItemsArrayList(itemKnife);
-        room3.addItemsArrayList(itemSword);
-        room3.addItemsArrayList(itemAxe);
-        room7.addItemsArrayList(itemWashboard);
-
-        ///// Her laver vi mad og tilføjde dem til room ///
-        Food itemApple = new Food("Apple", "from snowwhite", -25, true);
-        Food itemMeat = new Food("Meat", "from cow", 25, false);
-        Food itemBanana = new Food("Banana", "from minions", 15, false);
-        Food itemProtienBar = new Food("Protien Bar", "from arnolds gym", 35, false);
-
-        room2.addItemsArrayList(itemApple);
-        room2.addItemsArrayList(itemMeat);
-        room4.addItemsArrayList(itemBanana);
-        room7.addItemsArrayList(itemProtienBar);
+        buildAndPlaceItems();
 
     }
 
@@ -109,18 +95,26 @@ public class Map {
     }
 
 
-    public void buildItems() {
+    public void buildAndPlaceItems() {
 
-        Item itemKnife = new  Item("Knife", "Magic Grim");
+        Item itemKnife = new Item("Knife", "Magic Grim");
         Item itemSword = new Item("Sword", "It's a big sword");
         Item itemAxe = new Item("Axe", "Its name is gimli");
         Item itemWashboard = new Item("Washboard", "Remember to do your laundy");
-}
-    public void buildFood() {
         Food itemApple = new Food("Apple", "from snowwhite", -25, true);
         Food itemMeat = new Food("Meat", "from cow", 25, false);
         Food itemBanana = new Food("Banana", "from minions", 15, false);
-        Food itemProtienBar = new Food("Protien Bar", "from arnolds gym", 35, false);
+        Food itemProteinBar = new Food("ProteinBar", "from arnolds gym", 35, false);
+
+        room3.addItemsArrayList(itemKnife);
+        room3.addItemsArrayList(itemSword);
+        room3.addItemsArrayList(itemAxe);
+        room7.addItemsArrayList(itemWashboard);
+        room2.addItemsArrayList(itemApple);
+        room2.addItemsArrayList(itemMeat);
+        room4.addItemsArrayList(itemBanana);
+        room7.addItemsArrayList(itemProteinBar);
     }
+
 
 }

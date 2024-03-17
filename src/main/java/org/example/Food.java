@@ -41,13 +41,7 @@ public class Food extends Item{
 
     @Override
     public String toString() {
-        return "\n" + "Item: " + getItem() +
-                "\n" + "Item Description: " + getItemDescription() +
-                "\n" + "Health given: " + healthGain +
-                "\n" + "is it poison: " + (poison ? "Yes" : "No"); //ternary operator til if-else statement.
-
-
-
+        return "\n" + "Item: " + getItem() + " Item Description: " + getItemDescription() + " Health given: " + healthGain +" Poison?: " + (poison ? "Yes" : "No"); //ternary operator til if-else statement.
     }
 
 }

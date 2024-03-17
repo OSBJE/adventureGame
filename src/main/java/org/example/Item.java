@@ -36,8 +36,7 @@ public class Item {
 
 @Override
     public String toString() {
-        return "\n" + "Item: " + item +
-                "\n" + "Item Description: " + itemDescription;
+        return "\n" + "Item: " + item + " Item Description: " + itemDescription;
     }
 
     //// Setter Methods //////
