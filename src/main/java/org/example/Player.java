@@ -1,9 +1,7 @@
 package org.example;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -233,6 +231,40 @@ public class Player {
             }
         }
         return false;
+    }
+
+    /// Player Attack action ///
+    public void attackP() {
+        if(isAnythingEquipped()) {
+            for(Item item : equiped) {
+                if(item instanceof Weapon) {
+                    Weapon weaponItem = (Weapon) item;
+                    weaponItem.attack(); //Depleter vores skud i RangedWeapon
+                    //int depleteMonsterHealth = weaponItem.getWeaponDmg()-getMonsterHealth(); Vi gemmer resultatet af våbenskade og nuværende monster health i en variabel.
+
+                    //setMonsterHealth(depleteMonsterHealth); Vi sætter monsterets nye health med ovenstående variabel.
+
+                    //Herfra kræver funktionen vores monster objekt(er). Logikken her er, at vi laver en settermetode på vores monstre.
+
+
+                    break;
+                }
+            }
+        }
+    }
+    public int getRemainingShots() {
+        if(isAnythingEquipped()) {
+            for(Item item : equiped) {
+                if(item instanceof Weapon weaponItem ) {
+                    int remainingShots = weaponItem.getWeaponShoots();
+                    return remainingShots;
+                }
+            }
+        }
+        return 0;
+    }
+    public boolean isAnythingEquipped() {
+        return equiped[0] != null;
     }
 
     /// Player equip item to attack with ////

@@ -102,6 +102,16 @@ public class AdventureController {
         player.equipWeapon(input);
     }
 
+    public void attackP() {
+        player.attackP();
+    }
+    public boolean doIHaveWeaponEquipped() {
+        return player.isAnythingEquipped();
+    }
+    public int getRemainingShots() {
+        return player.getRemainingShots();
+    }
+
     //------------------------------------------------------------------------------------
 
 

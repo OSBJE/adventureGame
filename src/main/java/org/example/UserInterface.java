@@ -71,8 +71,10 @@ public class UserInterface {
         wordDirection.add("exit");
         wordDirection.add("take");
         wordDirection.add("drop");
-        wordDirection.add("health"); //Indsat for menu DOJ. -DEBUG
+        wordDirection.add("health");
         wordDirection.add("eat");
+        //wordDirection.add("equip");
+        wordDirection.add("attack");
 
         return wordDirection;
     }
@@ -97,10 +99,24 @@ public class UserInterface {
         } else if (userChoiceString.toLowerCase().contains("eat")) {
             //String cleanInput = spil.cleanItemInput(userChoiceString);
             spil.playerEatsFood(userChoiceString);
+        } else if (userChoiceString.toLowerCase().contains("attack")) {
+            attackFunction();
         }
         else {
             playerMovement(userChoiceString);
         }
+    }
+    public void attackFunction() {
+        if(spil.doIHaveWeaponEquipped()) {
+            if(spil.getRemainingShots() > 0) {
+                spil.attackP();
+                System.out.println("DEBUG if blok på attackfunction()"); //Måske nogle player getters på weapon objects damage med printout til brugeren om hvor meget dmg osv.
+
+            }else {
+                System.out.println("DEBUG vi er i elseblok på attackfunction() ");
+            }
+        }
+
     }
 
 

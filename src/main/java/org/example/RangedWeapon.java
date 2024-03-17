@@ -9,6 +9,9 @@ public class RangedWeapon extends Weapon {
 
     @Override
     public void attack() {
+        int weaponDMG =  getWeaponDmg();
+        int remainingShots = getWeaponShoots() -1;
+        setWeaponShoots(remainingShots);
 
     }
 
