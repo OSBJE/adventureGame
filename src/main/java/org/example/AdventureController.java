@@ -16,7 +16,9 @@ public class AdventureController {
 
     public AdventureController() {
         map = new Map();
-        player = new Player(map.getFirstRoom(), 50);
+        player = new Player(map.getFirstRoom(), 50, "SuperPlayer", 100);
+        //Blev nød til at indsætte lidt tekst for at få programmet til at spille.
+        //Vi kommer til at bruge Player for meget - det Oskar sagde
     }
 
 

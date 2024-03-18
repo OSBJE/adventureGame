@@ -63,10 +63,6 @@ public class UserInterface {
                 case "attack" -> {
                     attackFunction();
                 }
-
-            }
-
-            switch (playerInput3) {
                 case "help" -> {
                     helpCommands();
                     break;

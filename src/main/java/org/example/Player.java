@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Player {
+public class Player extends Character {
 
     //*** ATTRIBUTES ***//
     // Vi skal lave en current af vores map
@@ -20,7 +20,8 @@ public class Player {
 
 
     // Constructor ///
-    public Player(Room room, double healthPlayer) {
+    public Player(Room room, double healthPlayer, String name, double healthScore) {
+        super(name, healthScore);
         currentRoom = room;
         this.healthPlayer = healthPlayer; //Health angives ved skabelsen af playerobjekt. Dette kan ses i Controller.
     }
