@@ -101,9 +101,9 @@ public class Map {
         Item itemSword = new Item("Sword", "It's a big sword");
         Item itemAxe = new Item("Axe", "Its name is gimli");
         Item itemWashboard = new Item("Washboard", "Remember to do your laundy");
-        Food itemApple = new Food("Apple", "from snowwhite", -25, true);
+        Food itemApple = new Food("Apple", "from snowwhite", -15, true);
         Food itemMeat = new Food("Meat", "from cow", 25, false);
-        Food itemBanana = new Food("Banana", "from minions", 15, false);
+        Food itemBanana = new Food("Banana", "from minions", 10, false);
         Food itemProteinBar = new Food("ProteinBar", "from arnolds gym", 35, false);
 
         room3.addItemsArrayList(itemKnife);

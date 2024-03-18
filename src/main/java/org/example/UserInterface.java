@@ -212,14 +212,20 @@ public class UserInterface {
             System.out.println("You do not have this available.");
         }
     }
+    /*public void playerMovement (String userChoiceString) {
+        spil.playerDirection(userChoiceString);
+        int userChoiceInt = spil.playerDirection(userChoiceString);
+        spil.moveRoom(userChoiceInt);
+        addInformation();
+    }*/
 
     public void showPlayerHealthUI() { ///Sysouts af nuværende player health. Thresholds ligger på højere eller lige med 50 & 30 med sidste else.
         if (spil.getHealthPlayer() >= 50) {
-            System.out.println("Your health is currently at " + spil.getHealthPlayer() + "." + " You are in good health, but avoid fighting right now.");
+            System.out.println("Your health is currently at " + spil.getHealthPlayer() + "." + " You are in good health and feel super duper.");
         } else if (spil.getHealthPlayer() < 30) {
             System.out.println("Your health is currently at " + spil.getHealthPlayer() + "." + " You feel dizzy and might cross into the afterlife anytime soon.");
         } else {
-            System.out.println("Your health is currently at " + spil.getHealthPlayer() + "." + " Your health is worryingly low right now.");
+            System.out.println("Your health is currently at " + spil.getHealthPlayer() + "." + " Your health is getting low now. You better avoid fighting.");
         }
     }
 }
