@@ -68,4 +68,27 @@ public class AdventureController {
         return foodOrNoFood;
     }
 
+    //------Testing----------------------------------------------------------------------
+
+    public String getPlayerEquiped (){
+        return player.getPlayerEquiped();
+    }
+
+    public void setEquipedWeapon (String input) {
+        player.equipWeapon(input);
+    }
+
+    public void attackP() {
+        player.attackP();
+    }
+    public boolean doIHaveWeaponEquipped() {
+        return player.isAnythingEquipped();
+    }
+    public int getRemainingShots() {
+        return player.getRemainingShots();
+    }
+
+    //------------------------------------------------------------------------------------
+
+
 }

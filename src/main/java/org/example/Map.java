@@ -97,14 +97,16 @@ public class Map {
 
     public void buildAndPlaceItems() {
 
-        Item itemKnife = new Item("Knife", "Magic Grim");
-        Item itemSword = new Item("Sword", "It's a big sword");
-        Item itemAxe = new Item("Axe", "Its name is gimli");
-        Item itemWashboard = new Item("Washboard", "Remember to do your laundy");
+
         Food itemApple = new Food("Apple", "from snowwhite", -15, true);
         Food itemMeat = new Food("Meat", "from cow", 25, false);
         Food itemBanana = new Food("Banana", "from minions", 10, false);
         Food itemProteinBar = new Food("ProteinBar", "from arnolds gym", 35, false);
+        Item itemKnife = new MeleeWeapon("Knife", "Magic Grim", 10, 1000);
+        Item itemSword = new MeleeWeapon("Sword", "It's a big sword", 10, 1000);
+        Item itemAxe = new MeleeWeapon("Axe", "Its name is gimli", 20, 1000);
+        Item itemWashboard = new RangedWeapon("Washboard", "Remember to do your laundy", 50, 2);
+
 
         room3.addItemsArrayList(itemKnife);
         room3.addItemsArrayList(itemSword);
