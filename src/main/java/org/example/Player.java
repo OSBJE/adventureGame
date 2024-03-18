@@ -64,7 +64,7 @@ public class Player {
     // Det her er vores navigator (Compass) så vi kan gå rundt i vores spil //
 
 
-    public void moveRoom(int compass) {
+    public void movePlayer(int compass) {
         switch (compass) {
             case 1: // North room
                 if (currentRoom.getRoomDoorNorth() != null) {

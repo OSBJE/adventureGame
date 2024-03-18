@@ -34,8 +34,7 @@ public class UserInterface {
             String firstWord = inputArray[0];
             String secondWord = inputArray[1];
             String playerInput3 = inputArray[2];
-            //System.out.println("dette er ord 1: " + firstWord);    test af input
-            //System.out.println("dette er ord 2: " + secondWord);    test af input
+
 
             switch (firstWord) {
                 case "take" -> {
@@ -47,33 +46,21 @@ public class UserInterface {
                     dropItemChoice(secondWord);
                     break;
                 }
+
                 case "eat" -> {
                     eatWithCheckofEatability(secondWord);
                     break;
                 }
+
                 case "equip" -> {
-                    //equipMethod(secondWord);
+                    eatWithCheckofEatability(secondWord);
                     break;
                 }
+
+                default -> spil.movePlayer(playerInput3);
             }
 
             switch (playerInput3) {
-                case "north", "go north", "n" -> {
-                    playerMovement("north");
-                    break;
-                }
-                case "go south", "south", "s" -> {
-                    playerMovement("south");
-                    break;
-                }
-                case "go east", "east", "e" -> {
-                    playerMovement("east");
-                    break;
-                }
-                case "go west", "west", "w" -> {
-                    playerMovement("west");
-                    break;
-                }
                 case "help" -> {
                     helpCommands();
                     break;
@@ -94,8 +81,10 @@ public class UserInterface {
                     System.out.println("Thank you for playing and see you soon");
                     playerInput3 = SENTINEL;
                     firstWord = SENTINEL;
+                    break;
 
                 }
+                default -> spil.movePlayer(playerInput3);
 
             }
 

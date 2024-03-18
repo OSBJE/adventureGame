@@ -34,7 +34,11 @@ public class AdventureController {
     ///////************** Players movement  *********** ////////
 
     public void movePlayer(String playerDirection){
-        player.movePlayer(playerDirection);
+        player.movePlayer(getPLayerDirection(playerDirection));
+    }
+
+    public int getPLayerDirection(String playerInput){
+       return player.playerDirection(playerInput);
     }
 
 
