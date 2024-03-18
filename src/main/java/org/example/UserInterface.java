@@ -64,15 +64,12 @@ public class UserInterface {
                     attackFunction();
                 }
 
-            }
-
-            switch (playerInput3) {
                 case "help" -> {
                     helpCommands();
                     break;
                 }
                 case "look" -> {
-                    spil.getCurrentRoomDescription();
+                    System.out.println(spil.getCurrentRoomDescription());
                     break;
                 }
                 case "inventory", "invent", "inv" -> {
@@ -92,8 +89,6 @@ public class UserInterface {
 
                 }
                 default -> playerMovement(playerInput3);
-
-
 
             }
 
