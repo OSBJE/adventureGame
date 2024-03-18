@@ -55,8 +55,13 @@ public class UserInterface {
                 }
 
                 case "equip" -> {
-                    eatWithCheckofEatability(secondWord);
+                    equipWeapon(secondWord);
+                    playerEquiped();
                     break;
+                }
+
+                case "attack" -> {
+                    attackFunction();
                 }
 
             }
@@ -72,6 +77,7 @@ public class UserInterface {
                 }
                 case "inventory", "invent", "inv" -> {
                     playerInventory();
+                    playerEquiped(); // just to test
                     break;
                 }
                 case "health" -> {
@@ -194,7 +200,7 @@ public class UserInterface {
 
     }
 
-    //-----Testing--------------------------------------------------------------------------
+    //-----Weapon Management--------------------------------------------------------------------------
     public void playerEquiped() {
         System.out.println("\n you have the following weapon equiped: ");
         String equiped = spil.getPlayerEquiped();

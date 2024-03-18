@@ -281,13 +281,13 @@ public class Player {
 
 
     public void equipWeapon (String input){
-        Item checkInventory =  playerInventory.stream().filter(Item -> input.equals(Item.getItem())).findAny().orElse(null);
+                Item checkInventory =  playerInventory.stream().filter(Item -> input.equals(Item.getItem().toLowerCase())).findAny().orElse(null);
        if (checkInventory instanceof Weapon) {
            playerInventory.remove(checkInventory);
            equipWeaponCheck();
            equiped[0] = checkInventory;
        }
-        Item checkRoom =  currentRoom.getitemsArrayList().stream().filter(Item -> input.equals(Item.getItem())).findAny().orElse(null);
+        Item checkRoom =  currentRoom.getitemsArrayList().stream().filter(Item -> input.equals(Item.getItem().toLowerCase())).findAny().orElse(null);
         if (checkRoom instanceof Weapon) {
             currentRoom.getitemsArrayList().remove(checkRoom);
             equipWeaponCheck();
