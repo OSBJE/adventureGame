@@ -150,13 +150,14 @@ public class UserInterface {
         spil.movePlayer(userChoice);
         addInformation();
     }
+
     public void attackFunction() {
-        if(spil.doIHaveWeaponEquipped()) {
-            if(spil.getRemainingShots() > 0) {
+        if (spil.doIHaveWeaponEquipped()) {
+            if (spil.getRemainingShots() > 0) {
                 spil.attackP();
                 System.out.println("DEBUG if blok på attackfunction()"); //Måske nogle player getters på weapon objects damage med printout til brugeren om hvor meget dmg osv.
 
-            }else {
+            } else {
                 System.out.println("DEBUG vi er i elseblok på attackfunction() ");
             }
         }
@@ -199,19 +200,19 @@ public class UserInterface {
             System.out.println("Your inventory is empty.");
         }
 
-        }
+    }
 
-        //-----Testing--------------------------------------------------------------------------
-        public void playerEquiped () {
+    //-----Testing--------------------------------------------------------------------------
+    public void playerEquiped() {
         System.out.println("\n you have the following weapon equiped: ");
         String equiped = spil.getPlayerEquiped();
-            System.out.println(equiped);
-        }
-
-        public void equipWeapon (String input) {
-        spil.setEquipedWeapon(input);
-        }
+        System.out.println(equiped);
     }
+
+    public void equipWeapon(String input) {
+        spil.setEquipedWeapon(input);
+    }
+
 
     public void helpCommands() { //bare for at samle sysout. Kan fjernes, hvis helt dumt.
         System.out.println("----------------------------------------------------------------");
@@ -254,5 +255,6 @@ public class UserInterface {
         }
     }
 }
+
 
 
