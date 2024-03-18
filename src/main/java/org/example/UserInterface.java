@@ -34,6 +34,8 @@ public class UserInterface {
             String firstWord = inputArray[0];
             String secondWord = inputArray[1];
             String playerInput3 = inputArray[2];
+            //System.out.println("This is firstWord: " +firstWord);
+            //System.out.println("This is secondWord: " +secondWord);
 
 
             switch (firstWord) {
@@ -57,7 +59,6 @@ public class UserInterface {
                     break;
                 }
 
-                default -> spil.movePlayer(playerInput3);
             }
 
             switch (playerInput3) {
@@ -84,7 +85,9 @@ public class UserInterface {
                     break;
 
                 }
-                default -> spil.movePlayer(playerInput3);
+                default -> playerMovement(playerInput3);
+
+
 
             }
 
