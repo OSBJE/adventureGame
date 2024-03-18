@@ -281,7 +281,7 @@ public class Player {
 
 
     public void equipWeapon (String input){
-       Item checkInventory =  playerInventory.stream().filter(Item -> input.equals(Item.getItem())).findAny().orElse(null);
+        Item checkInventory =  playerInventory.stream().filter(Item -> input.equals(Item.getItem())).findAny().orElse(null);
        if (checkInventory instanceof Weapon) {
            playerInventory.remove(checkInventory);
            equipWeaponCheck();
