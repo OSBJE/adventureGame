@@ -66,6 +66,7 @@ public class UserInterface {
                    // Enemy result = supportAttackFunctionTarget(playerInput3);
                     //attackFunctionTarget(result);
                     attackFunctionTarget(playerInput);
+                   break;
                 }
 
                 case "help" -> {
@@ -90,8 +91,14 @@ public class UserInterface {
                     playerInput3 = SENTINEL;
                     firstWord = SENTINEL;
                     break;
-
                 }
+
+                case "Blabla" -> {
+                    attackFunction();
+                    System.out.println("Does it jump in here ?");
+                    break;
+                }
+
                 default -> playerMovement(playerInput3);
 
             }
@@ -152,7 +159,7 @@ public class UserInterface {
         if (spil.doIHaveWeaponEquipped()) {
             if (spil.getRemainingShots() > 0) {
                 spil.attackP();
-                System.out.println("DEBUG if blok på attackfunction()"); //Måske nogle player getters på weapon objects damage med printout til brugeren om hvor meget dmg osv.
+                //Måske nogle player getters på weapon objects damage med printout til brugeren om hvor meget dmg osv.
 
             } else {
                 System.out.println("DEBUG vi er i elseblok på attackfunction() ");
@@ -195,6 +202,10 @@ public class UserInterface {
             }
         }
         return null;
+    }
+
+    public void sortArrayListItem(){
+        spil.getsortArrayListItem();
     }
 
     public Enemy blabla () {

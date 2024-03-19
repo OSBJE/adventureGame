@@ -25,6 +25,7 @@ public class Enemy extends Character {
 
             player.setHealthPlayer(player.getHealthPlayer()-damage);
         }
+        System.out.println("nothing equiped ?");
     }
     public void enemyDies() { // DOJ Eventuelt
         if(getHealthscore() <= 0) {
@@ -42,8 +43,5 @@ public class Enemy extends Character {
     public void setEnemyDescription(String enemyDescription) {
         this.enemyDescription = enemyDescription;
     }
-    public void looseItemByDeath(Item weaponToLoose) {
-        //kode skal skrives
 
-    }
 }

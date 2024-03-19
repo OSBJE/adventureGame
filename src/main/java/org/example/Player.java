@@ -244,14 +244,15 @@ public class Player extends Character {
     /// Player Attack action ///
     public void attackP() { // Vi angriber ud i luften. Denne handling hopper på nærmeste enemy.
         if(isAnythingEquipped()) {
-           equiped.attack();
-                    //int depleteMonsterHealth = weaponItem.getWeaponDmg()-getMonsterHealth(); Vi gemmer resultatet af våbenskade og nuværende monster health i en variabel.
+           currentRoom.sortArrayListEnemy();
+           Enemy enemy = currentRoom.getEnemyArrayList().getFirst();
+           attackEnemy(enemy);
 
-                    //setMonsterHealth(depleteMonsterHealth); Vi sætter monsterets nye health med ovenstående variabel.
-
-                    //Herfra kræver funktionen vores monster objekt(er). Logikken her er, at vi laver en settermetode på vores monstre.
-                }
-            }
+           for (Enemy enemyattack : currentRoom.getEnemyArrayList()){
+               enemyattack.attackPlayer(this);
+           }
+        }
+    }
 
     public void attackEnemy(Enemy enemy) { //DOJ Ny metode der tager enemy som input
         if(isAnythingEquipped()) { //Ændre til at lede efter valid enemy.
@@ -261,6 +262,7 @@ public class Player extends Character {
                     enemy.setHealthscore(result);
 
                     enemy.attackPlayer(this);
+                    isEnemyDead(enemy);
 
                     //int depleteMonsterHealth = weaponItem.getWeaponDmg()-getMonsterHealth(); Vi gemmer resultatet af våbenskade og nuværende monster health i en variabel.
 
@@ -271,6 +273,18 @@ public class Player extends Character {
         }
     }
 
+    public void isEnemyDead(Enemy enemy) {
+        if (enemy.getHealthscore() <= 0){
+            dropWeapon(enemy);
+            currentRoom.removeEnemyArrayList(enemy);
+        }
+    }
+
+    // get enemyWeapon.
+    public void dropWeapon(Enemy enemy) {
+        Item toDrop = enemy.getWeaponEquipt();
+        currentRoom.addItemsArrayList(toDrop);
+    }
 
 
     public int getRemainingShots() {
@@ -306,11 +320,7 @@ public class Player extends Character {
     }
 
 
-    // get enemyWeapon.
-    public void dropWeapon(Enemy enemy) {
-        enemy.getEnenmyWeapon();
 
-    }
 
     /*public void equipWeapon(String input) {
         Iterator<Item> iterator = playerInventory.iterator();
@@ -347,33 +357,6 @@ public class Player extends Character {
         String output = navnearray[1];
         return output;
     }
-
-
-    //----- Sorting algorithme.-------
-
-    /*
-public void sortEnemyArray () {
- Collections.sort(currentRoom.getitemsArrayList());
-
-
-
-        for( Item item : currentRoom.getitemsArrayList()) {
-     Weapon weaponItem = (Weapon) item;
-
-
-     System.out.println(weaponItem.getWeaponDmg());
-
- }
-
-
- currentRoom.getitemsArrayList().sort((o1, o2) -> );
-
- Weapon weaponItem = (Weapon) item:
- currentRoom.getitemsArrayList().sort(((o1, o2)
-         -> o1.get));
-
-
-} */
 
 }
 

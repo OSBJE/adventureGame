@@ -102,6 +102,10 @@ public class AdventureController {
         return player.getCurrentRoom().getEnemyArrayList();
     }
 
+    public void getsortArrayListItem () {
+        player.getCurrentRoom().altenativesortArrayListItem2();
+    }
+
     //------------------------------------------------------------------------------------
 
 

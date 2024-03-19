@@ -122,11 +122,11 @@ public class Room {
         enemyArrayList.sort(new Comparator<Enemy>() {
             @Override
             public int compare(Enemy o1, Enemy o2) {
-                return Integer.valueOf(o1.getHealthscore().compareTo(o2.getHealthscore()));
+                return o1.getHealthscore().compareTo(o2.getHealthscore());
             }
         });
     }
-
+    //------Other sorting methods I dont use ------ //
     public void sortArrayListItem () {
         itemsArrayList.sort(new Comparator<Item>() {
             @Override
@@ -141,7 +141,17 @@ public class Room {
     }
 
     public void altenativesortArrayListItem2 () {
-        itemsArrayList.stream().sorted((p1,p2) -> p1.getItem().compareTo(p2.getItem()));
-    }
+       Item temp = null;
+        for (int i = 0; i < itemsArrayList.size(); i++){
+           for (int j=i+1; j < itemsArrayList.size(); j++){
+               if(itemsArrayList.get(i).getItem().compareTo(itemsArrayList.get(j).getItem())>0){
 
+                   temp = itemsArrayList.get(i);
+                   itemsArrayList.set(i, itemsArrayList.get(j));
+                   itemsArrayList.set(j,temp);
+               }
+           }
+       }
+    }
+    //---------------------------------end of other sort methods I dont use -----------------------------//
 }
