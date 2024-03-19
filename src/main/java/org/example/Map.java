@@ -6,7 +6,7 @@ public class Map {
 
 
     private Room startRoom;
-    private Item itemsList;
+    //private Item itemsList;
     private Room room1;
     private Room room2;
     private Room room3;

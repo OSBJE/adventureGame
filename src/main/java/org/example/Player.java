@@ -13,6 +13,10 @@ public class Player extends Character {
 
     private Room currentRoom;
     private double healthPlayer;
+    ArrayList<Item> playerInventory = new ArrayList<>(); // Player variable til brug i methode //
+    Item[] equiped = new Item[1]; // equiped Weapon ////
+    //ArrayList<Item> equiped = new ArrayList<>();
+
 
     public Room getCurrentRoom() {
         return currentRoom;
@@ -35,20 +39,9 @@ public class Player extends Character {
     }
 
 
-    // Player variable til brug i methode //
-
-    ArrayList<Item> playerInventory = new ArrayList<>();
-
-
-    // equiped Weapon ////
-    Item[] equiped = new Item[1];
-
-    //ArrayList<Item> equiped = new ArrayList<>();
-
-
     //---------testing--------------------------------------------------------------------------------------------------------
 
-    public String getPlayerEquiped () {
+    public String getPlayerEquiped() {
         String equiped2 = " ";
         if (equiped[0] != null) {
             for (int i = 0; i <= equiped.length - 1; i++) {
@@ -91,39 +84,12 @@ public class Player extends Character {
     }
 
 
-    //"Method to handle String direction inputs"//
-
-    /*
-    public int playerDirection(String str) {
-        int direction = 0;
-        int lng = str.length() - 1;
-        String str2 = str.toLowerCase();
-
-        for (int i = 0; i <= lng; i++) {
-            if (str2.charAt(i) == 'n') {
-                direction = 1;
-                break;
-            } else if (str2.charAt(i) == 's') {
-                direction = 2;
-                break;
-            } else if (str2.charAt(i) == 'e') {
-                direction = 3;
-                break;
-            } else if (str2.charAt(i) == 'w') {
-                direction = 4;
-                break;
-            }
-        }
-        return direction;
-    }
-
-     */
 
 
     ///// Alternative method to handle play direction //////
 
 
-    public int playerDirection (String input){
+    public int playerDirection(String input) {
 
         final HashMap<String, Integer> WORDMAP = new HashMap<>();
 
@@ -133,7 +99,7 @@ public class Player extends Character {
         WORDMAP.put("west", 4);
 
         List<Integer> result = WORDMAP.entrySet().stream().filter(e -> e.getKey().startsWith(cleanInput(input))).map(HashMap.Entry::getValue).collect(Collectors.toList());
-        if(result.size() == 1){
+        if (result.size() == 1) {
             return result.get(0); // Det her er index. når det ikke er et array som bruger man get. Fordi det er en collection kalder man metode.
         }
         return 0;
@@ -148,8 +114,8 @@ public class Player extends Character {
 
     private static String cleanInput(String input) {
         input = input.toLowerCase();
-        if (input.startsWith("go ")){
-            input = input.substring(input.indexOf(" ")+1);
+        if (input.startsWith("go ")) {
+            input = input.substring(input.indexOf(" ") + 1);
         }
         return input;
     }
@@ -157,10 +123,10 @@ public class Player extends Character {
     //// Player item liste ////
 
 
-    public String takeItem(String chosenItem){
+    public String takeItem(String chosenItem) {
         String result = "takeNotPossible";
-        for (Item item : currentRoom.getitemsArrayList()){
-            if (item.getItem().equalsIgnoreCase(chosenItem)){
+        for (Item item : currentRoom.getitemsArrayList()) {
+            if (item.getItem().equalsIgnoreCase(chosenItem)) {
                 currentRoom.removeItemsArrayList(item);
                 playerInventory.add(item);
                 result = "takeOkay";
@@ -169,7 +135,6 @@ public class Player extends Character {
         }
         return result;
     }
-
 
 
     public String dropItem(String chosenItem) {
@@ -243,12 +208,11 @@ public class Player extends Character {
     }
 
 
-
     /// Player Attack action ///
     public void attackP() { // Vi angriber ud i luften. Denne handling hopper på nærmeste enemy.
-        if(isAnythingEquipped()) {
-            for(Item item : equiped) {
-                if(item instanceof Weapon) {
+        if (isAnythingEquipped()) {
+            for (Item item : equiped) {
+                if (item instanceof Weapon) {
                     Weapon weaponItem = (Weapon) item;
 
                     weaponItem.attack(); //Depleter vores skud i RangedWeapon
@@ -264,15 +228,16 @@ public class Player extends Character {
             }
         }
     }
+
     public void attackEnemy(Enemy enemy) { //DOJ Ny metode der tager enemy som input
-        if(isAnythingEquipped()) { //Ændre til at lede efter valid enemy.
-            for(Item item : equiped) {
-                if(item instanceof Weapon) {
+        if (isAnythingEquipped()) { //Ændre til at lede efter valid enemy.
+            for (Item item : equiped) {
+                if (item instanceof Weapon) {
                     Weapon weaponItem = (Weapon) item;
                     weaponItem.attack(); //Depleter vores skud i RangedWeapon
 
                     int damage = weaponItem.getWeaponDmg();
-                    double result = enemy.getHealthscore()-damage;
+                    double result = enemy.getHealthscore() - damage;
                     enemy.setHealthscore(result);
 
 
@@ -291,9 +256,9 @@ public class Player extends Character {
     }
 
     public int getRemainingShots() {
-        if(isAnythingEquipped()) {
-            for(Item item : equiped) {
-                if(item instanceof Weapon weaponItem ) {
+        if (isAnythingEquipped()) {
+            for (Item item : equiped) {
+                if (item instanceof Weapon weaponItem) {
                     int remainingShots = weaponItem.getWeaponShoots();
                     return remainingShots;
                 }
@@ -301,6 +266,7 @@ public class Player extends Character {
         }
         return 0;
     }
+
     public boolean isAnythingEquipped() {
         return equiped[0] != null;
     }
@@ -308,24 +274,28 @@ public class Player extends Character {
     /// Player equip item to attack with ////
 
 
-    public void equipWeapon (String input){
-                Item checkInventory =  playerInventory.stream().filter(Item -> input.equals(Item.getItem().toLowerCase())).findAny().orElse(null);
-       if (checkInventory instanceof Weapon) {
-           playerInventory.remove(checkInventory);
-           equipWeaponCheck();
-           equiped[0] = checkInventory;
-       }
-        Item checkRoom =  currentRoom.getitemsArrayList().stream().filter(Item -> input.equals(Item.getItem().toLowerCase())).findAny().orElse(null);
+    public String equipWeapon(String input) {
+        String result = "notWeapon";
+        Item checkInventory = playerInventory.stream().filter(Item -> input.equals(Item.getItem().toLowerCase())).findAny().orElse(null);
+        if (checkInventory instanceof Weapon) {
+            playerInventory.remove(checkInventory);
+            equipWeaponCheck();
+            equiped[0] = checkInventory;
+            result = "weaponOkay";
+        }
+        Item checkRoom = currentRoom.getitemsArrayList().stream().filter(Item -> input.equals(Item.getItem().toLowerCase())).findAny().orElse(null);
         if (checkRoom instanceof Weapon) {
             currentRoom.getitemsArrayList().remove(checkRoom);
             equipWeaponCheck();
             equiped[0] = checkRoom;
+            result = "weaponOkay";
         }
+        return result;
     }
 
     //---This function helps check and add back the weapon equip to player inventory.
-    public void equipWeaponCheck () {
-        if (equiped[0] != null){
+    public void equipWeaponCheck() {
+        if (equiped[0] != null) {
             playerInventory.add(equiped[0]);
         }
     }
@@ -368,6 +338,33 @@ public class Player extends Character {
 }
 
 
+//"Method to handle String direction inputs"//
+
+    /*
+    public int playerDirection(String str) {
+        int direction = 0;
+        int lng = str.length() - 1;
+        String str2 = str.toLowerCase();
+
+        for (int i = 0; i <= lng; i++) {
+            if (str2.charAt(i) == 'n') {
+                direction = 1;
+                break;
+            } else if (str2.charAt(i) == 's') {
+                direction = 2;
+                break;
+            } else if (str2.charAt(i) == 'e') {
+                direction = 3;
+                break;
+            } else if (str2.charAt(i) == 'w') {
+                direction = 4;
+                break;
+            }
+        }
+        return direction;
+    }
+
+     */
 
 
 

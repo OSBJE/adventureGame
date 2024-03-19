@@ -81,8 +81,8 @@ public class AdventureController {
         return player.getPlayerEquiped();
     }
 
-    public void setEquipedWeapon (String input) {
-        player.equipWeapon(input);
+    public String setEquipedWeapon (String input) {
+        return player.equipWeapon(input);
     }
 
     public void attackP() {
