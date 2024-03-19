@@ -197,6 +197,10 @@ public class UserInterface {
         return null;
     }
 
+    public Enemy blabla () {
+        return spil.getEnemyArrayList().getFirst();
+    }
+
     public void addInformation() {
         //MMH her vil jeg gerne have den til at udskrive noget om hvor spilleren befinder sig, og en melding, hvis vedkomende ikke kan gå den vej
         //Til dette bruger jeg lokal variable previousRoom og currentRoom

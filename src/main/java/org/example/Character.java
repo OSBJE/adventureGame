@@ -35,4 +35,10 @@ public class Character {
     public void setWeaponEquipt(Item weaponEquipt) {
         this.weaponEquipt = new Item[]{weaponEquipt};
     }
+
+    public Item getEnenmyWeapon () {
+        Item[] returnWeapon = weaponEquipt;
+        Item weapon = returnWeapon[0];
+        return weapon;
+    }
 }

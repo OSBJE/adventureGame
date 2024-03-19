@@ -15,7 +15,6 @@ public class Enemy extends Character {
     }
 
 
-
     public String getEnemyDescription() {
         return enemyDescription;
     }

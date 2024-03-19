@@ -1,11 +1,20 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Player extends Character {
+
+    // Player variable til brug i methode //
+
+    ArrayList<Item> playerInventory = new ArrayList<>();
+
+    // equiped Weapon ////
+    Weapon equiped = null;
+
 
     //*** ATTRIBUTES ***//
     // Vi skal lave en current af vores map
@@ -35,27 +44,15 @@ public class Player extends Character {
     }
 
 
-    // Player variable til brug i methode //
-
-    ArrayList<Item> playerInventory = new ArrayList<>();
-
-
-    // equiped Weapon ////
-    Item[] equiped = new Item[1];
-
-    //ArrayList<Item> equiped = new ArrayList<>();
-
 
     //---------testing--------------------------------------------------------------------------------------------------------
 
     public String getPlayerEquiped () {
         String equiped2 = " ";
-        if (equiped[0] != null) {
-            for (int i = 0; i <= equiped.length - 1; i++) {
-                equiped2 = equiped[i].toString();
+        if (equiped != null) {
+            equiped2 = equiped.toString ();
                 return equiped2;
             }
-        }
         return equiped2;
     }
 
@@ -247,34 +244,21 @@ public class Player extends Character {
     /// Player Attack action ///
     public void attackP() { // Vi angriber ud i luften. Denne handling hopper på nærmeste enemy.
         if(isAnythingEquipped()) {
-            for(Item item : equiped) {
-                if(item instanceof Weapon) {
-                    Weapon weaponItem = (Weapon) item;
-
-                    weaponItem.attack(); //Depleter vores skud i RangedWeapon
-
+           equiped.attack();
                     //int depleteMonsterHealth = weaponItem.getWeaponDmg()-getMonsterHealth(); Vi gemmer resultatet af våbenskade og nuværende monster health i en variabel.
 
                     //setMonsterHealth(depleteMonsterHealth); Vi sætter monsterets nye health med ovenstående variabel.
 
                     //Herfra kræver funktionen vores monster objekt(er). Logikken her er, at vi laver en settermetode på vores monstre.
-
-                    break;
                 }
             }
-        }
-    }
+
     public void attackEnemy(Enemy enemy) { //DOJ Ny metode der tager enemy som input
         if(isAnythingEquipped()) { //Ændre til at lede efter valid enemy.
-            for(Item item : equiped) {
-                if(item instanceof Weapon) {
-                    Weapon weaponItem = (Weapon) item;
-                    weaponItem.attack(); //Depleter vores skud i RangedWeapon
-
-                    int damage = weaponItem.getWeaponDmg();
+                    equiped.attack(); //Depleter vores skud i RangedWeapon
+                    int damage = equiped.getWeaponDmg();
                     double result = enemy.getHealthscore()-damage;
                     enemy.setHealthscore(result);
-
 
                     enemy.attackPlayer(this);
 
@@ -284,50 +268,48 @@ public class Player extends Character {
 
                     //Herfra kræver funktionen vores monster objekt(er). Logikken her er, at vi laver en settermetode på vores monstre.
 
-                    break;
-                }
-            }
         }
     }
 
+
+
     public int getRemainingShots() {
         if(isAnythingEquipped()) {
-            for(Item item : equiped) {
-                if(item instanceof Weapon weaponItem ) {
-                    int remainingShots = weaponItem.getWeaponShoots();
-                    return remainingShots;
+            int remainingShots = equiped.getWeaponShoots();
+                return remainingShots;
                 }
-            }
-        }
         return 0;
     }
+
+
     public boolean isAnythingEquipped() {
-        return equiped[0] != null;
+        return equiped != null;
     }
 
     /// Player equip item to attack with ////
 
 
     public void equipWeapon (String input){
-                Item checkInventory =  playerInventory.stream().filter(Item -> input.equals(Item.getItem().toLowerCase())).findAny().orElse(null);
+        Item checkInventory =  playerInventory.stream().filter(Item -> input.equals(Item.getItem().toLowerCase())).findAny().orElse(null);
        if (checkInventory instanceof Weapon) {
            playerInventory.remove(checkInventory);
            equipWeaponCheck();
-           equiped[0] = checkInventory;
+           equiped = (Weapon) checkInventory;
        }
-        Item checkRoom =  currentRoom.getitemsArrayList().stream().filter(Item -> input.equals(Item.getItem().toLowerCase())).findAny().orElse(null);
-        if (checkRoom instanceof Weapon) {
-            currentRoom.getitemsArrayList().remove(checkRoom);
-            equipWeaponCheck();
-            equiped[0] = checkRoom;
-        }
     }
 
     //---This function helps check and add back the weapon equip to player inventory.
     public void equipWeaponCheck () {
-        if (equiped[0] != null){
-            playerInventory.add(equiped[0]);
+        if (equiped != null){
+            playerInventory.add(equiped);
         }
+    }
+
+
+    // get enemyWeapon.
+    public void dropWeapon(Enemy enemy) {
+        enemy.getEnenmyWeapon();
+
     }
 
     /*public void equipWeapon(String input) {
@@ -365,6 +347,34 @@ public class Player extends Character {
         String output = navnearray[1];
         return output;
     }
+
+
+    //----- Sorting algorithme.-------
+
+    /*
+public void sortEnemyArray () {
+ Collections.sort(currentRoom.getitemsArrayList());
+
+
+
+        for( Item item : currentRoom.getitemsArrayList()) {
+     Weapon weaponItem = (Weapon) item;
+
+
+     System.out.println(weaponItem.getWeaponDmg());
+
+ }
+
+
+ currentRoom.getitemsArrayList().sort((o1, o2) -> );
+
+ Weapon weaponItem = (Weapon) item:
+ currentRoom.getitemsArrayList().sort(((o1, o2)
+         -> o1.get));
+
+
+} */
+
 }
 
 
