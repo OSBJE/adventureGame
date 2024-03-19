@@ -9,6 +9,7 @@ public class AdventureController {
 
     private Map map;
     private Player player;
+    private Enemy enemy;
 
 
 
@@ -92,6 +93,13 @@ public class AdventureController {
     }
     public int getRemainingShots() {
         return player.getRemainingShots();
+    }
+    public void attackEnemy(Enemy enemy) {
+        player.attackEnemy(enemy);
+    }
+
+    public ArrayList<Enemy> getEnemyArrayList() {
+        return player.getCurrentRoom().getEnemyArrayList();
     }
 
     //------------------------------------------------------------------------------------

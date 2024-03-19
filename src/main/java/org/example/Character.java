@@ -23,6 +23,7 @@ public class Character {
         return weaponEquipt;
     }
 
+
     public void setName(String name) {
         this.name = name;
     }
@@ -31,7 +32,7 @@ public class Character {
         this.healthscore = healthscore;
     }
 
-    public void setWeaponEquipt(Item[] weaponEquipt) {
-        this.weaponEquipt = weaponEquipt;
+    public void setWeaponEquipt(Item weaponEquipt) {
+        this.weaponEquipt = new Item[]{weaponEquipt};
     }
 }

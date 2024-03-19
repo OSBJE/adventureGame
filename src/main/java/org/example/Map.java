@@ -106,6 +106,10 @@ public class Map {
         Item itemSword = new MeleeWeapon("Sword", "It's a big sword", 10, 1000);
         Item itemAxe = new MeleeWeapon("Axe", "Its name is gimli", 20, 1000);
         Item itemWashboard = new RangedWeapon("Washboard", "Remember to do your laundy", 50, 2);
+        //Item enemyItem = new MeleeWeapon("Rapier", "An elegant rapier.", 5, 1000);
+        Enemy enemy1 = new Enemy("Bob", 50, "Jose Mourinho",new MeleeWeapon("Rapier", "", 10, 1000) );
+        //enemy1.setWeaponEquipt(itemAxe); //DOJ Se IntelliJ fejl.
+
 
 
         room3.addItemsArrayList(itemKnife);
@@ -116,6 +120,8 @@ public class Map {
         room2.addItemsArrayList(itemMeat);
         room4.addItemsArrayList(itemBanana);
         room7.addItemsArrayList(itemProteinBar);
+
+        room2.addEnemyArrayList(enemy1);
     }
 
 

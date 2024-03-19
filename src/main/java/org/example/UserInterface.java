@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -61,7 +62,10 @@ public class UserInterface {
                 }
 
                 case "attack" -> {
-                    attackFunction();
+                    //attackFunction();
+                   // Enemy result = supportAttackFunctionTarget(playerInput3);
+                    //attackFunctionTarget(result);
+                    attackFunctionTarget(playerInput);
                 }
 
                 case "help" -> {
@@ -144,7 +148,7 @@ public class UserInterface {
         addInformation();
     }
 
-    public void attackFunction() {
+    public void attackFunction() { //Til attacks ud i luften, uden enemy parameter. Implementer sammen med attack branch i switch
         if (spil.doIHaveWeaponEquipped()) {
             if (spil.getRemainingShots() > 0) {
                 spil.attackP();
@@ -155,6 +159,42 @@ public class UserInterface {
             }
         }
 
+    }
+    public void attackFunctionTarget(String playerInput) {//Til attacks ud med et target, MED enemy parameter. Implementer sammen med attack branch i switch
+
+        String[] inputArray = playerInputManipulation(playerInput);
+        String firstWord = inputArray[0];
+        String secondWord = inputArray[1];
+        String thirdWord = inputArray[2];
+
+        String enemyName = secondWord; // "attack" + enemy navn
+        System.out.println("You chose to attack: " + enemyName);
+
+        if (spil.doIHaveWeaponEquipped()) {
+            if (spil.getRemainingShots() > 0) {
+                Enemy target = supportAttackFunctionTarget(enemyName); //Vi returner en enemy baseret på String input.
+                if (target != null) {
+                    spil.attackEnemy(target);
+                    System.out.println("Attacked " + target.getName());
+                    System.out.println("Current HP"+target.getHealthscore());
+                } else {
+                    System.out.println("No enemy with the name " + enemyName + " found.");
+                }
+            } else {
+                System.out.println("You are out of ammo.");
+            }
+        } else {
+            System.out.println("No weapon is equipped.");
+        }
+    }
+    public Enemy supportAttackFunctionTarget(String input) { // Vi leder efter Enemy objekter baseret på stringinput.
+        ArrayList<Enemy> enemies = spil.getEnemyArrayList();
+        for (Enemy enemy : enemies) {
+            if (enemy.getName().equalsIgnoreCase(input)) {
+                return enemy;
+            }
+        }
+        return null;
     }
 
     public void addInformation() {
@@ -169,6 +209,7 @@ public class UserInterface {
             System.out.println(spil.getCurrentRoomDescription());
             System.out.println(" ");
             displayItemsInRoom();
+            displayEnemyInRoom();
             System.out.println(" ");
         }
         previousRoom = currentRoom;
@@ -182,6 +223,16 @@ public class UserInterface {
             }
         } else {
             System.out.println("You see nothing of use to you in this room.");
+        }
+    }
+    public void displayEnemyInRoom() { //Metode til at displaye items i room. Items bliver foreløbigt sat i buildMap().
+        if (!spil.getEnemyArrayList().isEmpty()) { //Hvis arraylisten IKKE er tom
+            System.out.println("You spot enemies in this room: ");
+            for (Enemy enemy : spil.getEnemyArrayList()) { //For each loop itererer gennem vores itemsArrayList for at finde Items, der er forbundet med det enkelte rum.
+                System.out.println(enemy.toString());
+            }
+        } else {
+            System.out.println("You see no enemies in this room.");
         }
     }
 

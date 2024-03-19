@@ -15,6 +15,8 @@ public class Room {
     private String roomName;  // roomNavn
     private String roomDescription;   // Skal indhold hvilke "Rooms" den er konktet til
     private ArrayList<Item> itemsArrayList = new ArrayList<>();
+
+    private ArrayList<Enemy> enemyArrayList = new ArrayList<>();
     private Room roomDoorNorth;
     private Room roomDoorSouth;
     private Room roomDoorEast;
@@ -104,4 +106,14 @@ public class Room {
         itemsArrayList.remove(Item);
     }
 
+    public void addEnemyArrayList(Enemy enemy){
+        enemyArrayList.add(enemy);
+    }
+
+    public void removeEnemyArrayList(Enemy enemy) {
+        enemyArrayList.remove(enemy);
+    }
+    public ArrayList<Enemy> getEnemyArrayList() {
+        return enemyArrayList;
+    }
 }

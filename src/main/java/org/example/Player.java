@@ -245,24 +245,51 @@ public class Player extends Character {
 
 
     /// Player Attack action ///
-    public void attackP() {
+    public void attackP() { // Vi angriber ud i luften. Denne handling hopper på nærmeste enemy.
         if(isAnythingEquipped()) {
             for(Item item : equiped) {
                 if(item instanceof Weapon) {
                     Weapon weaponItem = (Weapon) item;
+
                     weaponItem.attack(); //Depleter vores skud i RangedWeapon
+
                     //int depleteMonsterHealth = weaponItem.getWeaponDmg()-getMonsterHealth(); Vi gemmer resultatet af våbenskade og nuværende monster health i en variabel.
 
                     //setMonsterHealth(depleteMonsterHealth); Vi sætter monsterets nye health med ovenstående variabel.
 
                     //Herfra kræver funktionen vores monster objekt(er). Logikken her er, at vi laver en settermetode på vores monstre.
 
+                    break;
+                }
+            }
+        }
+    }
+    public void attackEnemy(Enemy enemy) { //DOJ Ny metode der tager enemy som input
+        if(isAnythingEquipped()) { //Ændre til at lede efter valid enemy.
+            for(Item item : equiped) {
+                if(item instanceof Weapon) {
+                    Weapon weaponItem = (Weapon) item;
+                    weaponItem.attack(); //Depleter vores skud i RangedWeapon
+
+                    int damage = weaponItem.getWeaponDmg();
+                    double result = enemy.getHealthscore()-damage;
+                    enemy.setHealthscore(result);
+
+
+                    enemy.attackPlayer(this);
+
+                    //int depleteMonsterHealth = weaponItem.getWeaponDmg()-getMonsterHealth(); Vi gemmer resultatet af våbenskade og nuværende monster health i en variabel.
+
+                    //setMonsterHealth(depleteMonsterHealth); Vi sætter monsterets nye health med ovenstående variabel.
+
+                    //Herfra kræver funktionen vores monster objekt(er). Logikken her er, at vi laver en settermetode på vores monstre.
 
                     break;
                 }
             }
         }
     }
+
     public int getRemainingShots() {
         if(isAnythingEquipped()) {
             for(Item item : equiped) {
