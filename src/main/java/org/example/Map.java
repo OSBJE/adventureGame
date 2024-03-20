@@ -114,11 +114,11 @@ public class Map {
         Item enemyItem3 = new RangedWeapon("Handgranade", "Its very holy", 25 , 1);
 
         //Enemies with items
-        Enemy enemy1 = new Enemy("Bob", 50, "Jose Mourinho", new MeleeWeapon("Rapier", "", 10, 1000)); //new MeleeWeapon("Rapier", "", 10, 1000)
+        Enemy enemy1 = new Enemy("Bob", 50, "Jose Mourinho", new MeleeWeapon("Rapier", "", 10, 1000), room2); //new MeleeWeapon("Rapier", "", 10, 1000)
         enemy1.setWeaponEquipt(enemyItem1);// really wird but only this works !
-        Enemy enemy2 = new Enemy("Legolas", 25, "only 42", new MeleeWeapon("Rapier", "", 10, 1000));
+        Enemy enemy2 = new Enemy("Legolas", 25, "only 42", new MeleeWeapon("Rapier", "", 10, 1000), room4);
         enemy2.setWeaponEquipt(enemyItem2);
-        Enemy enemy3 = new Enemy("Rabbit", 10, "get the holy handgrande", new MeleeWeapon("Rapier", "", 10, 1000));
+        Enemy enemy3 = new Enemy("Rabbit", 10, "get the holy handgrande", new MeleeWeapon("Rapier", "", 10, 1000),room4);
         enemy3.setWeaponEquipt(enemyItem3);
         // enemy1.setWeaponEquipt((Weapon) itemAxe); //DOJ Se IntelliJ fejl. fix weapon not equiped to enemy.
 

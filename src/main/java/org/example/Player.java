@@ -259,7 +259,7 @@ public class Player extends Character {
             enemy.setHealthscore(result);
 
             enemy.attackPlayer(this);
-            isEnemyDead(enemy);
+            enemy.enemyDies(enemy);
 
             //int depleteMonsterHealth = weaponItem.getWeaponDmg()-getMonsterHealth(); Vi gemmer resultatet af våbenskade og nuværende monster health i en variabel.
 
@@ -270,18 +270,6 @@ public class Player extends Character {
         }
     }
 
-    public void isEnemyDead(Enemy enemy) {
-        if (enemy.getHealthscore() <= 0){
-            dropWeapon(enemy);
-            currentRoom.removeEnemyArrayList(enemy);
-        }
-    }
-
-    // get enemyWeapon.
-    public void dropWeapon(Enemy enemy) {
-        Item toDrop = enemy.getWeaponEquipt();
-        currentRoom.addItemsArrayList(toDrop);
-    }
 
 
     public int getRemainingShots() {
@@ -347,6 +335,20 @@ public class Player extends Character {
 
 
     /// overstående metoder har vi fået fra Lucas nedstående virker ////
+
+    /*
+    public void isEnemyDead(Enemy enemy) {
+        if (enemy.getHealthscore() <= 0){
+            dropWeapon(enemy);
+            currentRoom.removeEnemyArrayList(enemy);
+        }
+    }
+
+    // get enemyWeapon.
+    public void dropWeapon(Enemy enemy) {
+        Item toDrop = enemy.getWeaponEquipt();
+        currentRoom.addItemsArrayList(toDrop);
+    }*/
 
 
     public String cleanItemInput(String input) {

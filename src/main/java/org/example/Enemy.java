@@ -6,12 +6,14 @@ public class Enemy extends Character {
 
     private String enemyDescription;
     private Weapon equippedWeapon;
+    private Room room;
 
 
-    public Enemy(String name, double healthscore, String description, Weapon weapon) {
+    public Enemy(String name, double healthscore, String description, Weapon weapon, Room room) {
         super(name, healthscore);
         this.enemyDescription = description;
         this.equippedWeapon = weapon;
+        this.room = room;
     }
 
 
@@ -27,14 +29,18 @@ public class Enemy extends Character {
         }
         System.out.println("nothing equiped ?");
     }
-    public void enemyDies() { // DOJ Eventuelt
-        if(getHealthscore() <= 0) {
-            System.out.println("DEBUG enemy dør");
-            //Skal connectes til room for drop våben?
-
-
+    public void enemyDies(Enemy enemy) { // DOJ Eventuelt
+        if (getHealthscore() <= 0){
+            dropWeapon();
+            room.getEnemyArrayList().remove(enemy);
         }
     }
+
+    public void dropWeapon() {
+        Item toDrop = getWeaponEquipt();
+        room.addItemsArrayList(toDrop);
+    }
+
     @Override
     public String toString() {
         return "\n" + "Enemy: " + getName() + " Enemy description: " + enemyDescription;
