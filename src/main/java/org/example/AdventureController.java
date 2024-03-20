@@ -85,8 +85,8 @@ public class AdventureController {
         return player.equipWeapon(input);
     }
 
-    public void attackP() {
-        player.attackP();
+    public void attackRandom() {
+        player.attackRandom();
     }
     public boolean doIHaveWeaponEquipped() {
         return player.isAnythingEquipped();

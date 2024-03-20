@@ -18,14 +18,12 @@ public class Player extends Character {
     private double healthPlayer;
 
 
-
     // ***************** Constructor *********************************************** ///
     public Player(Room room, double healthPlayer, String name, double healthScore) {
         super(name, healthScore);
         currentRoom = room;
         this.healthPlayer = healthPlayer; //Health angives ved skabelsen af playerobjekt. Dette kan ses i Controller.
     }
-
 
 
     /// ************************* Getter methods **********************************////
@@ -37,10 +35,10 @@ public class Player extends Character {
         return currentRoom;
     }
 
-    public String getPlayerEquiped () {
+    public String getPlayerEquiped() {
         String equiped2 = " ";
         if (equiped != null) {
-            equiped2 = equiped.toString ();
+            equiped2 = equiped.toString();
             return equiped2;
         }
         return equiped2;
@@ -57,7 +55,7 @@ public class Player extends Character {
 
     // --- method to UI navigating shots --- //
     public int getRemainingShots() {
-        if(isAnythingEquipped()) {
+        if (isAnythingEquipped()) {
             int remainingShots = equiped.getWeaponShoots();
             return remainingShots;
         }
@@ -72,7 +70,7 @@ public class Player extends Character {
 
     /// *********************** Player navigation **********************************////
 
-   // ---Vælger hvilket room player går ind i ---//
+    // ---Vælger hvilket room player går ind i ---//
     public void movePlayer(int compass) {
         switch (compass) {
             case 1: // North room
@@ -99,7 +97,7 @@ public class Player extends Character {
     }
 
     // --- Method to handle String direction inputs --- //
-    public int playerDirection (String input){
+    public int playerDirection(String input) {
 
         final HashMap<String, Integer> WORDMAP = new HashMap<>();
 
@@ -109,7 +107,7 @@ public class Player extends Character {
         WORDMAP.put("west", 4);
 
         List<Integer> result = WORDMAP.entrySet().stream().filter(e -> e.getKey().startsWith(cleanInput(input))).map(HashMap.Entry::getValue).collect(Collectors.toList());
-        if(result.size() == 1){
+        if (result.size() == 1) {
             return result.get(0); // Det her er index. når det ikke er et array som bruger man get. Fordi det er en collection kalder man metode.
         }
         return 0;
@@ -125,8 +123,8 @@ public class Player extends Character {
     // --- Helper til navigations input ---//
     private static String cleanInput(String input) {
         input = input.toLowerCase();
-        if (input.startsWith("go ")){
-            input = input.substring(input.indexOf(" ")+1);
+        if (input.startsWith("go ")) {
+            input = input.substring(input.indexOf(" ") + 1);
         }
         return input;
     }
@@ -134,10 +132,10 @@ public class Player extends Character {
     /// ******************* Player inventory management and equip functions *************////
 
     // --- method to take item ---//
-    public String takeItem(String chosenItem){
+    public String takeItem(String chosenItem) {
         String result = "takeNotPossible";
-        for (Item item : currentRoom.getitemsArrayList()){
-            if (item.getItem().equalsIgnoreCase(chosenItem)){
+        for (Item item : currentRoom.getitemsArrayList()) {
+            if (item.getItem().equalsIgnoreCase(chosenItem)) {
                 currentRoom.removeItemsArrayList(item);
                 playerInventory.add(item);
                 result = "takeOkay";
@@ -162,20 +160,21 @@ public class Player extends Character {
     }
 
     // --- method to equip item from inventory --- //
-    public String equipWeapon (String input){
+    public String equipWeapon(String input) {
         String result = "notWeapon";
-        Item checkInventory =  playerInventory.stream().filter(Item -> input.equals(Item.getItem().toLowerCase())).findAny().orElse(null);
+        Item checkInventory = playerInventory.stream().filter(Item -> input.equals(Item.getItem().toLowerCase())).findAny().orElse(null);
         if (checkInventory instanceof Weapon) {
             playerInventory.remove(checkInventory);
             equipWeaponCheck();
             equiped = (Weapon) checkInventory;
             result = "weaponOkay";
-        } return result;
+        }
+        return result;
     }
 
     // --- helper method to unequip weapon --- //
-    public void equipWeaponCheck () {
-        if (equiped != null){
+    public void equipWeaponCheck() {
+        if (equiped != null) {
             playerInventory.add(equiped);
         }
     }
@@ -233,33 +232,31 @@ public class Player extends Character {
 
 
     // --- Player Attack random enemy --- //
-    public void attackP() { // Vi angriber ud i luften. Denne handling hopper på nærmeste enemy.
-        if(isAnythingEquipped()) {
-           currentRoom.sortArrayListEnemy();
-           Enemy enemy = currentRoom.getEnemyArrayList().getFirst();
-           attackEnemy(enemy);
+    public void attackRandom() { // Vi angriber ud i luften. Denne handling hopper på nærmeste enemy.
+            currentRoom.sortArrayListEnemy();
+            Enemy enemy = currentRoom.getEnemyArrayList().getFirst();
+            attackEnemy(enemy);
 
-        }
+
     }
 
     // --- Player Attack specific enemy  --- //
     public void attackEnemy(Enemy enemy) { //DOJ Ny metode der tager enemy som input
-        if(isAnythingEquipped()) { //Ændre til at lede efter valid enemy.
-            equiped.attack(); //Depleter vores skud i RangedWeapon
-            int damage = equiped.getWeaponDmg();
-            double result = enemy.getHealthscore()-damage;
-            enemy.setHealthscore(result);
+        equiped.attack(); //Depleter vores skud i RangedWeapon
+        int damage = equiped.getWeaponDmg();
+        double result = enemy.getHealthscore() - damage;
+        enemy.setHealthscore(result);
 
-            enemy.attackPlayer(this);
-            enemy.enemyDies(enemy);
+        enemy.attackPlayer(this);
+        enemy.enemyDies(enemy);
 
-            //int depleteMonsterHealth = weaponItem.getWeaponDmg()-getMonsterHealth(); Vi gemmer resultatet af våbenskade og nuværende monster health i en variabel.
+        //int depleteMonsterHealth = weaponItem.getWeaponDmg()-getMonsterHealth(); Vi gemmer resultatet af våbenskade og nuværende monster health i en variabel.
 
-            //setMonsterHealth(depleteMonsterHealth); Vi sætter monsterets nye health med ovenstående variabel.
+        //setMonsterHealth(depleteMonsterHealth); Vi sætter monsterets nye health med ovenstående variabel.
 
-            //Herfra kræver funktionen vores monster objekt(er). Logikken her er, at vi laver en settermetode på vores monstre.
+        //Herfra kræver funktionen vores monster objekt(er). Logikken her er, at vi laver en settermetode på vores monstre.
 
-        }
+
     }
 
     // --- helper method to check equiped weapon --- // ----> might recode and delete
