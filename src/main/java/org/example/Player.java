@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Player extends Character {
+public class Player {
 
 
     ///********** Player inventory and equiped weapon slot holders *************////////
@@ -20,8 +20,7 @@ public class Player extends Character {
 
 
     // ***************** Constructor *********************************************** ///
-    public Player(Room room, double healthPlayer, String name, double healthScore) {
-        super(name, healthScore);
+    public Player(Room room, double healthPlayer) {
         currentRoom = room;
         this.healthPlayer = healthPlayer; //Health angives ved skabelsen af playerobjekt. Dette kan ses i Controller.
     }
