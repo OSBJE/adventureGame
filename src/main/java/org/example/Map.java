@@ -1,12 +1,9 @@
 package org.example;
 
 public class Map {
-    //*** ATTRIBUTES ***//
+    //****************** ATTRIBUTES **************************************************//
     // Et kort af "Rooms" har et Room, som det laves på baggrund af.
-
-
     private Room startRoom;
-    //private Item itemsList;
     private Room room1;
     private Room room2;
     private Room room3;
@@ -18,7 +15,7 @@ public class Map {
     private Room room9;
 
 
-    //*** Constructor *** //
+    // ***************** Constructor *********************************************** ///
     // Når et spil startes, kalder den sin metode buildGame.
     // kald metoden i constructor
 
@@ -31,6 +28,16 @@ public class Map {
     // Nedståden metode bygger vores "rooms map"
 
 
+    /// ************************* Getter methods **********************************////
+
+    // --- method to get player started --- //
+    public Room getFirstRoom() {
+        return startRoom;
+    }
+
+
+    /// *********************** Map construction **********************************////
+    // --- build map opskrift ---//
     public void buildMap() {
         // vi starter med at lave 9 room objekter, et som repræsenterer hvert room i vores spil
         //
@@ -87,16 +94,12 @@ public class Map {
 
         startRoom = room1;
         buildAndPlaceItems();
+        buildAndPlaceEnemies();
 
     }
 
-    public Room getFirstRoom() {
-        return startRoom;
-    }
-
-
+    // --- Helper method to fill map --- //
     public void buildAndPlaceItems() {
-
 
         Food itemApple = new Food("Apple", "from snowwhite", -15, true);
         Food itemMeat = new Food("Meat", "from cow", 25, false);
@@ -107,23 +110,6 @@ public class Map {
         Item itemAxe = new MeleeWeapon("Axe", "Its name is gimli", 25, 1000);
         Item itemWashboard = new RangedWeapon("Washboard", "Remember to do your laundy", 50, 2);
 
-
-        //Monster Items
-        Item enemyItem1 = new MeleeWeapon("Rapier", "An elegant rapier.", 5, 1000);
-        Item enemyItem2 = new RangedWeapon("Bow", "Sweet jesus is big", 10 , 2 );
-        Item enemyItem3 = new RangedWeapon("Handgranade", "Its very holy", 25 , 1);
-
-        //Enemies with items
-        Enemy enemy1 = new Enemy("Bob", 50, "Jose Mourinho", new MeleeWeapon("Rapier", "", 10, 1000), room2); //new MeleeWeapon("Rapier", "", 10, 1000)
-        enemy1.setWeaponEquipt(enemyItem1);// really wird but only this works !
-        Enemy enemy2 = new Enemy("Legolas", 25, "only 42", new MeleeWeapon("Rapier", "", 10, 1000), room4);
-        enemy2.setWeaponEquipt(enemyItem2);
-        Enemy enemy3 = new Enemy("Rabbit", 10, "get the holy handgrande", new MeleeWeapon("Rapier", "", 10, 1000),room4);
-        enemy3.setWeaponEquipt(enemyItem3);
-        // enemy1.setWeaponEquipt((Weapon) itemAxe); //DOJ Se IntelliJ fejl. fix weapon not equiped to enemy.
-
-
-
         room3.addItemsArrayList(itemKnife);
         room3.addItemsArrayList(itemSword);
         room3.addItemsArrayList(itemAxe);
@@ -133,10 +119,26 @@ public class Map {
         room4.addItemsArrayList(itemBanana);
         room7.addItemsArrayList(itemProteinBar);
 
+
+    }
+
+    public void buildAndPlaceEnemies() {
+        //Monster Items
+        Item enemyItem1 = new MeleeWeapon("Rapier", "An elegant rapier.", 5, 1000);
+        Item enemyItem2 = new RangedWeapon("Bow", "Sweet jesus is big", 10, 2);
+        Item enemyItem3 = new RangedWeapon("Handgranade", "Its very holy", 25, 1);
+
+        //Enemies with items
+        Enemy enemy1 = new Enemy("Bob", 50, "Jose Mourinho", room2, (Weapon) enemyItem1); //new MeleeWeapon("Rapier", "", 10, 1000)
+        enemy1.setWeaponEquipt(enemyItem1);// really wird but only this works !
+        Enemy enemy2 = new Enemy("Legolas", 25, "only 42", room4, (Weapon) enemyItem2);
+        enemy2.setWeaponEquipt(enemyItem2);
+        Enemy enemy3 = new Enemy("Rabbit", 10, "get the holy handgrande", room4, (Weapon) enemyItem3);
+        enemy3.setWeaponEquipt(enemyItem3);
+        // enemy1.setWeaponEquipt((Weapon) itemAxe); //DOJ
+
         room2.addEnemyArrayList(enemy1);
         room4.addEnemyArrayList(enemy2);
         room4.addEnemyArrayList(enemy3);
     }
-
-
 }

@@ -2,19 +2,16 @@ package org.example;
 
 public class RangedWeapon extends Weapon {
 
+    //****************** ATTRIBUTES **************************************************//
+    // Arv fra Weapon
 
+
+    // ***************** Constructor *********************************************** ///
     public RangedWeapon(String item, String itemDescription, int weaponDmg, int weaponShoots) {
         super(item, itemDescription, weaponDmg, weaponShoots);
     }
 
-    @Override
-    public void attack() {
-        int weaponDMG =  getWeaponDmg();
-        int remainingShots = getWeaponShoots() -1;
-        setWeaponShoots(remainingShots);
-
-    }
-
+    /// ************************* Getter methods **********************************////
     @Override
     public String toString() {
         return "\n" + "Item: " + getItem() +
@@ -24,6 +21,13 @@ public class RangedWeapon extends Weapon {
 
 
 
+    }
+
+    //*************************** Method to manage shoots ****************************////
+    @Override
+    public void attack() { // ---> rename
+        int remainingShots = getWeaponShoots() -1;
+        setWeaponShoots(remainingShots);
     }
 
 }

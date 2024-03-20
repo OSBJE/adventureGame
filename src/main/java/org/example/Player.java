@@ -1,67 +1,78 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Player extends Character {
 
-    // Player variable til brug i methode //
 
+    ///********** Player inventory and equiped weapon slot holders *************////////
     ArrayList<Item> playerInventory = new ArrayList<>();
-
-    // equiped Weapon ////
     Weapon equiped = null;
 
 
-    //*** ATTRIBUTES ***//
-    // Vi skal lave en current af vores map
-
-
+    //****************** ATTRIBUTES **************************************************//
     private Room currentRoom;
     private double healthPlayer;
 
-    public Room getCurrentRoom() {
-        return currentRoom;
-    }
 
 
-    // Constructor ///
+    // ***************** Constructor *********************************************** ///
     public Player(Room room, double healthPlayer, String name, double healthScore) {
         super(name, healthScore);
         currentRoom = room;
         this.healthPlayer = healthPlayer; //Health angives ved skabelsen af playerobjekt. Dette kan ses i Controller.
     }
 
+
+
+    /// ************************* Getter methods **********************************////
     public double getHealthPlayer() { //hente playerHealth
         return healthPlayer;
     }
 
-    public void setHealthPlayer(double healthPlayer) { //setter til damage eller healthregain  fra indtagelse af food.
-        this.healthPlayer = healthPlayer; //Health angives ved skabelsen af playerobjekt. Dette kan ses i Controller.
+    public Room getCurrentRoom() {
+        return currentRoom;
     }
-
-
-
-    //---------testing--------------------------------------------------------------------------------------------------------
 
     public String getPlayerEquiped () {
         String equiped2 = " ";
         if (equiped != null) {
             equiped2 = equiped.toString ();
-                return equiped2;
-            }
+            return equiped2;
+        }
         return equiped2;
     }
 
+    // --- Method to get inventory --- //
+    public String getPlayerInventory() {
+        String playerInventoryList = "";
+        for (int i = 0; i <= playerInventory.size() - 1; i++) {
+            playerInventoryList += playerInventory.get(i).toString();
+        }
+        return playerInventoryList;
+    }
 
-    //------------------------------------------------------------------------------------------------------------------------
+    // --- method to UI navigating shots --- //
+    public int getRemainingShots() {
+        if(isAnythingEquipped()) {
+            int remainingShots = equiped.getWeaponShoots();
+            return remainingShots;
+        }
+        return 0;
+    }
 
-    // Det her er vores navigator (Compass) så vi kan gå rundt i vores spil //
+    /// ************************* Setter methods **********************************////
+    public void setHealthPlayer(double healthPlayer) { //setter til damage eller healthregain  fra indtagelse af food.
+        this.healthPlayer = healthPlayer; //Health angives ved skabelsen af playerobjekt. Dette kan ses i Controller.
+    }
 
 
+    /// *********************** Player navigation **********************************////
+
+   // ---Vælger hvilket room player går ind i ---//
     public void movePlayer(int compass) {
         switch (compass) {
             case 1: // North room
@@ -87,39 +98,7 @@ public class Player extends Character {
         }
     }
 
-
-    //"Method to handle String direction inputs"//
-
-    /*
-    public int playerDirection(String str) {
-        int direction = 0;
-        int lng = str.length() - 1;
-        String str2 = str.toLowerCase();
-
-        for (int i = 0; i <= lng; i++) {
-            if (str2.charAt(i) == 'n') {
-                direction = 1;
-                break;
-            } else if (str2.charAt(i) == 's') {
-                direction = 2;
-                break;
-            } else if (str2.charAt(i) == 'e') {
-                direction = 3;
-                break;
-            } else if (str2.charAt(i) == 'w') {
-                direction = 4;
-                break;
-            }
-        }
-        return direction;
-    }
-
-     */
-
-
-    ///// Alternative method to handle play direction //////
-
-
+    // --- Method to handle String direction inputs --- //
     public int playerDirection (String input){
 
         final HashMap<String, Integer> WORDMAP = new HashMap<>();
@@ -143,6 +122,7 @@ public class Player extends Character {
         // collect(Collectors.toList()) det er hjælpe class som samler resultatet. Den samler det et list.
     }
 
+    // --- Helper til navigations input ---//
     private static String cleanInput(String input) {
         input = input.toLowerCase();
         if (input.startsWith("go ")){
@@ -151,9 +131,9 @@ public class Player extends Character {
         return input;
     }
 
-    //// Player item liste ////
+    /// ******************* Player inventory management and equip functions *************////
 
-
+    // --- method to take item ---//
     public String takeItem(String chosenItem){
         String result = "takeNotPossible";
         for (Item item : currentRoom.getitemsArrayList()){
@@ -167,8 +147,7 @@ public class Player extends Character {
         return result;
     }
 
-
-
+    // --- method to drop item ---//
     public String dropItem(String chosenItem) {
         String result = "dropNotPossible";
         for (Item item : playerInventory) {
@@ -182,19 +161,27 @@ public class Player extends Character {
         return result;
     }
 
-    public String getPlayerInventory() {
-        String playerInventoryList = "";
-        for (int i = 0; i <= playerInventory.size() - 1; i++) {
-            playerInventoryList += playerInventory.get(i).toString();
+    // --- method to equip item from inventory --- //
+    public void equipWeapon (String input){
+        Item checkInventory =  playerInventory.stream().filter(Item -> input.equals(Item.getItem().toLowerCase())).findAny().orElse(null);
+        if (checkInventory instanceof Weapon) {
+            playerInventory.remove(checkInventory);
+            equipWeaponCheck();
+            equiped = (Weapon) checkInventory;
         }
-        return playerInventoryList;
     }
 
+    // --- helper method to unequip weapon --- //
+    public void equipWeaponCheck () {
+        if (equiped != null){
+            playerInventory.add(equiped);
+        }
+    }
 
-    ////************** Player eat Items ************************/////////
+    ///*************************** Player eat Items **************************************////
 
 
-    // metode der checker om det kan spises //
+    // --- metode der checker om det kan spises --- //
     public String playerEatsFood(String input) {
 
         ArrayList<Item> itemsToCheck = new ArrayList<>();
@@ -240,8 +227,10 @@ public class Player extends Character {
     }
 
 
+    ///*************************** Player combat management ********************************////
 
-    /// Player Attack action ///
+
+    // --- Player Attack random enemy --- //
     public void attackP() { // Vi angriber ud i luften. Denne handling hopper på nærmeste enemy.
         if(isAnythingEquipped()) {
            currentRoom.sortArrayListEnemy();
@@ -251,6 +240,7 @@ public class Player extends Character {
         }
     }
 
+    // --- Player Attack specific enemy  --- //
     public void attackEnemy(Enemy enemy) { //DOJ Ny metode der tager enemy som input
         if(isAnythingEquipped()) { //Ændre til at lede efter valid enemy.
             equiped.attack(); //Depleter vores skud i RangedWeapon
@@ -270,91 +260,9 @@ public class Player extends Character {
         }
     }
 
-
-
-    public int getRemainingShots() {
-        if(isAnythingEquipped()) {
-            int remainingShots = equiped.getWeaponShoots();
-                return remainingShots;
-                }
-        return 0;
-    }
-
-
+    // --- helper method to check equiped weapon --- // ----> might recode and delete
     public boolean isAnythingEquipped() {
         return equiped != null;
-    }
-
-    /// Player equip item to attack with ////
-
-
-    public void equipWeapon (String input){
-        Item checkInventory =  playerInventory.stream().filter(Item -> input.equals(Item.getItem().toLowerCase())).findAny().orElse(null);
-       if (checkInventory instanceof Weapon) {
-           playerInventory.remove(checkInventory);
-           equipWeaponCheck();
-           equiped = (Weapon) checkInventory;
-       }
-    }
-
-    //---This function helps check and add back the weapon equip to player inventory.
-    public void equipWeaponCheck () {
-        if (equiped != null){
-            playerInventory.add(equiped);
-        }
-    }
-
-
-
-
-    /*public void equipWeapon(String input) {
-        Iterator<Item> iterator = playerInventory.iterator();
-        while (iterator.hasNext()) {
-            Item Item = iterator.next();
-            if (Item.getItem().equals(input)){
-                playerInventory.remove(Item);
-                equiped.add(Item);
-
-                System.out.println(Item + "Has been equiped");
-                break;
-            }
-        }
-    }*/
-
-    /*
-    public void equipWeapon (String input) {
-        for (Item item : playerInventory){
-            if(item.getItem().equals(input)){
-                playerInventory.remove(item);
-                equiped[0] = item;
-                break;
-            }
-        }
-    }
-    */
-
-
-    /// overstående metoder har vi fået fra Lucas nedstående virker ////
-
-    /*
-    public void isEnemyDead(Enemy enemy) {
-        if (enemy.getHealthscore() <= 0){
-            dropWeapon(enemy);
-            currentRoom.removeEnemyArrayList(enemy);
-        }
-    }
-
-    // get enemyWeapon.
-    public void dropWeapon(Enemy enemy) {
-        Item toDrop = enemy.getWeaponEquipt();
-        currentRoom.addItemsArrayList(toDrop);
-    }*/
-
-
-    public String cleanItemInput(String input) {
-        String[] navnearray = input.split(" ");
-        String output = navnearray[1];
-        return output;
     }
 
 }
