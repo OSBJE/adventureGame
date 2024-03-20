@@ -248,27 +248,24 @@ public class Player extends Character {
            Enemy enemy = currentRoom.getEnemyArrayList().getFirst();
            attackEnemy(enemy);
 
-           for (Enemy enemyattack : currentRoom.getEnemyArrayList()){
-               enemyattack.attackPlayer(this);
-           }
         }
     }
 
     public void attackEnemy(Enemy enemy) { //DOJ Ny metode der tager enemy som input
         if(isAnythingEquipped()) { //Ændre til at lede efter valid enemy.
-                    equiped.attack(); //Depleter vores skud i RangedWeapon
-                    int damage = equiped.getWeaponDmg();
-                    double result = enemy.getHealthscore()-damage;
-                    enemy.setHealthscore(result);
+            equiped.attack(); //Depleter vores skud i RangedWeapon
+            int damage = equiped.getWeaponDmg();
+            double result = enemy.getHealthscore()-damage;
+            enemy.setHealthscore(result);
 
-                    enemy.attackPlayer(this);
-                    isEnemyDead(enemy);
+            enemy.attackPlayer(this);
+            isEnemyDead(enemy);
 
-                    //int depleteMonsterHealth = weaponItem.getWeaponDmg()-getMonsterHealth(); Vi gemmer resultatet af våbenskade og nuværende monster health i en variabel.
+            //int depleteMonsterHealth = weaponItem.getWeaponDmg()-getMonsterHealth(); Vi gemmer resultatet af våbenskade og nuværende monster health i en variabel.
 
-                    //setMonsterHealth(depleteMonsterHealth); Vi sætter monsterets nye health med ovenstående variabel.
+            //setMonsterHealth(depleteMonsterHealth); Vi sætter monsterets nye health med ovenstående variabel.
 
-                    //Herfra kræver funktionen vores monster objekt(er). Logikken her er, at vi laver en settermetode på vores monstre.
+            //Herfra kræver funktionen vores monster objekt(er). Logikken her er, at vi laver en settermetode på vores monstre.
 
         }
     }

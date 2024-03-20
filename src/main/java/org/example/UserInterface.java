@@ -92,8 +92,7 @@ public class UserInterface {
                     firstWord = SENTINEL;
                     break;
                 }
-
-                case "Blabla" -> {
+                case "blabla" -> {
                     attackFunction();
                     System.out.println("Does it jump in here ?");
                     break;
