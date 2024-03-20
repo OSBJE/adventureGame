@@ -9,10 +9,9 @@ public class Enemy extends Character {
     private Room room;
 
 
-    public Enemy(String name, double healthscore, String description, Weapon weapon, Room room) {
+    public Enemy(String name, double healthscore, String description, Room room) {
         super(name, healthscore);
         this.enemyDescription = description;
-        this.equippedWeapon = weapon;
         this.room = room;
     }
 
