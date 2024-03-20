@@ -1,6 +1,5 @@
 package org.example;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 // Den class er beregnet til at oprette "Rooms"
 
@@ -116,4 +115,43 @@ public class Room {
     public ArrayList<Enemy> getEnemyArrayList() {
         return enemyArrayList;
     }
+
+    ////////************* sorting our array list in Room ****************/////////
+
+    public void sortArrayListEnemy () {
+        enemyArrayList.sort(new Comparator<Enemy>() {
+            @Override
+            public int compare(Enemy o1, Enemy o2) {
+                return o1.getHealthscore().compareTo(o2.getHealthscore());
+            }
+        });
+    }
+    //------Other sorting methods I dont use ------ //
+    public void sortArrayListItem () {
+        itemsArrayList.sort(new Comparator<Item>() {
+            @Override
+            public int compare(Item o1, Item o2) {
+                return o1.getItem().compareTo(o2.getItem());
+            }
+        });
+    }
+
+    public void altenativesortArrayListItem1 () {
+        Collections.sort(itemsArrayList, (p1, p2) -> p1.getItem().compareTo(p2.getItem()));
+    }
+
+    public void altenativesortArrayListItem2 () {
+       Item temp = null;
+        for (int i = 0; i < itemsArrayList.size(); i++){
+           for (int j=i+1; j < itemsArrayList.size(); j++){
+               if(itemsArrayList.get(i).getItem().compareTo(itemsArrayList.get(j).getItem())>0){
+
+                   temp = itemsArrayList.get(i);
+                   itemsArrayList.set(i, itemsArrayList.get(j));
+                   itemsArrayList.set(j,temp);
+               }
+           }
+       }
+    }
+    //---------------------------------end of other sort methods I dont use -----------------------------//
 }

@@ -12,8 +12,9 @@ public class UserInterface {
     // laver en nyt game
 
     AdventureController spil = new AdventureController();
-    private String previousRoom;//benyttes nede i metode til at tjekke om vi har rykket os
+    private String previousRoom;
 
+    //MMH Vi kunne definere constructor og køre startGame herinde. Så skal metodekald af startGame slettes fra Main
     public UserInterface() {
         welcome();
         startAndPlayGame();
@@ -27,7 +28,7 @@ public class UserInterface {
 
 
         while (!playerInput.toLowerCase().equals(SENTINEL)) {
-            System.out.println("\n" +"In what direction do you want to go: North, South, East og West?");
+            System.out.println("In what direction do you want to go: North, South, East og West?");
             System.out.println("Or type inventory, take, drop, eat, equip, attack, help, look or exit.");
             playerInput = input.nextLine();
             String[] inputArray = playerInputManipulation(playerInput);
@@ -56,7 +57,7 @@ public class UserInterface {
 
                 case "equip" -> {
                     equipWeapon(secondWord);
-                    //playerEquiped();
+                    playerEquiped();
                     break;
                 }
 
@@ -64,7 +65,8 @@ public class UserInterface {
                     //attackFunction();
                    // Enemy result = supportAttackFunctionTarget(playerInput3);
                     //attackFunctionTarget(result);
-                    attackFunctionTarget(secondWord);
+                    attackFunctionTarget(playerInput);
+                   break;
                 }
 
                 case "help" -> {
@@ -77,7 +79,7 @@ public class UserInterface {
                 }
                 case "inventory", "invent", "inv" -> {
                     playerInventory();
-                    //playerEquiped(); // just to test
+                    playerEquiped(); // just to test
                     break;
                 }
                 case "health" -> {
@@ -89,8 +91,13 @@ public class UserInterface {
                     playerInput3 = SENTINEL;
                     firstWord = SENTINEL;
                     break;
-
                 }
+                case "blabla" -> {
+                    attackFunction();
+                    System.out.println("Does it jump in here ?");
+                    break;
+                }
+
                 default -> playerMovement(playerInput3);
 
             }
@@ -151,7 +158,7 @@ public class UserInterface {
         if (spil.doIHaveWeaponEquipped()) {
             if (spil.getRemainingShots() > 0) {
                 spil.attackP();
-                System.out.println("DEBUG if blok på attackfunction()"); //Måske nogle player getters på weapon objects damage med printout til brugeren om hvor meget dmg osv.
+                //Måske nogle player getters på weapon objects damage med printout til brugeren om hvor meget dmg osv.
 
             } else {
                 System.out.println("DEBUG vi er i elseblok på attackfunction() ");
@@ -160,8 +167,13 @@ public class UserInterface {
 
     }
     public void attackFunctionTarget(String playerInput) {//Til attacks ud med et target, MED enemy parameter. Implementer sammen med attack branch i switch
-//Hvis playerInput(secondWord) er " ", så skal den tage fra en liste, som Oskar laver
-        String enemyName = playerInput;
+
+        String[] inputArray = playerInputManipulation(playerInput);
+        String firstWord = inputArray[0];
+        String secondWord = inputArray[1];
+        String thirdWord = inputArray[2];
+
+        String enemyName = secondWord; // "attack" + enemy navn
         System.out.println("You chose to attack: " + enemyName);
 
         if (spil.doIHaveWeaponEquipped()) {
@@ -178,7 +190,7 @@ public class UserInterface {
                 System.out.println("You are out of ammo.");
             }
         } else {
-            System.out.println("No weapon is equipped, so you cannot attack!");
+            System.out.println("No weapon is equipped.");
         }
     }
     public Enemy supportAttackFunctionTarget(String input) { // Vi leder efter Enemy objekter baseret på stringinput.
@@ -189,6 +201,14 @@ public class UserInterface {
             }
         }
         return null;
+    }
+
+    public void sortArrayListItem(){
+        spil.getsortArrayListItem();
+    }
+
+    public Enemy blabla () {
+        return spil.getEnemyArrayList().getFirst();
     }
 
     public void addInformation() {
@@ -204,6 +224,7 @@ public class UserInterface {
             System.out.println(" ");
             displayItemsInRoom();
             displayEnemyInRoom();
+            System.out.println(" ");
         }
         previousRoom = currentRoom;
     }
@@ -240,22 +261,14 @@ public class UserInterface {
     }
 
     //-----Weapon Management--------------------------------------------------------------------------
-    /*public void playerEquiped() {
+    public void playerEquiped() {
         System.out.println("\n you have the following weapon equiped: ");
         String equiped = spil.getPlayerEquiped();
         System.out.println(equiped);
-
-    }*/
+    }
 
     public void equipWeapon(String input) {
-        if(spil.setEquipedWeapon(input).equals("notWeapon")) {
-            System.out.println("This is not an available weapon...find something else.");
-            System.out.println(" ");
-        } else {
-            String equipedItem = spil.getPlayerEquiped();
-            System.out.println("You have the following weapon equipped: " + equipedItem );
-            System.out.println(" ");
-        }
+        spil.setEquipedWeapon(input);
     }
 
 

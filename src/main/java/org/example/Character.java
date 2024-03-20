@@ -4,7 +4,7 @@ public class Character {
 
     private String name;
     private Double healthscore;
-    private Item[] weaponEquipt = new Item[1];
+    private Item weaponEquipt;
 
     public Character (String name, double healthscore) {
         this.name = name;
@@ -19,7 +19,7 @@ public class Character {
         return healthscore;
     }
 
-    public Item[] getWeaponEquipt() {
+    public Item getWeaponEquipt() {
         return weaponEquipt;
     }
 
@@ -33,6 +33,13 @@ public class Character {
     }
 
     public void setWeaponEquipt(Item weaponEquipt) {
-        this.weaponEquipt = new Item[]{weaponEquipt};
+        this.weaponEquipt = weaponEquipt;
+
+    }
+
+    public Item getEnenmyWeapon () {
+        Item returnWeapon = weaponEquipt;
+        Item weapon = returnWeapon;
+        return weapon;
     }
 }

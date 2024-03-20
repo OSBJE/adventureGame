@@ -104,11 +104,23 @@ public class Map {
         Food itemProteinBar = new Food("ProteinBar", "from arnolds gym", 35, false);
         Item itemKnife = new MeleeWeapon("Knife", "Magic Grim", 10, 1000);
         Item itemSword = new MeleeWeapon("Sword", "It's a big sword", 10, 1000);
-        Item itemAxe = new MeleeWeapon("Axe", "Its name is gimli", 20, 1000);
+        Item itemAxe = new MeleeWeapon("Axe", "Its name is gimli", 25, 1000);
         Item itemWashboard = new RangedWeapon("Washboard", "Remember to do your laundy", 50, 2);
-        //Item enemyItem = new MeleeWeapon("Rapier", "An elegant rapier.", 5, 1000);
-        Enemy enemy1 = new Enemy("Bob", 50, "Jose Mourinho",new MeleeWeapon("Rapier", "", 10, 1000) );
-        //enemy1.setWeaponEquipt(itemAxe); //DOJ Se IntelliJ fejl.
+
+
+        //Monster Items
+        Item enemyItem1 = new MeleeWeapon("Rapier", "An elegant rapier.", 5, 1000);
+        Item enemyItem2 = new RangedWeapon("Bow", "Sweet jesus is big", 10 , 2 );
+        Item enemyItem3 = new RangedWeapon("Handgranade", "Its very holy", 25 , 1);
+
+        //Enemies with items
+        Enemy enemy1 = new Enemy("Bob", 50, "Jose Mourinho", new MeleeWeapon("Rapier", "", 10, 1000), room2); //new MeleeWeapon("Rapier", "", 10, 1000)
+        enemy1.setWeaponEquipt(enemyItem1);// really wird but only this works !
+        Enemy enemy2 = new Enemy("Legolas", 25, "only 42", new MeleeWeapon("Rapier", "", 10, 1000), room4);
+        enemy2.setWeaponEquipt(enemyItem2);
+        Enemy enemy3 = new Enemy("Rabbit", 10, "get the holy handgrande", new MeleeWeapon("Rapier", "", 10, 1000),room4);
+        enemy3.setWeaponEquipt(enemyItem3);
+        // enemy1.setWeaponEquipt((Weapon) itemAxe); //DOJ Se IntelliJ fejl. fix weapon not equiped to enemy.
 
 
 
@@ -122,6 +134,8 @@ public class Map {
         room7.addItemsArrayList(itemProteinBar);
 
         room2.addEnemyArrayList(enemy1);
+        room4.addEnemyArrayList(enemy2);
+        room4.addEnemyArrayList(enemy3);
     }
 
 
