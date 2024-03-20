@@ -4,30 +4,44 @@ import java.util.ArrayList;
 
 public class Enemy extends Character {
 
+    //****************** ATTRIBUTES **************************************************//
     private String enemyDescription;
     private Weapon equippedWeapon;
     private Room room;
 
 
-    public Enemy(String name, double healthscore, String description, Room room) {
+    // ***************** Constructor *********************************************** ///
+    public Enemy(String name, double healthscore, String description, Room room, Weapon weapon) {
         super(name, healthscore);
         this.enemyDescription = description;
         this.room = room;
+        this.equippedWeapon = weapon;
     }
 
 
-    public String getEnemyDescription() {
-        return enemyDescription;
+    /// ************************* Getter methods **********************************////
+
+    @Override
+    public String toString() {
+        return "\n" + "Enemy: " + getName() + " Enemy description: " + enemyDescription;
     }
 
-    public void attackPlayer(Player player) { //DOJ
-        if(getWeaponEquipt() != null) {
-            int damage = equippedWeapon.getWeaponDmg();
+    /// ************************* Setter methods **********************************////
+
+
+    /// ************************* Attack and die functions ************************////
+
+    // --- Attack this player --- //
+
+    public void attackPlayer(Player player) {
+        if(equippedWeapon != null) {
+            int damage = equippedWeapon.getWeaponDmg(); // forklaring det her sette player health
 
             player.setHealthPlayer(player.getHealthPlayer()-damage);
         }
-        System.out.println("nothing equiped ?");
     }
+
+    // --- Die function but is behaviours --- //
     public void enemyDies(Enemy enemy) { // DOJ Eventuelt
         if (getHealthscore() <= 0){
             dropWeapon();
@@ -35,18 +49,10 @@ public class Enemy extends Character {
         }
     }
 
+    // --- Helper method --- //
     public void dropWeapon() {
         Item toDrop = getWeaponEquipt();
         room.addItemsArrayList(toDrop);
-    }
-
-    @Override
-    public String toString() {
-        return "\n" + "Enemy: " + getName() + " Enemy description: " + enemyDescription;
-    }
-
-    public void setEnemyDescription(String enemyDescription) {
-        this.enemyDescription = enemyDescription;
     }
 
 }

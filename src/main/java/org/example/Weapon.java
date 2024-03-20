@@ -5,15 +5,11 @@ import org.example.Item;
 public abstract class Weapon extends Item {
 
 
-    // Attributes ///
+    //****************** ATTRIBUTES **************************************************//
+    int weaponDmg;
+    int weaponShoots;
 
-    int weaponDmg = 0;
-    int weaponShoots = 0;
-
-
-    // constructor //
-
-
+    // ***************** Constructor *********************************************** ///
     public Weapon(String item, String itemDescription, int weaponDmg, int weaponShoots) {
         super(item, itemDescription);
         this.weaponDmg = weaponDmg;
@@ -21,7 +17,7 @@ public abstract class Weapon extends Item {
     }
 
 
-    // getter methods //
+    /// ************************* Getter methods **********************************////
     public int getWeaponDmg() {
         return weaponDmg;
     }
@@ -30,8 +26,7 @@ public abstract class Weapon extends Item {
         return weaponShoots;
     }
 
-
-    // Setter methods //
+    /// ************************* Setter methods **********************************////
     public void setWeaponDmg(int weaponDmg) {
         this.weaponDmg = weaponDmg;
     }
@@ -41,7 +36,7 @@ public abstract class Weapon extends Item {
     }
 
 
-    // methods to do dmg ect //
+    //*************************** Method to manage shoots **************************************////
 
     public abstract void attack();
 

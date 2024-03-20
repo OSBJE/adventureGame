@@ -45,6 +45,10 @@ public class Room {
         return itemsArrayList;
     }
 
+    // --- get enemies in room --- //
+    public ArrayList<Enemy> getEnemyArrayList() {
+        return enemyArrayList;
+    }
 
     // --- this getter methods is used to check if it is okay go into the room. The value will either be a room or null
 
@@ -63,12 +67,6 @@ public class Room {
     public Room getRoomDoorWest() {
         return roomDoorWest;
     }
-
-    // --- get enemies in room --- //
-    public ArrayList<Enemy> getEnemyArrayList() {
-        return enemyArrayList;
-    }
-
 
     /// ************************* Setter methods **********************************////
 
@@ -129,6 +127,5 @@ public class Room {
            }
        }
     }
-
 
 }
