@@ -21,7 +21,7 @@ public class AdventureController {
         //Blev nød til at indsætte lidt tekst for at få programmet til at spille.
         //Vi kommer til at bruge Player for meget - det Oskar sagde
     }
-
+//chage
 
     //////*********** Map ******************** ///////
     // At kalde den her funktion bygger vores kort.
