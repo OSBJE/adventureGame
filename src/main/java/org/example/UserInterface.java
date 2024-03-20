@@ -57,16 +57,16 @@ public class UserInterface {
 
                 case "equip" -> {
                     equipWeapon(secondWord);
-                    playerEquiped();
+                    //playerEquiped();
                     break;
                 }
 
                 case "attack" -> {
-                    //attackFunction();
-                   // Enemy result = supportAttackFunctionTarget(playerInput3);
-                    //attackFunctionTarget(result);
-                    attackFunctionTarget(playerInput);
-                   break;
+                    attackFunctionTarget(secondWord);
+                    if (secondWord == " ") {
+                        attackFunction();
+                    }
+                    break;
                 }
 
                 case "help" -> {
@@ -92,11 +92,7 @@ public class UserInterface {
                     firstWord = SENTINEL;
                     break;
                 }
-                case "blabla" -> {
-                    attackFunction();
-                    System.out.println("Does it jump in here ?");
-                    break;
-                }
+
 
                 default -> playerMovement(playerInput3);
 
@@ -166,14 +162,10 @@ public class UserInterface {
         }
 
     }
+
     public void attackFunctionTarget(String playerInput) {//Til attacks ud med et target, MED enemy parameter. Implementer sammen med attack branch i switch
 
-        String[] inputArray = playerInputManipulation(playerInput);
-        String firstWord = inputArray[0];
-        String secondWord = inputArray[1];
-        String thirdWord = inputArray[2];
-
-        String enemyName = secondWord; // "attack" + enemy navn
+        String enemyName = playerInput; // "attack" + enemy navn
         System.out.println("You chose to attack: " + enemyName);
 
         if (spil.doIHaveWeaponEquipped()) {
@@ -182,7 +174,7 @@ public class UserInterface {
                 if (target != null) {
                     spil.attackEnemy(target);
                     System.out.println("Attacked " + target.getName());
-                    System.out.println("Current HP"+target.getHealthscore());
+                    System.out.println("Current HP" + target.getHealthscore());
                 } else {
                     System.out.println("No enemy with the name " + enemyName + " found.");
                 }
@@ -190,9 +182,10 @@ public class UserInterface {
                 System.out.println("You are out of ammo.");
             }
         } else {
-            System.out.println("No weapon is equipped.");
+            System.out.println("No weapon is equipped, so you cannot attack.");
         }
     }
+
     public Enemy supportAttackFunctionTarget(String input) { // Vi leder efter Enemy objekter baseret på stringinput.
         ArrayList<Enemy> enemies = spil.getEnemyArrayList();
         for (Enemy enemy : enemies) {
@@ -203,11 +196,11 @@ public class UserInterface {
         return null;
     }
 
-    public void sortArrayListItem(){
+    public void sortArrayListItem() {
         spil.getsortArrayListItem();
     }
 
-    public Enemy blabla () {
+    public Enemy blabla() {
         return spil.getEnemyArrayList().getFirst();
     }
 
@@ -239,6 +232,7 @@ public class UserInterface {
             System.out.println("You see nothing of use to you in this room.");
         }
     }
+
     public void displayEnemyInRoom() { //Metode til at displaye items i room. Items bliver foreløbigt sat i buildMap().
         if (!spil.getEnemyArrayList().isEmpty()) { //Hvis arraylisten IKKE er tom
             System.out.println("You spot enemies in this room: ");
@@ -268,7 +262,14 @@ public class UserInterface {
     }
 
     public void equipWeapon(String input) {
-        spil.setEquipedWeapon(input);
+        if (spil.setEquipedWeapon(input).equals("notWeapon")) {
+            System.out.println("This is not an available weapon in your bag...find something else.");
+            System.out.println(" ");
+        } else {
+            String equipedItem = spil.getPlayerEquiped();
+            System.out.println("You have the following weapon equipped: " + equipedItem);
+            System.out.println(" ");
+        }
     }
 
 

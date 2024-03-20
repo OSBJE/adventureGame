@@ -162,13 +162,15 @@ public class Player extends Character {
     }
 
     // --- method to equip item from inventory --- //
-    public void equipWeapon (String input){
+    public String equipWeapon (String input){
+        String result = "notWeapon";
         Item checkInventory =  playerInventory.stream().filter(Item -> input.equals(Item.getItem().toLowerCase())).findAny().orElse(null);
         if (checkInventory instanceof Weapon) {
             playerInventory.remove(checkInventory);
             equipWeaponCheck();
             equiped = (Weapon) checkInventory;
-        }
+            result = "weaponOkay";
+        } return result;
     }
 
     // --- helper method to unequip weapon --- //
