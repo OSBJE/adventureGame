@@ -235,8 +235,6 @@ public class Player {
             currentRoom.sortArrayListEnemy();
             Enemy enemy = currentRoom.getEnemyArrayList().getFirst();
             attackEnemy(enemy);
-
-
     }
 
     // --- Player Attack specific enemy  --- //

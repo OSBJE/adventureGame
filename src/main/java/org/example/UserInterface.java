@@ -39,8 +39,6 @@ public class UserInterface {
             String firstWord = inputArray[0];
             String secondWord = inputArray[1];
             String playerInput3 = inputArray[2];
-            //System.out.println("This is firstWord: " +firstWord);
-            //System.out.println("This is secondWord: " +secondWord);
 
 
             switch (firstWord) {
@@ -61,7 +59,6 @@ public class UserInterface {
 
                 case "equip" -> {
                     equipWeapon(secondWord);
-                    //playerEquiped();
                     break;
                 }
 
@@ -158,14 +155,18 @@ public class UserInterface {
     public void attackFunction() { //Til attacks ud i luften, uden enemy parameter. Implementer sammen med attack branch i switch
         if (spil.doIHaveWeaponEquipped()) {
             if (spil.getRemainingShots() > 0) {
+                Enemy randomEnemy = spil.getEnemyArrayList().getFirst();
+                String enemyString = randomEnemy.getName();
+                System.out.println("You attack "+enemyString+".");
                 spil.attackRandom();
                 //Måske nogle player getters på weapon objects damage med printout til brugeren om hvor meget dmg osv.
 
             } else {
                 System.out.println("Your weapon is out of ammunition.");
             }
+        }else {
+            System.out.println("No weapon is equipped, so you cannot attack." + "\n");
         }
-        System.out.println("No weapon is equipped, so you cannot attack." + "\n");
     }
 
     public void attackFunctionTarget(String playerInput) {//Til attacks ud med et target, MED enemy parameter. Implementer sammen med attack branch i switch
@@ -317,7 +318,8 @@ public class UserInterface {
     }
     public void playerisDeadMessageUI() {
         if (spil.getHealthPlayer() <=0) {
-            System.out.println("\nYou have sustained critical injury and are now susceptible the enemies lurking nearby.");
+            System.out.println("\nYour health is currently at "+spil.getHealthPlayer()+".");
+            System.out.println("You have sustained critical injury and are now susceptible the enemies lurking nearby.");
             System.out.println("You succumb to your wounds and perish.");
         }
     }
