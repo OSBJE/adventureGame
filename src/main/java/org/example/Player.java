@@ -9,8 +9,8 @@ public class Player {
 
 
     ///********** Player inventory and equiped weapon slot holders *************////////
-    ArrayList<Item> playerInventory = new ArrayList<>();
-    Weapon equiped = null;
+    private ArrayList<Item> playerInventory = new ArrayList<>();
+    private Weapon equiped = null;
 
 
     //****************** ATTRIBUTES **************************************************//
