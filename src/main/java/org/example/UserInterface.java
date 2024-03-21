@@ -105,10 +105,10 @@ public class UserInterface {
 
     public void welcome() {
         System.out.println(" ");
-        System.out.println("Welcome to the AdventureGame");
+        System.out.println("Welcome to the AdventureGame - MULTIVERSE");
         System.out.println("We hope you are ready for som action.");
         System.out.println(" ");
-        System.out.println("You start in room1 where you find yourself standing on a \nbeautiful green hill with a marvelous view...");
+        System.out.println("You start in room1 where you find yourself standing on a \nbeautiful green hill with a marvelous view...\n");
     }
 
     //denne metode tager input fra player, laver til små bogstaver, deler op på ord i nyt Array, så disse kan bruges videre
