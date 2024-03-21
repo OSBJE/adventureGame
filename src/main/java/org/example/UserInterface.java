@@ -210,10 +210,6 @@ public class UserInterface {
         return null;
     }
 
-    public void sortArrayListItem() {
-        spil.getsortArrayListItem();
-    }
-
 
     public void addInformation() {
         //MMH her vil jeg gerne have den til at udskrive noget om hvor spilleren befinder sig, og en melding, hvis vedkomende ikke kan gå den vej
@@ -308,12 +304,7 @@ public class UserInterface {
             System.out.println("You do not have this available.");
         }
     }
-    /*public void playerMovement (String userChoiceString) {
-        spil.playerDirection(userChoiceString);
-        int userChoiceInt = spil.playerDirection(userChoiceString);
-        spil.moveRoom(userChoiceInt);
-        addInformation();
-    }*/
+
 
     public void showPlayerHealthUI() { ///Sysouts af nuværende player health. Thresholds ligger på højere eller lige med 50 & 30 med sidste else.
         if (spil.getHealthPlayer() >= 50) {
