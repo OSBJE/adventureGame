@@ -2,9 +2,13 @@ package org.example;
 
 import java.util.ArrayList;
 
-public class Enemy extends Character {
+public class Enemy {
 
     //****************** ATTRIBUTES **************************************************//
+    private String name;
+    private Double healthscore;
+    private Item weaponEquipt;
+
     private String enemyDescription;
     private Weapon equippedWeapon;
     private Room room;
@@ -12,7 +16,8 @@ public class Enemy extends Character {
 
     // ***************** Constructor *********************************************** ///
     public Enemy(String name, double healthscore, String description, Room room, Weapon weapon) {
-        super(name, healthscore);
+        this.healthscore = healthscore;
+        this.name = name;
         this.enemyDescription = description;
         this.room = room;
         this.equippedWeapon = weapon;
@@ -21,6 +26,23 @@ public class Enemy extends Character {
 
     /// ************************* Getter methods **********************************////
 
+    public String getName() {
+        return name;
+    }
+
+    public Double getHealthscore() {
+        return healthscore;
+    }
+
+    public Item getWeaponEquipt() {
+        return weaponEquipt;
+    }
+
+    public Item getEnenmyWeapon () {
+        Item weapon = weaponEquipt;
+        return weapon;
+    }
+
     @Override
     public String toString() {
         return "\n" + "Enemy: " + getName() + " Enemy description: " + enemyDescription;
@@ -28,6 +50,14 @@ public class Enemy extends Character {
 
     /// ************************* Setter methods **********************************////
 
+    public void setHealthscore(Double healthscore) {
+        this.healthscore = healthscore;
+    }
+
+    public void setWeaponEquipt(Item weaponEquipt) {
+        this.weaponEquipt = weaponEquipt;
+
+    }
 
     /// ************************* Attack and die functions ************************////
 

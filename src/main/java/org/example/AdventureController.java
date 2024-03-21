@@ -17,11 +17,11 @@ public class AdventureController {
 
     public AdventureController() {
         map = new Map();
-        player = new Player(map.getFirstRoom(), 50, "SuperPlayer", 100);
+        player = new Player(map.getFirstRoom(), 50);
         //Blev nød til at indsætte lidt tekst for at få programmet til at spille.
         //Vi kommer til at bruge Player for meget - det Oskar sagde
     }
-//chage
+    //chage
 
     //////*********** Map ******************** ///////
     // At kalde den her funktion bygger vores kort.
@@ -85,8 +85,8 @@ public class AdventureController {
         return player.equipWeapon(input);
     }
 
-    public void attackP() {
-        player.attackP();
+    public void attackRandom() {
+        player.attackRandom();
     }
     public boolean doIHaveWeaponEquipped() {
         return player.isAnythingEquipped();

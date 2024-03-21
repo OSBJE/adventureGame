@@ -66,9 +66,10 @@ public class UserInterface {
                 }
 
                 case "attack" -> {
-                    attackFunctionTarget(secondWord);
                     if (secondWord == " ") {
                         attackFunction();
+                    } else {
+                        attackFunctionTarget(secondWord);
                     }
                     break;
                 }
@@ -83,7 +84,7 @@ public class UserInterface {
                 }
                 case "inventory", "invent", "inv" -> {
                     playerInventory();
-                    playerEquiped(); // just to test
+                    //playerEquiped(); // just to test
                     break;
                 }
                 case "health" -> {
@@ -108,10 +109,10 @@ public class UserInterface {
 
     public void welcome() {
         System.out.println(" ");
-        System.out.println("Welcome to the AdventureGame");
+        System.out.println("Welcome to the AdventureGame - MULTIVERSE");
         System.out.println("We hope you are ready for som action.");
         System.out.println(" ");
-        System.out.println("You start in room1 where you find yourself standing on a \nbeautiful green hill with a marvelous view...");
+        System.out.println("You start in room1 where you find yourself standing on a \nbeautiful green hill with a marvelous view...\n");
     }
 
     //denne metode tager input fra player, laver til små bogstaver, deler op på ord i nyt Array, så disse kan bruges videre
@@ -157,14 +158,14 @@ public class UserInterface {
     public void attackFunction() { //Til attacks ud i luften, uden enemy parameter. Implementer sammen med attack branch i switch
         if (spil.doIHaveWeaponEquipped()) {
             if (spil.getRemainingShots() > 0) {
-                spil.attackP();
+                spil.attackRandom();
                 //Måske nogle player getters på weapon objects damage med printout til brugeren om hvor meget dmg osv.
 
             } else {
-                System.out.println("DEBUG vi er i elseblok på attackfunction() ");
+                System.out.println("Your weapon is out of ammunition.");
             }
         }
-
+        System.out.println("No weapon is equipped, so you cannot attack." + "\n");
     }
 
     public void attackFunctionTarget(String playerInput) {//Til attacks ud med et target, MED enemy parameter. Implementer sammen med attack branch i switch
@@ -204,9 +205,6 @@ public class UserInterface {
         spil.getsortArrayListItem();
     }
 
-    public Enemy blabla() {
-        return spil.getEnemyArrayList().getFirst();
-    }
 
     public void addInformation() {
         //MMH her vil jeg gerne have den til at udskrive noget om hvor spilleren befinder sig, og en melding, hvis vedkomende ikke kan gå den vej
