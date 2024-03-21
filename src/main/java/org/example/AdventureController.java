@@ -9,8 +9,6 @@ public class AdventureController {
 
     private Map map;
     private Player player;
-    private Enemy enemy;
-
 
 
     // Det her er vores konstroktor
