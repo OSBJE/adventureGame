@@ -6,11 +6,10 @@ public class Enemy {
 
     //****************** ATTRIBUTES **************************************************//
     private String name;
-    private Double healthscore;
-    private Item weaponEquipt;
+    private double healthscore;
+    private Weapon weaponEquipt;
 
     private String enemyDescription;
-    private Weapon equippedWeapon; // det her skal fikses.
     private Room room;
 
 
@@ -20,7 +19,7 @@ public class Enemy {
         this.name = name;
         this.enemyDescription = description;
         this.room = room;
-        this.equippedWeapon = weapon;
+        this.weaponEquipt = weapon;
     }
 
 
@@ -30,7 +29,7 @@ public class Enemy {
         return name;
     }
 
-    public Double getHealthscore() {
+    public double getHealthscore() {
         return healthscore;
     }
 
@@ -55,7 +54,7 @@ public class Enemy {
     }
 
     public void setWeaponEquipt(Item weaponEquipt) {
-        this.weaponEquipt = weaponEquipt;
+        this.weaponEquipt = (Weapon) weaponEquipt;
 
     }
 
@@ -64,8 +63,8 @@ public class Enemy {
     // --- Attack this player --- //
 
     public void attackPlayer(Player player) {
-        if(equippedWeapon != null) {
-            int damage = equippedWeapon.getWeaponDmg(); // forklaring det her sette player health
+        if(weaponEquipt != null) {
+            int damage = weaponEquipt.getWeaponDmg(); // forklaring det her sette player health
 
             player.setHealthPlayer(player.getHealthPlayer()-damage);
         }

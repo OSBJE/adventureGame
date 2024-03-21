@@ -109,7 +109,7 @@ public class Room {
         enemyArrayList.sort(new Comparator<Enemy>() {
             @Override
             public int compare(Enemy o1, Enemy o2) {
-                return o1.getHealthscore().compareTo(o2.getHealthscore());
+                return Double.compare(o1.getHealthscore(), o2.getHealthscore());
             }
         });
     }
