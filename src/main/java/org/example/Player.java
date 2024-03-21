@@ -256,8 +256,6 @@ public class Player {
 
     }
 
-    // --- Metode, der tjekker
-
     // --- helper method to check equiped weapon --- // ----> might recode and delete
     public boolean isAnythingEquipped() {
         return equiped != null;

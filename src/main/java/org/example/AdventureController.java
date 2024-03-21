@@ -5,25 +5,34 @@ import java.util.ArrayList;
 public class AdventureController {
 
 
-    // Her kalder vi de forskellige instancer af vores class
+    ///********** Generate our Map and connect to Player *************************///
 
     private Map map;
     private Player player;
 
 
-    // Det her er vores konstroktor
+    // ***************** Constructor ******************************************** ///
 
     public AdventureController() {
         map = new Map();
         player = new Player(map.getFirstRoom(), 50);
-        //Blev nød til at indsætte lidt tekst for at få programmet til at spille.
-        //Vi kommer til at bruge Player for meget - det Oskar sagde
     }
-    //chage
 
-    //////*********** Map ******************** ///////
-    // At kalde den her funktion bygger vores kort.
 
+    /// *********************** Player navigation *******************************///
+
+    public void movePlayer(String playerDirection){
+        player.movePlayer(getPLayerDirection(playerDirection));
+    }
+
+    public int getPLayerDirection(String playerInput){
+        return player.playerDirection(playerInput);
+    }
+
+
+    /// *********************** Map functions **********************************///
+
+    // --- Helper function give Player current room --- //
     public String getCurrentRoom() { //Room name
         return player.getCurrentRoom().getRoomName();
     }
@@ -31,20 +40,20 @@ public class AdventureController {
         return player.getCurrentRoom().getRoomDescription();
     }
 
-
-    ///////************** Players movement  *********** ////////
-
-    public void movePlayer(String playerDirection){
-        player.movePlayer(getPLayerDirection(playerDirection));
+    // --- Helper function to look in room and see enemies --- //
+    public ArrayList<Enemy> getEnemyArrayList() {
+        return player.getCurrentRoom().getEnemyArrayList();
     }
 
-    public int getPLayerDirection(String playerInput){
-       return player.playerDirection(playerInput);
+    // --- Helper function to look in room and see items --- //
+    public ArrayList<Item> getitemsArrayList (){  //Returnerer assignede items, der er forbundet med rummene.
+        return player.getCurrentRoom().getitemsArrayList();
     }
 
 
-    ///////************** Item handling between room and player inventory  *********** ////////
+    /// ************** Item handling between room and player inventory  *********** ///
 
+    // --- Methods to handlings items --- //
     public String takeItemMethod (String input) {
         return player.takeItem(input);
     }
@@ -53,21 +62,25 @@ public class AdventureController {
         return player.dropItem(input);
     }
 
-    public ArrayList<Item> getitemsArrayList (){  //Returnerer assignede items, der er forbundet med rummene.
-        return player.getCurrentRoom().getitemsArrayList();
-    }
-
+    // --- getter to get overview of Inventory --- //
     public String getPlayerInventory () { // returnere ting i player inventory
         return player.getPlayerInventory();
     }
 
-    ///////************** Player health management  *********** ////////
-    public double getHealthPlayer() { //hente playerHealth
-        return player.getHealthPlayer();
+    // --- Methods to equip items --- //
+    public String setEquipedWeapon (String input) {
+        return player.equipWeapon(input);
     }
 
-    public void setHealthPlayer(double healthPlayer) { //setter til damage eller healthregain  fra indtagelse af food.
-        player.setHealthPlayer(healthPlayer);
+    // --- getter to see equiped weapon --- //
+    public String getPlayerEquiped (){
+        return player.getPlayerEquiped();
+    }
+
+
+    /// ************************* Player health management  ************************ ///
+    public double getHealthPlayer() { //hente playerHealth
+        return player.getHealthPlayer();
     }
 
     public String playerEatsFood(String input) {
@@ -75,35 +88,26 @@ public class AdventureController {
         return foodOrNoFood;
     }
 
-    //------Testing----------------------------------------------------------------------
 
-    public String getPlayerEquiped (){
-        return player.getPlayerEquiped();
-    }
+    /// ************************* Player health management  ************************ ///
 
-    public String setEquipedWeapon (String input) {
-        return player.equipWeapon(input);
-    }
-
+    // --- Methods to attach Enenmy --- //
     public void attackRandom() {
         player.attackRandom();
     }
-    public boolean doIHaveWeaponEquipped() {
-        return player.isAnythingEquipped();
-    }
-    public int getRemainingShots() {
-        return player.getRemainingShots();
-    }
+
     public void attackEnemy(Enemy enemy) {
         player.attackEnemy(enemy);
     }
 
-    public ArrayList<Enemy> getEnemyArrayList() {
-        return player.getCurrentRoom().getEnemyArrayList();
+    // --- Helper to see if we have equiped weapon --- //
+    public boolean doIHaveWeaponEquipped() {
+        return player.isAnythingEquipped();
     }
 
-
-    //------------------------------------------------------------------------------------
-
+    // --- Helper to get see if we have shoots to use for attack --- //
+    public int getRemainingShots() {
+        return player.getRemainingShots();
+    }
 
 }
