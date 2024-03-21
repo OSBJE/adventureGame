@@ -104,12 +104,12 @@ public class Map {
         Food itemApple = new Food("Apple", "Seems to be from the tale of Snow White", -15, true);
         Food itemMeat = new Food("Meat", "You think it's from a cow.", 25, false);
         Food itemBanana = new Food("Banana", "You seem to remember this from minions.", 10, false);
-        Food itemProteinBar = new Food("Protein Bar", "It says 'property of Arnold's gym.", 35, false);
+        Food itemProteinBar = new Food("ProteinBar", "It says 'property of Arnold's gym.", 35, false);
         Item itemKnife = new MeleeWeapon("Knife", "It's magically ugly... Whatever that means.", 10, 1000);
         Item itemSword = new MeleeWeapon("Sword", "What you'd expect.", 10, 1000);
         Item itemAxe = new MeleeWeapon("Axe", "The name 'Gimli' is inscribed on the weapon.", 25, 1000);
         Item itemWashboard = new RangedWeapon("Washboard", "A small note is attached saying 'Remember to do your laundry.", 50, 2);
-        Item jarOfHoney = new Food("The Jar of honey", "It tastes delicious.", 60, false);
+        Item jarOfHoney = new Food("Honey", "It tastes delicious.", 60, false);
 
         room3.addItemsArrayList(itemKnife);
         room3.addItemsArrayList(itemSword);
@@ -131,8 +131,8 @@ public class Map {
         Item enemyItem3 = new RangedWeapon("Handgrenade", "It's very holy.", 20, 1);
         Item enemyItem4 = new MeleeWeapon("Mattress", "It's super cheap.", - 5, 1000);
         Item enemyItem5 = new RangedWeapon("Blaster", "Hard to hit with.", 0, 10);
-        Item enemyItem6 = new MeleeWeapon("The Bee Stinger", "If you are allergic you will die.", 35, 1000);
-        Item enemyItem7 = new RangedWeapon("The Portalgun", "It is missing fluid.", 10, 3);
+        Item enemyItem6 = new MeleeWeapon("BeeStinger", "If you are allergic you will die.", 35, 1000);
+        Item enemyItem7 = new RangedWeapon("Portalgun", "It is missing fluid.", 10, 3);
 
         //Enemies with items
         Enemy enemy1 = new Enemy("Bob", 50, "Jose Mourinho", room2, (Weapon) enemyItem1); //new MeleeWeapon("Rapier", "", 10, 1000)
@@ -141,9 +141,9 @@ public class Map {
         enemy2.setWeaponEquipt(enemyItem2);
         Enemy enemy3 = new Enemy("Rabbit", 30, "Get the holy handgrenade.", room4, (Weapon) enemyItem3);
         enemy3.setWeaponEquipt(enemyItem3);
-        Enemy enemy4 = new Enemy("Lars Larsen", 75,"Han har et godt tilbud.", room5, (Weapon) enemyItem4);
+        Enemy enemy4 = new Enemy("LarsLarsen", 75,"Han har et godt tilbud.", room5, (Weapon) enemyItem4);
         enemy4.setWeaponEquipt(enemyItem4);
-        Enemy enemy5 = new Enemy("Storm Trooper", 30, "Not very scary.", room6, (Weapon) enemyItem5);
+        Enemy enemy5 = new Enemy("StormTrooper", 30, "Not very scary.", room6, (Weapon) enemyItem5);
         enemy5.setWeaponEquipt(enemyItem5);
         Enemy enemy6 = new Enemy("Bee", 10, "It's a honey Bee.", room7, (Weapon) enemyItem6);
         enemy6.setWeaponEquipt(enemyItem6);
