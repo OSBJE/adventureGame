@@ -109,7 +109,7 @@ public class UserInterface {
         System.out.println("Welcome to the AdventureGame - MULTIVERSE");
         System.out.println("We hope you are ready for som action.");
         System.out.println(" ");
-        System.out.println("You start in room1 where you find yourself standing on a \nbeautiful green hill with a marvelous view...\n");
+        System.out.println(spil.getCurrentRoomDescription());
     }
 
     //denne metode tager input fra player, laver til små bogstaver, deler op på ord i nyt Array, så disse kan bruges videre
