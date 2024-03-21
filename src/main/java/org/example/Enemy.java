@@ -10,7 +10,7 @@ public class Enemy {
     private Item weaponEquipt;
 
     private String enemyDescription;
-    private Weapon equippedWeapon;
+    private Weapon equippedWeapon; // det her skal fikses.
     private Room room;
 
 

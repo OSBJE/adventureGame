@@ -65,9 +65,11 @@ public class AdventureController {
     public double getHealthPlayer() { //hente playerHealth
         return player.getHealthPlayer();
     }
+
     public void setHealthPlayer(double healthPlayer) { //setter til damage eller healthregain  fra indtagelse af food.
         player.setHealthPlayer(healthPlayer);
     }
+
     public String playerEatsFood(String input) {
         String foodOrNoFood = player.playerEatsFood(input);
         return foodOrNoFood;
