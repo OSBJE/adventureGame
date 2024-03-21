@@ -28,6 +28,10 @@ public class UserInterface {
 
 
         while (!playerInput.toLowerCase().equals(SENTINEL)) {
+            if(isPlayerDead()) { //Hver iteration af while loop tjekkes players health. Hvis <= 0 breaker vi while loop, hvor brugeren får nogle sysout beskeder.
+                playerisDeadMessageUI();
+                break;
+            }
             System.out.println("In what direction do you want to go: North, South, East og West?");
             System.out.println("Or type inventory, take, drop, eat, equip, attack, help, look or exit.");
             playerInput = input.nextLine();
@@ -312,6 +316,18 @@ public class UserInterface {
         } else {
             System.out.println("Your health is currently at " + spil.getHealthPlayer() + "." + " Your health is getting low now. You better avoid fighting.");
         }
+    }
+    public void playerisDeadMessageUI() {
+        if (spil.getHealthPlayer() <=0) {
+            System.out.println("\nYou have sustained critical injury and are now susceptible the enemies lurking nearby.");
+            System.out.println("You succumb to your wounds and perish.");
+        }
+    }
+    public boolean isPlayerDead() {
+        if(spil.getHealthPlayer() <= 0) {
+            return true;
+        }
+        return false;
     }
 }
 

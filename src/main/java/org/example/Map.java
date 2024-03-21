@@ -126,14 +126,14 @@ public class Map {
         //Monster Items
         Item enemyItem1 = new MeleeWeapon("Rapier", "An elegant rapier.", 5, 1000);
         Item enemyItem2 = new RangedWeapon("Bow", "Sweet jesus is big", 10, 2);
-        Item enemyItem3 = new RangedWeapon("Handgranade", "Its very holy", 25, 1);
+        Item enemyItem3 = new RangedWeapon("Handgranade", "Its very holy", 20, 1);
 
         //Enemies with items
         Enemy enemy1 = new Enemy("Bob", 50, "Jose Mourinho", room2, (Weapon) enemyItem1); //new MeleeWeapon("Rapier", "", 10, 1000)
         enemy1.setWeaponEquipt(enemyItem1);// really wird but only this works !
         Enemy enemy2 = new Enemy("Legolas", 25, "only 42", room4, (Weapon) enemyItem2);
         enemy2.setWeaponEquipt(enemyItem2);
-        Enemy enemy3 = new Enemy("Rabbit", 10, "get the holy handgrande", room4, (Weapon) enemyItem3);
+        Enemy enemy3 = new Enemy("Rabbit", 30, "get the holy handgrande", room4, (Weapon) enemyItem3);
         enemy3.setWeaponEquipt(enemyItem3);
         // enemy1.setWeaponEquipt((Weapon) itemAxe); //DOJ
 
