@@ -157,10 +157,16 @@ public class UserInterface {
             if (spil.getRemainingShots() > 0) {
                 Enemy randomEnemy = spil.getEnemyArrayList().getFirst();
                 String enemyString = randomEnemy.getName();
-                System.out.println("You attack "+enemyString+".");
+                System.out.println(" ");
+                System.out.println("You perform a strike out in front of you with your weapon.");
+                System.out.println("You manage to hit "+enemyString+", as he is closest to you.");
                 spil.attackRandom();
-                //Måske nogle player getters på weapon objects damage med printout til brugeren om hvor meget dmg osv.
-
+                if(randomEnemy.getHealthscore()>=0) {
+                    System.out.println(enemyString + " Current health: " + randomEnemy.getHealthscore());
+                }
+                else {
+                    System.out.println(randomEnemy.getName()+" has perished.");
+                }
             } else {
                 System.out.println("Your weapon is out of ammunition.");
             }
@@ -170,17 +176,19 @@ public class UserInterface {
     }
 
     public void attackFunctionTarget(String playerInput) {//Til attacks ud med et target, MED enemy parameter. Implementer sammen med attack branch i switch
-
         String enemyName = playerInput; // "attack" + enemy navn
-        System.out.println("You chose to attack: " + enemyName);
-
         if (spil.doIHaveWeaponEquipped()) {
             if (spil.getRemainingShots() > 0) {
                 Enemy target = supportAttackFunctionTarget(enemyName); //Vi returner en enemy baseret på String input.
                 if (target != null) {
+                    System.out.println("You chose to attack "+target.getName());
                     spil.attackEnemy(target);
-                    System.out.println("Attacked " + target.getName());
-                    System.out.println("Current HP" + target.getHealthscore());
+                    if(target.getHealthscore()>=0) {
+                        System.out.println("(Enemy) Current health: " + target.getHealthscore());
+                    }else {
+                        System.out.println(target.getName()+" has perished.");
+                    }
+
                 } else {
                     System.out.println("No enemy with the name " + enemyName + " found.");
                 }
@@ -286,7 +294,7 @@ public class UserInterface {
         System.out.println("Type look to get a description of the current room. ");
         System.out.println("Type eat and name of food you want to eat. ");
         System.out.println("Type equip and name of weapon you want to use. ");
-        System.out.println("Type attack and .... ");
+        System.out.println("Type attack to perform an attack on the enemy closest to you. This command can also be followed by the enemy's name.");
         System.out.println("Type exit to terminate the program.");
         System.out.println("---------------------------------------------------------------- ");
     }
